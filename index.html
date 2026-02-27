@@ -1,3 +1,7 @@
+
+Index · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +28,26 @@ var e=React.createElement,us=React.useState,um=React.useMemo,uc=React.useCallbac
 var RC=Recharts.ResponsiveContainer,BC_=Recharts.BarChart,Bar_=Recharts.Bar,XA=Recharts.XAxis,YA=Recharts.YAxis,
   CG=Recharts.CartesianGrid,TT=Recharts.Tooltip,LG=Recharts.Legend,CL=Recharts.Cell,RL=Recharts.ReferenceLine;
 
-var DD={"report_month": "January 2026", "snapshot_date": "2026-01-30", "current_label": "Jan 2026", "baseline_label": "Jan 2025", "source_note": "Lynn Public Schools PowerSchool SIS \u00b7 Jan 30, 2026 enrollment snapshot", "district_totals": {"current_total": 15888, "baseline_total": 16502, "current_el": 7212, "baseline_el": 7704}, "grade_band_summary": [{"band": "PK\u20135", "current": 7546, "baseline": 7617, "el_current": 4671, "el_baseline": 4873}, {"band": "Gr 6\u20138", "current": 3344, "baseline": 3498, "el_current": 1007, "el_baseline": 1042}, {"band": "Gr 9\u201312", "current": 4949, "baseline": 5343, "el_current": 1534, "el_baseline": 1783}], "grade_level_data": [{"grade": "PK", "current": 541, "baseline": 453, "el_current": 306, "el_baseline": 313}, {"grade": "K", "current": 1034, "baseline": 1128, "el_current": 758, "el_baseline": 788}, {"grade": "1", "current": 1162, "baseline": 1183, "el_current": 809, "el_baseline": 843}, {"grade": "2", "current": 1148, "baseline": 1266, "el_current": 820, "el_baseline": 896}, {"grade": "3", "current": 1243, "baseline": 1241, "el_current": 822, "el_baseline": 801}, {"grade": "4", "current": 1192, "baseline": 1234, "el_current": 661, "el_baseline": 752}, {"grade": "5", "current": 1226, "baseline": 1112, "el_current": 495, "el_baseline": 480}, {"grade": "6", "current": 1059, "baseline": 1154, "el_current": 331, "el_baseline": 343}, {"grade": "7", "current": 1116, "baseline": 1187, "el_current": 338, "el_baseline": 357}, {"grade": "8", "current": 1169, "baseline": 1157, "el_current": 338, "el_baseline": 342}, {"grade": "9", "current": 1146, "baseline": 1198, "el_current": 344, "el_baseline": 411}, {"grade": "10", "current": 1192, "baseline": 1408, "el_current": 374, "el_baseline": 534}, {"grade": "11", "current": 1269, "baseline": 1366, "el_current": 439, "el_baseline": 417}, {"grade": "12", "current": 1342, "baseline": 1371, "el_current": 367, "el_baseline": 421}], "school_data": [{"school": "Aborn Elementary", "type": "elem", "current": 224, "baseline": 226, "el_current": 92, "el_baseline": 85}, {"school": "Breed Middle", "type": "middle", "current": 1162, "baseline": 1281, "el_current": 381, "el_baseline": 409}, {"school": "Brickett Elementary", "type": "elem", "current": 329, "baseline": 322, "el_current": 204, "el_baseline": 194}, {"school": "Callahan Elementary", "type": "elem", "current": 392, "baseline": 398, "el_current": 182, "el_baseline": 191}, {"school": "Cobbet Elementary", "type": "elem", "current": 652, "baseline": 622, "el_current": 464, "el_baseline": 462}, {"school": "Connery Elementary", "type": "elem", "current": 560, "baseline": 555, "el_current": 425, "el_baseline": 432}, {"school": "Drewicz Elementary", "type": "elem", "current": 499, "baseline": 493, "el_current": 340, "el_baseline": 343}, {"school": "VA Barton ECC", "type": "elem", "current": 239, "baseline": 183, "el_current": 129, "el_baseline": 122}, {"school": "Fallon Elementary", "type": "elem", "current": 31, "baseline": 30, "el_current": 7, "el_baseline": 6}, {"school": "Ford Elementary", "type": "elem", "current": 470, "baseline": 409, "el_current": 298, "el_baseline": 282}, {"school": "Frederick Douglass", "type": "high", "current": 351, "baseline": 231, "el_current": 35, "el_baseline": 33}, {"school": "Durgin Success Acad.", "type": "high", "current": 126, "baseline": 99, "el_current": 38, "el_baseline": 14}, {"school": "Harrington Elementary", "type": "elem", "current": 676, "baseline": 706, "el_current": 497, "el_baseline": 502}, {"school": "Hood Elementary", "type": "elem", "current": 556, "baseline": 554, "el_current": 346, "el_baseline": 356}, {"school": "Ingalls Elementary", "type": "elem", "current": 627, "baseline": 713, "el_current": 446, "el_baseline": 532}, {"school": "Lincoln Thomson Elem.", "type": "elem", "current": 188, "baseline": 220, "el_current": 104, "el_baseline": 141}, {"school": "Lynn Classical HS", "type": "high", "current": 1478, "baseline": 1808, "el_current": 505, "el_baseline": 683}, {"school": "Lynn English HS", "type": "high", "current": 1721, "baseline": 2060, "el_current": 725, "el_baseline": 892}, {"school": "Lynn Voc. Tech.", "type": "high", "current": 1555, "baseline": 1568, "el_current": 284, "el_baseline": 289}, {"school": "Lynn Woods Elementary", "type": "elem", "current": 171, "baseline": 153, "el_current": 51, "el_baseline": 50}, {"school": "Pickering Middle", "type": "middle", "current": 539, "baseline": 585, "el_current": 146, "el_baseline": 140}, {"school": "Sewell Anderson Elem.", "type": "elem", "current": 246, "baseline": 297, "el_current": 146, "el_baseline": 180}, {"school": "Shoemaker Elementary", "type": "elem", "current": 364, "baseline": 357, "el_current": 144, "el_baseline": 136}, {"school": "Sisson Elementary", "type": "elem", "current": 420, "baseline": 462, "el_current": 188, "el_baseline": 218}, {"school": "Thurgood Marshall Mid.", "type": "middle", "current": 1199, "baseline": 1316, "el_current": 389, "el_baseline": 412}, {"school": "Tracy Elementary", "type": "elem", "current": 404, "baseline": 387, "el_current": 285, "el_baseline": 282}, {"school": "Washington Elementary", "type": "elem", "current": 447, "baseline": 467, "el_current": 293, "el_baseline": 318}]};
+/* ══════ BUILT-IN DATASETS ══════ */
+var PERIODS={
+  "feb":{"report_month":"February 2026","snapshot_date":"2026-02-27","current_label":"Feb 2026","baseline_label":"Feb 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Feb 27, 2026 enrollment snapshot","district_totals":{"current_total":15894,"baseline_total":16528,"current_el":7267,"baseline_el":7726},"grade_band_summary":[{"band":"PK\u20135","current":7561,"baseline":7636,"el_current":4726,"el_baseline":4890},{"band":"Gr 6\u20138","current":3350,"baseline":3502,"el_current":1027,"el_baseline":1046},{"band":"Gr 9\u201312","current":4934,"baseline":5346,"el_current":1504,"el_baseline":1784}],"grade_level_data":[{"grade":"PK","current":560,"baseline":471,"el_current":379,"el_baseline":330},{"grade":"K","current":1038,"baseline":1130,"el_current":747,"el_baseline":792},{"grade":"1","current":1159,"baseline":1182,"el_current":811,"el_baseline":843},{"grade":"2","current":1152,"baseline":1268,"el_current":816,"el_baseline":897},{"grade":"3","current":1236,"baseline":1241,"el_current":817,"el_baseline":800},{"grade":"4","current":1188,"baseline":1233,"el_current":656,"el_baseline":749},{"grade":"5","current":1228,"baseline":1111,"el_current":500,"el_baseline":479},{"grade":"6","current":1059,"baseline":1152,"el_current":335,"el_baseline":342},{"grade":"7","current":1119,"baseline":1188,"el_current":346,"el_baseline":358},{"grade":"8","current":1172,"baseline":1162,"el_current":346,"el_baseline":346},{"grade":"9","current":1144,"baseline":1203,"el_current":348,"el_baseline":413},{"grade":"10","current":1190,"baseline":1408,"el_current":375,"el_baseline":536},{"grade":"11","current":1262,"baseline":1366,"el_current":409,"el_baseline":414},{"grade":"12","current":1338,"baseline":1369,"el_current":372,"el_baseline":421}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":224,"baseline":226,"el_current":88,"el_baseline":85},{"school":"Breed Middle","type":"middle","current":1164,"baseline":1289,"el_current":388,"el_baseline":413},{"school":"Brickett Elementary","type":"elem","current":329,"baseline":322,"el_current":204,"el_baseline":194},{"school":"Callahan Elementary","type":"elem","current":395,"baseline":402,"el_current":190,"el_baseline":192},{"school":"Cobbet Elementary","type":"elem","current":661,"baseline":626,"el_current":495,"el_baseline":469},{"school":"Connery Elementary","type":"elem","current":559,"baseline":558,"el_current":425,"el_baseline":434},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":494,"el_current":328,"el_baseline":343},{"school":"VA Barton ECC","type":"elem","current":244,"baseline":191,"el_current":150,"el_baseline":129},{"school":"Fallon Elementary","type":"elem","current":32,"baseline":32,"el_current":5,"el_baseline":8},{"school":"Ford Elementary","type":"elem","current":480,"baseline":411,"el_current":327,"el_baseline":283},{"school":"Frederick Douglass","type":"high","current":351,"baseline":231,"el_current":33,"el_baseline":33},{"school":"Durgin Success Acad.","type":"high","current":130,"baseline":101,"el_current":55,"el_baseline":15},{"school":"Harrington Elementary","type":"elem","current":673,"baseline":701,"el_current":484,"el_baseline":498},{"school":"Hood Elementary","type":"elem","current":555,"baseline":556,"el_current":347,"el_baseline":359},{"school":"Ingalls Elementary","type":"elem","current":620,"baseline":717,"el_current":448,"el_baseline":534},{"school":"Lincoln Thomson Elem.","type":"elem","current":188,"baseline":220,"el_current":105,"el_baseline":141},{"school":"Lynn Classical HS","type":"high","current":1472,"baseline":1814,"el_current":477,"el_baseline":687},{"school":"Lynn English HS","type":"high","current":1709,"baseline":2055,"el_current":722,"el_baseline":889},{"school":"Lynn Voc. Tech.","type":"high","current":1555,"baseline":1567,"el_current":287,"el_baseline":288},{"school":"Lynn Woods Elementary","type":"elem","current":172,"baseline":154,"el_current":50,"el_baseline":51},{"school":"Pickering Middle","type":"middle","current":545,"baseline":586,"el_current":153,"el_baseline":141},{"school":"Sewell Anderson Elem.","type":"elem","current":241,"baseline":296,"el_current":131,"el_baseline":180},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":355,"el_current":144,"el_baseline":135},{"school":"Sisson Elementary","type":"elem","current":420,"baseline":461,"el_current":197,"el_baseline":215},{"school":"Thurgood Marshall Mid.","type":"middle","current":1203,"baseline":1313,"el_current":402,"el_baseline":412},{"school":"Tracy Elementary","type":"elem","current":407,"baseline":386,"el_current":286,"el_baseline":283},{"school":"Washington Elementary","type":"elem","current":445,"baseline":464,"el_current":289,"el_baseline":315}]},
+  "jan":{"report_month":"January 2026","snapshot_date":"2026-01-30","current_label":"Jan 2026","baseline_label":"Jan 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Jan 30, 2026 enrollment snapshot","district_totals":{"current_total":15888,"baseline_total":16502,"current_el":7212,"baseline_el":7704},"grade_band_summary":[{"band":"PK\u20135","current":7546,"baseline":7617,"el_current":4671,"el_baseline":4873},{"band":"Gr 6\u20138","current":3344,"baseline":3498,"el_current":1007,"el_baseline":1042},{"band":"Gr 9\u201312","current":4949,"baseline":5343,"el_current":1524,"el_baseline":1783}],"grade_level_data":[{"grade":"PK","current":541,"baseline":453,"el_current":306,"el_baseline":313},{"grade":"K","current":1034,"baseline":1128,"el_current":758,"el_baseline":788},{"grade":"1","current":1162,"baseline":1183,"el_current":809,"el_baseline":843},{"grade":"2","current":1148,"baseline":1266,"el_current":820,"el_baseline":896},{"grade":"3","current":1243,"baseline":1241,"el_current":822,"el_baseline":801},{"grade":"4","current":1192,"baseline":1234,"el_current":661,"el_baseline":752},{"grade":"5","current":1226,"baseline":1112,"el_current":495,"el_baseline":480},{"grade":"6","current":1059,"baseline":1154,"el_current":331,"el_baseline":343},{"grade":"7","current":1116,"baseline":1187,"el_current":338,"el_baseline":357},{"grade":"8","current":1169,"baseline":1157,"el_current":338,"el_baseline":342},{"grade":"9","current":1146,"baseline":1198,"el_current":344,"el_baseline":411},{"grade":"10","current":1192,"baseline":1408,"el_current":374,"el_baseline":534},{"grade":"11","current":1269,"baseline":1366,"el_current":439,"el_baseline":417},{"grade":"12","current":1342,"baseline":1371,"el_current":367,"el_baseline":421}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":224,"baseline":226,"el_current":92,"el_baseline":85},{"school":"Breed Middle","type":"middle","current":1162,"baseline":1281,"el_current":381,"el_baseline":409},{"school":"Brickett Elementary","type":"elem","current":329,"baseline":322,"el_current":204,"el_baseline":194},{"school":"Callahan Elementary","type":"elem","current":392,"baseline":398,"el_current":182,"el_baseline":191},{"school":"Cobbet Elementary","type":"elem","current":652,"baseline":622,"el_current":464,"el_baseline":462},{"school":"Connery Elementary","type":"elem","current":560,"baseline":555,"el_current":425,"el_baseline":432},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":493,"el_current":340,"el_baseline":343},{"school":"VA Barton ECC","type":"elem","current":239,"baseline":183,"el_current":129,"el_baseline":122},{"school":"Fallon Elementary","type":"elem","current":31,"baseline":30,"el_current":7,"el_baseline":6},{"school":"Ford Elementary","type":"elem","current":470,"baseline":409,"el_current":298,"el_baseline":282},{"school":"Frederick Douglass","type":"high","current":351,"baseline":231,"el_current":35,"el_baseline":33},{"school":"Durgin Success Acad.","type":"high","current":126,"baseline":99,"el_current":38,"el_baseline":14},{"school":"Harrington Elementary","type":"elem","current":676,"baseline":706,"el_current":497,"el_baseline":502},{"school":"Hood Elementary","type":"elem","current":556,"baseline":554,"el_current":346,"el_baseline":356},{"school":"Ingalls Elementary","type":"elem","current":627,"baseline":713,"el_current":446,"el_baseline":532},{"school":"Lincoln Thomson Elem.","type":"elem","current":188,"baseline":220,"el_current":104,"el_baseline":141},{"school":"Lynn Classical HS","type":"high","current":1478,"baseline":1808,"el_current":505,"el_baseline":683},{"school":"Lynn English HS","type":"high","current":1721,"baseline":2060,"el_current":725,"el_baseline":892},{"school":"Lynn Voc. Tech.","type":"high","current":1555,"baseline":1568,"el_current":284,"el_baseline":289},{"school":"Lynn Woods Elementary","type":"elem","current":171,"baseline":153,"el_current":51,"el_baseline":50},{"school":"Pickering Middle","type":"middle","current":539,"baseline":585,"el_current":146,"el_baseline":140},{"school":"Sewell Anderson Elem.","type":"elem","current":246,"baseline":297,"el_current":146,"el_baseline":180},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":357,"el_current":144,"el_baseline":136},{"school":"Sisson Elementary","type":"elem","current":420,"baseline":462,"el_current":188,"el_baseline":218},{"school":"Thurgood Marshall Mid.","type":"middle","current":1199,"baseline":1316,"el_current":389,"el_baseline":412},{"school":"Tracy Elementary","type":"elem","current":404,"baseline":387,"el_current":285,"el_baseline":282},{"school":"Washington Elementary","type":"elem","current":447,"baseline":467,"el_current":293,"el_baseline":318}]}
+};
+var PERIOD_LIST=[{key:"feb",label:"Feb 2025 \u2192 Feb 2026"},{key:"jan",label:"Jan 2025 \u2192 Jan 2026"}];
+
+function hasEL(raw){
+  var dt=raw.district_totals;
+  return(dt.current_el>0||dt.baseline_el>0);
+}
 
 function proc(raw){
   var dt=raw.district_totals;
-  var tc=dt.current_total-dt.baseline_total,tp=((tc/dt.baseline_total)*100).toFixed(2);
-  var ec=dt.current_el-dt.baseline_el,ep=((ec/dt.baseline_el)*100).toFixed(2);
-  var es=((dt.current_el/dt.current_total)*100).toFixed(1);
+  var tc=dt.current_total-dt.baseline_total,tp=dt.baseline_total>0?((tc/dt.baseline_total)*100).toFixed(2):"0";
+  var ec=dt.current_el-dt.baseline_el,ep=dt.baseline_el>0?((ec/dt.baseline_el)*100).toFixed(2):"0";
+  var es=dt.current_total>0?((dt.current_el/dt.current_total)*100).toFixed(1):"0";
   var grades=raw.grade_level_data.map(function(d){return Object.assign({},d,{
     change:d.current-d.baseline,
-    pct:(((d.current-d.baseline)/d.baseline)*100).toFixed(1),
+    pct:d.baseline>0?(((d.current-d.baseline)/d.baseline)*100).toFixed(1):"0",
     elChange:d.el_current-d.el_baseline,
     elPct:d.el_baseline>0?(((d.el_current-d.el_baseline)/d.el_baseline)*100).toFixed(1):"N/A",
     elPctCur:d.current>0?((d.el_current/d.current)*100).toFixed(1):"0",
@@ -48,7 +62,7 @@ function proc(raw){
     elShareBase:d.baseline>0?((d.el_baseline/d.baseline)*100).toFixed(1):"0"
   })});
   var bands=(raw.grade_band_summary||[]).map(function(d){return Object.assign({},d,{change:d.current-d.baseline,elChange:d.el_current-d.el_baseline})});
-  return{meta:Object.assign({},raw,{totalChange:tc,totalPct:tp,elChange:ec,elPct:ep,elShare:es}),grades:grades,schools:schools,bands:bands};
+  return{meta:Object.assign({},raw,{totalChange:tc,totalPct:tp,elChange:ec,elPct:ep,elShare:es,hasEL:hasEL(raw)}),grades:grades,schools:schools,bands:bands};
 }
 
 var bgr=function(g){return["PK","K","1","2","3","4","5"].indexOf(g)>=0?"pk5":["6","7","8"].indexOf(g)>=0?"ms":"hs"};
@@ -75,7 +89,7 @@ function GTT(p){
     ),
     e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+fss(parseFloat(d.pct))+"%)")
   ];
-  if(p.showEL){
+  if(p.showEL&&p.meta.hasEL){
     kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
       e("div",{style:{fontSize:11,color:ELC,marginBottom:6,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
       e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elPctBase+"%)"),
@@ -99,7 +113,7 @@ function STT(p){
     ),
     e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+(d.pct!=="N/A"?fss(parseFloat(d.pct))+"%":"N/A")+")")
   ];
-  if(p.showEL){
+  if(p.showEL&&p.meta.hasEL){
     kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
       e("div",{style:{fontSize:11,color:ELC,marginBottom:4,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
       e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elShareBase+"%)"),
@@ -114,9 +128,10 @@ function mkP(a,ac){return{padding:"6px 14px",borderRadius:20,fontSize:12,fontWei
 function mkS(a,ac){var s=mkP(a,ac);s.padding="4px 10px";s.fontSize=11;return s}
 
 function App(){
+  var _p=us("feb"),period=_p[0],setPeriod=_p[1];
   var _v=us("grade"),view=_v[0],setView=_v[1];
   var _e=us(true),showEL=_e[0],setShowEL=_e[1];
-  var _d=us(DD),rawData=_d[0],setRawData=_d[1];
+  var _d=us(null),custom=_d[0],setCustom=_d[1];
   var _ss=us("change"),sSort=_ss[0],setSSort=_ss[1];
   var _sf=us("all"),sFilt=_sf[0],setSFilt=_sf[1];
   var _sm=us("total"),sMetric=_sm[0],setSMetric=_sm[1];
@@ -124,8 +139,11 @@ function App(){
   var _dr=us(false),isDrag=_dr[0],setIsDrag=_dr[1];
   var fRef=ur(null);
 
+  var rawData=custom||(PERIODS[period]||PERIODS["feb"]);
   var data=um(function(){return proc(rawData)},[rawData]);
   var meta=data.meta,grades=data.grades,schools=data.schools,bands=data.bands;
+  var elAvail=meta.hasEL;
+  var elActive=showEL&&elAvail;
 
   var sorted=um(function(){
     var d=sFilt==="all"?schools.slice():schools.filter(function(s){return s.type===sFilt});
@@ -143,10 +161,12 @@ function App(){
     r.onload=function(ev){try{
       var p=JSON.parse(ev.target.result);
       if(!p.district_totals||!p.grade_level_data||!p.school_data)throw new Error("Missing required fields");
-      setRawData(p);setUpSt({type:"success",msg:"Loaded: "+(p.report_month||"new data")});setTimeout(function(){setUpSt(null)},4000);
+      setCustom(p);setPeriod("custom");setUpSt({type:"success",msg:"Loaded: "+(p.report_month||"new data")});setTimeout(function(){setUpSt(null)},4000);
     }catch(err){setUpSt({type:"error",msg:"Invalid: "+err.message});setTimeout(function(){setUpSt(null)},5000)}};
     r.readAsText(f);
   };
+
+  var selectPeriod=function(k){setPeriod(k);if(k!=="custom")setCustom(null)};
 
   // ── Drag overlay ──
   var overlay=isDrag?e("div",{style:{position:"fixed",inset:0,zIndex:999,background:"rgba(13,13,26,0.92)",display:"flex",alignItems:"center",justifyContent:"center",border:"3px dashed rgba(230,164,78,0.5)",borderRadius:20,margin:20}},
@@ -161,13 +181,16 @@ function App(){
   var cards=[
     {l:"Total "+meta.baseline_label,v:meta.district_totals.baseline_total.toLocaleString(),s:"Baseline",c:"#7EB8DA"},
     {l:"Total "+meta.current_label,v:meta.district_totals.current_total.toLocaleString(),s:"Current",c:"#7EB8DA"},
-    {l:"Total Change",v:(meta.totalChange>=0?"+":"\u2212")+Math.abs(meta.totalChange).toLocaleString(),s:meta.totalPct+"%",c:"#E8927C"},
-    null,
-    {l:"EL "+meta.baseline_label,v:meta.district_totals.baseline_el.toLocaleString(),s:"Baseline",c:ELC},
-    {l:"EL "+meta.current_label,v:meta.district_totals.current_el.toLocaleString(),s:"Current",c:ELC},
-    {l:"EL Change",v:(meta.elChange>=0?"+":"\u2212")+Math.abs(meta.elChange).toLocaleString(),s:meta.elPct+"%",c:"#E8927C"}
+    {l:"Total Change",v:(meta.totalChange>=0?"+":"\u2212")+Math.abs(meta.totalChange).toLocaleString(),s:meta.totalPct+"%",c:"#E8927C"}
   ];
+  if(elAvail){
+    cards.push(null);
+    cards.push({l:"EL "+meta.baseline_label,v:meta.district_totals.baseline_el.toLocaleString(),s:"Baseline",c:ELC});
+    cards.push({l:"EL "+meta.current_label,v:meta.district_totals.current_el.toLocaleString(),s:"Current",c:ELC});
+    cards.push({l:"EL Change",v:(meta.elChange>=0?"+":"\u2212")+Math.abs(meta.elChange).toLocaleString(),s:meta.elPct+"%",c:"#E8927C"});
+  }
 
+  var cardCols=elAvail?"repeat(3,1fr) 2px repeat(3,1fr)":"repeat(3,1fr)";
   var cardEls=cards.map(function(cd,i){
     if(!cd)return e("div",{key:i,style:{background:"rgba(255,255,255,0.06)",width:1,margin:"8px auto"}});
     return e("div",{key:i,style:{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:10,padding:"14px 12px",textAlign:"center"}},
@@ -181,14 +204,14 @@ function App(){
   var gradeView=null;
   if(view==="grade"){
     var gBars=[
-      e(Bar_,{key:"b",dataKey:"baseline",name:"Total "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:showEL?22:34},
+      e(Bar_,{key:"b",dataKey:"baseline",name:"Total "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},
         grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.3})})
       ),
-      e(Bar_,{key:"c",dataKey:"current",name:"Total "+meta.current_label,radius:[3,3,0,0],maxBarSize:showEL?22:34},
+      e(Bar_,{key:"c",dataKey:"current",name:"Total "+meta.current_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},
         grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.85})})
       )
     ];
-    if(showEL){
+    if(elActive){
       gBars.push(e(Bar_,{key:"eb",dataKey:"el_baseline",name:"EL "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:22},
         grades.map(function(_,i){return e(CL,{key:i,fill:ELC,fillOpacity:0.3})})
       ));
@@ -200,16 +223,16 @@ function App(){
     var changeBadges=e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+grades.length+",1fr)",gap:4,marginTop:8,padding:"0 46px"}},
       grades.map(function(d,i){
         var kids=[e("div",{key:"v",style:{fontSize:12,fontWeight:700,color:ccc(d.change)}},fss(d.change))];
-        if(showEL)kids.push(e("div",{key:"e",style:{fontSize:10,fontWeight:600,color:d.elChange>=0?ELC:"#E8927C",marginTop:2}},"EL "+fss(d.elChange)));
+        if(elActive)kids.push(e("div",{key:"e",style:{fontSize:10,fontWeight:600,color:d.elChange>=0?ELC:"#E8927C",marginTop:2}},"EL "+fss(d.elChange)));
         return e("div",{key:i,style:{textAlign:"center",background:d.change>=0?"rgba(107,142,107,0.12)":"rgba(199,91,63,0.1)",borderRadius:6,padding:"5px 2px",border:"1px solid "+(d.change>=0?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.18)")}},kids);
       })
     );
 
     var legendItems=Object.keys(BCC).map(function(k){return e("div",{key:k,style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:BCC[k],display:"inline-block"}}),BLB[k])});
-    if(showEL)legendItems.push(e("div",{key:"el",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,display:"inline-block"}}),"EL Enrollment"));
+    if(elActive)legendItems.push(e("div",{key:"el",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,display:"inline-block"}}),"EL Enrollment"));
 
     var elShare=null;
-    if(showEL){
+    if(elActive){
       elShare=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
         e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:8}},"EL Share of Total by Grade ("+meta.current_label+")"),
         e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+grades.length+",1fr)",gap:4}},
@@ -229,7 +252,7 @@ function App(){
 
     gradeView=e("div",{style:{maxWidth:960,margin:"0 auto 28px",background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:16,padding:"24px 20px 16px"}},
       e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Enrollment Change by Grade Level"),
-      e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:"0 0 16px"}},"Lighter bars = "+meta.baseline_label+" \u00b7 Solid bars = "+meta.current_label+(showEL?" \u00b7 Gold bars = EL enrollment":"")),
+      e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:"0 0 16px"}},"Lighter bars = "+meta.baseline_label+" \u00b7 Solid bars = "+meta.current_label+(elActive?" \u00b7 Gold bars = EL enrollment":"")),
       e(RC,{width:"100%",height:380},
         e(BC_,{data:grades,barCategoryGap:"14%",barGap:2},
           e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",vertical:false}),
@@ -250,11 +273,11 @@ function App(){
   var schoolView=null;
   if(view==="school"){
     var sBars=[
-      e(Bar_,{key:"tc",dataKey:"change",name:"Total Change",radius:[0,4,4,0],maxBarSize:showEL?14:20,minPointSize:3},
+      e(Bar_,{key:"tc",dataKey:"change",name:"Total Change",radius:[0,4,4,0],maxBarSize:elActive?14:20,minPointSize:3},
         sorted.map(function(d,i){return e(CL,{key:i,fill:d.change>=0?"#6B8E6B":TC[d.type],fillOpacity:0.8})})
       )
     ];
-    if(showEL){
+    if(elActive){
       sBars.push(e(Bar_,{key:"ec",dataKey:"elChange",name:"EL Change",radius:[0,4,4,0],maxBarSize:14,minPointSize:3},
         sorted.map(function(d,i){return e(CL,{key:i,fill:d.elChange>=0?ELC:"#B8864A",fillOpacity:0.75})})
       ));
@@ -269,7 +292,7 @@ function App(){
 
     var sLegend=[e("div",{key:"g",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:"#6B8E6B",opacity:0.8}}),"Total Gain")];
     Object.keys(TC).forEach(function(k){sLegend.push(e("div",{key:k,style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:TC[k],opacity:0.8}}),TL[k]+" Decline"))});
-    if(showEL){
+    if(elActive){
       sLegend.push(e("div",{key:"eg",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,opacity:0.75}}),"EL Gain"));
       sLegend.push(e("div",{key:"ed",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:"#B8864A",opacity:0.75}}),"EL Decline"));
     }
@@ -281,13 +304,14 @@ function App(){
       return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.change));
     });
 
+    var sumCols=elActive?"1fr 1fr 1fr":"1fr 1fr";
     var sumPanels=[
       e("div",{key:"g",style:{background:"rgba(107,142,107,0.08)",border:"1px solid rgba(107,142,107,0.15)",borderRadius:10,padding:"14px 16px"}},
         e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#8FBC8F",fontWeight:600,marginBottom:8}},"Largest Total Gains"),topGains),
       e("div",{key:"d",style:{background:"rgba(199,91,63,0.08)",border:"1px solid rgba(199,91,63,0.15)",borderRadius:10,padding:"14px 16px"}},
         e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#E8927C",fontWeight:600,marginBottom:8}},"Largest Total Declines"),topDecl)
     ];
-    if(showEL){
+    if(elActive){
       var topElDecl=schools.slice().sort(function(a,b){return a.elChange-b.elChange}).slice(0,5).map(function(d,i){
         return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.elChange));
       });
@@ -296,7 +320,7 @@ function App(){
     }
 
     var elConc=null;
-    if(showEL){
+    if(elActive){
       elConc=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
         e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:10}},"EL Concentration by School ("+meta.current_label+" \u2014 % of total)"),
         e("div",{style:{display:"flex",flexWrap:"wrap",gap:6}},
@@ -314,7 +338,7 @@ function App(){
       filterBtns,
       e("span",{key:"sep1",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),
       sortBtns,
-      showEL?[
+      elActive?[
         e("span",{key:"sep2",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),
         e("button",{key:"sm",onClick:function(){setSMetric(sMetric==="total"?"el":"total")},style:mkS(sMetric==="el",ELC)},"Sort by "+(sMetric==="el"?"Total":"EL"))
       ]:null
@@ -324,12 +348,12 @@ function App(){
       e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12,marginBottom:16}},
         e("div",null,
           e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Enrollment Change by School"),
-          e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:0}},"Year-over-year change \u00b7 "+(showEL?"Gold = EL change \u00b7 ":"")+"Hover for details")
+          e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:0}},"Year-over-year change \u00b7 "+(elActive?"Gold = EL change \u00b7 ":"")+"Hover for details")
         ),
         ctrlRow
       ),
-      e(RC,{width:"100%",height:Math.max(420,sorted.length*(showEL?38:30)+40)},
-        e(BC_,{data:sorted,layout:"vertical",barCategoryGap:showEL?"22%":"18%",barGap:2},
+      e(RC,{width:"100%",height:Math.max(420,sorted.length*(elActive?38:30)+40)},
+        e(BC_,{data:sorted,layout:"vertical",barCategoryGap:elActive?"22%":"18%",barGap:2},
           e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",horizontal:false}),
           e(XA,{type:"number",tick:{fill:"rgba(255,255,255,0.4)",fontSize:11},axisLine:{stroke:"rgba(255,255,255,0.08)"},tickLine:false}),
           e(YA,{type:"category",dataKey:"school",width:155,tick:{fill:"rgba(255,255,255,0.65)",fontSize:11,fontWeight:500},axisLine:false,tickLine:false}),
@@ -339,49 +363,70 @@ function App(){
         )
       ),
       e("div",{style:{display:"flex",justifyContent:"center",gap:16,marginTop:10,fontSize:11,color:"rgba(255,255,255,0.45)",flexWrap:"wrap"}},sLegend),
-      e("div",{style:{display:"grid",gridTemplateColumns:showEL?"1fr 1fr 1fr":"1fr 1fr",gap:12,marginTop:16}},sumPanels),
+      e("div",{style:{display:"grid",gridTemplateColumns:sumCols,gap:12,marginTop:16}},sumPanels),
       elConc
     );
   }
+
+  // ── Period selector ──
+  var periodSel=e("div",{style:{display:"flex",gap:6,alignItems:"center",justifyContent:"center",flexWrap:"wrap"}},
+    PERIOD_LIST.map(function(p){
+      return e("button",{key:p.key,onClick:function(){selectPeriod(p.key)},style:Object.assign({},mkP(period===p.key,"#7EB8DA"),{fontSize:13,padding:"7px 18px"})},p.label);
+    }),
+    custom?e("button",{key:"custom",style:Object.assign({},mkP(period==="custom",ELC),{fontSize:13,padding:"7px 18px"})},"Custom: "+(custom.report_month||"Uploaded")):null
+  );
 
   // ── Tabs ──
   var tabs=e("div",{style:{maxWidth:960,margin:"0 auto 18px",display:"flex",justifyContent:"center",alignItems:"center",gap:10,flexWrap:"wrap"}},
     e("button",{onClick:function(){setView("grade")},style:mkP(view==="grade")},"By Grade Level"),
     e("button",{onClick:function(){setView("school")},style:mkP(view==="school")},"By School"),
-    e("span",{style:{width:1,height:24,background:"rgba(255,255,255,0.1)",margin:"0 4px"}}),
-    e("button",{onClick:function(){setShowEL(!showEL)},style:Object.assign({},mkP(showEL,ELC),{display:"flex",alignItems:"center",gap:6})},
-      e("span",{style:{width:8,height:8,borderRadius:"50%",background:showEL?ELC:"rgba(255,255,255,0.25)",transition:"all 0.2s"}}),
-      "EL Overlay"
-    )
+    elAvail?[
+      e("span",{key:"sep",style:{width:1,height:24,background:"rgba(255,255,255,0.1)",margin:"0 4px"}}),
+      e("button",{key:"el",onClick:function(){setShowEL(!showEL)},style:Object.assign({},mkP(showEL&&elAvail,ELC),{display:"flex",alignItems:"center",gap:6})},
+        e("span",{style:{width:8,height:8,borderRadius:"50%",background:showEL?ELC:"rgba(255,255,255,0.25)",transition:"all 0.2s"}}),
+        "EL Overlay"
+      )
+    ]:null
   );
 
-  return e("div",{onDrop:function(ev){ev.preventDefault();setIsDrag(false);hFile(ev.dataTransfer.files[0])},onDragOver:function(ev){ev.preventDefault();setIsDrag(true)},onDragLeave:function(){setIsDrag(false)},style:{position:"relative"}},
-    overlay,
-    // Header
-    e("div",{style:{maxWidth:960,margin:"0 auto 24px",textAlign:"center"}},
-      e("div",{style:{display:"inline-block",background:"rgba(199,91,63,0.15)",border:"1px solid rgba(199,91,63,0.3)",borderRadius:20,padding:"4px 14px",fontSize:11,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color:"#E8927C",marginBottom:12}},"Lynn Public Schools \u00b7 "+meta.report_month+" Update"),
-      e("h1",{style:{fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:800,color:"#fff",margin:"0 0 6px",lineHeight:1.15}},"Enrollment Change Analysis"),
-      e("p",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",margin:"0 0 12px",fontWeight:300}},meta.baseline_label+" \u2192 "+meta.current_label+" \u00b7 Total & EL enrollment data"),
-      e("div",{style:{display:"inline-flex",alignItems:"center",gap:8,flexWrap:"wrap",justifyContent:"center"}},
-        e("input",{ref:fRef,type:"file",accept:".json",style:{display:"none"},onChange:function(ev){hFile(ev.target.files[0])}}),
-        e("button",{onClick:function(){fRef.current&&fRef.current.click()},style:Object.assign({},mkP(false),{padding:"5px 14px",display:"flex",alignItems:"center",gap:6,fontSize:11,color:"rgba(255,255,255,0.5)",borderColor:"rgba(255,255,255,0.1)"})},"\u{1F4C1} Load Data File"),
-        e("button",{onClick:function(){setRawData(DD);setUpSt({type:"success",msg:"Restored Jan 2026"});setTimeout(function(){setUpSt(null)},3000)},style:Object.assign({},mkP(false),{padding:"5px 14px",fontSize:11,color:"rgba(255,255,255,0.35)",borderColor:"rgba(255,255,255,0.06)"})},"Reset to Jan 2026"),
-        upSt?e("span",{style:{fontSize:12,fontWeight:600,padding:"4px 12px",borderRadius:12,background:upSt.type==="success"?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.2)",color:upSt.type==="success"?"#8FBC8F":"#E8927C",border:"1px solid "+(upSt.type==="success"?"rgba(107,142,107,0.3)":"rgba(199,91,63,0.3)"),animation:"fadeIn 0.3s"}},(upSt.type==="success"?"\u2713":"\u2715")+" "+upSt.msg):null
-      ),
-      e("div",{style:{fontSize:11,color:"rgba(255,255,255,0.2)",marginTop:6}},"Drag & drop a JSON data file anywhere, or click Load Data File")
-    ),
-    // Cards
-    e("div",{style:{maxWidth:960,margin:"0 auto 24px",display:"grid",gridTemplateColumns:"repeat(3,1fr) 2px repeat(3,1fr)",gap:10,alignItems:"stretch"}},cardEls),
-    // EL callout
-    e("div",{style:{maxWidth:960,margin:"0 auto 20px",background:"linear-gradient(135deg,rgba(230,164,78,0.06) 0%,rgba(230,164,78,0.02) 100%)",border:"1px solid rgba(230,164,78,0.15)",borderRadius:10,padding:"12px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}},
+  // ── EL callout ──
+  var elCallout=null;
+  if(elAvail){
+    elCallout=e("div",{style:{maxWidth:960,margin:"0 auto 20px",background:"linear-gradient(135deg,rgba(230,164,78,0.06) 0%,rgba(230,164,78,0.02) 100%)",border:"1px solid rgba(230,164,78,0.15)",borderRadius:10,padding:"12px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}},
       e("div",{style:{fontSize:13,color:"rgba(255,255,255,0.6)"}},
         e("span",{style:{color:ELC,fontWeight:700}},"EL students represent "+meta.elShare+"%")," of total district enrollment",
         e("span",{style:{color:"rgba(255,255,255,0.35)",marginLeft:6}},"(EL: "+meta.elPct+"% vs total: "+meta.totalPct+"%)")
       ),
-      e("div",{style:{display:"flex",gap:4,flexWrap:"wrap"}},
+      bands.length>0&&bands[0].current>0?e("div",{style:{display:"flex",gap:4,flexWrap:"wrap"}},
         bands.map(function(b,i){return e("span",{key:i,style:{fontSize:10,padding:"3px 8px",borderRadius:12,background:"rgba(255,255,255,0.05)",color:"rgba(255,255,255,0.45)",border:"1px solid rgba(255,255,255,0.06)"}},b.band+": EL "+fss(b.elChange))})
+      ):null
+    );
+  }
+  if(!elAvail){
+    elCallout=e("div",{style:{maxWidth:960,margin:"0 auto 20px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:10,padding:"10px 18px",textAlign:"center",fontSize:12,color:"rgba(255,255,255,0.35)",fontStyle:"italic"}},"EL enrollment data not yet available for this period");
+  }
+
+  return e("div",{onDrop:function(ev){ev.preventDefault();setIsDrag(false);hFile(ev.dataTransfer.files[0])},onDragOver:function(ev){ev.preventDefault();setIsDrag(true)},onDragLeave:function(){setIsDrag(false)},style:{position:"relative"}},
+    overlay,
+    // Header
+    e("div",{style:{maxWidth:960,margin:"0 auto 20px",textAlign:"center"}},
+      e("div",{style:{display:"inline-block",background:"rgba(199,91,63,0.15)",border:"1px solid rgba(199,91,63,0.3)",borderRadius:20,padding:"4px 14px",fontSize:11,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color:"#E8927C",marginBottom:12}},"Lynn Public Schools \u00b7 Enrollment Update"),
+      e("h1",{style:{fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:800,color:"#fff",margin:"0 0 6px",lineHeight:1.15}},"Enrollment Change Analysis"),
+      e("p",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",margin:"0 0 16px",fontWeight:300}},meta.baseline_label+" \u2192 "+meta.current_label+" \u00b7 Year-over-year comparison")
+    ),
+    // Period selector
+    e("div",{style:{maxWidth:960,margin:"0 auto 20px",textAlign:"center"}},
+      periodSel,
+      e("div",{style:{display:"inline-flex",alignItems:"center",gap:8,marginTop:10,flexWrap:"wrap",justifyContent:"center"}},
+        e("input",{ref:fRef,type:"file",accept:".json",style:{display:"none"},onChange:function(ev){hFile(ev.target.files[0])}}),
+        e("button",{onClick:function(){fRef.current&&fRef.current.click()},style:Object.assign({},mkP(false),{padding:"4px 12px",display:"flex",alignItems:"center",gap:5,fontSize:11,color:"rgba(255,255,255,0.4)",borderColor:"rgba(255,255,255,0.08)"})},"\u{1F4C1} Load Custom Data"),
+        upSt?e("span",{style:{fontSize:12,fontWeight:600,padding:"4px 12px",borderRadius:12,background:upSt.type==="success"?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.2)",color:upSt.type==="success"?"#8FBC8F":"#E8927C",border:"1px solid "+(upSt.type==="success"?"rgba(107,142,107,0.3)":"rgba(199,91,63,0.3)"),animation:"fadeIn 0.3s"}},(upSt.type==="success"?"\u2713":"\u2715")+" "+upSt.msg):null
       )
     ),
+    // Cards
+    e("div",{style:{maxWidth:960,margin:"0 auto 24px",display:"grid",gridTemplateColumns:cardCols,gap:10,alignItems:"stretch"}},cardEls),
+    // EL callout
+    elCallout,
     tabs,
     gradeView,
     schoolView,
