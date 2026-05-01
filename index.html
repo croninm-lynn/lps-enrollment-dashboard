@@ -22,19 +22,31 @@ body{background:linear-gradient(145deg,#0d0d1a 0%,#141428 40%,#0f1a2e 100%);font
 "use strict";
 var e=React.createElement,us=React.useState,um=React.useMemo,uc=React.useCallback,ur=React.useRef;
 var RC=Recharts.ResponsiveContainer,BC_=Recharts.BarChart,Bar_=Recharts.Bar,XA=Recharts.XAxis,YA=Recharts.YAxis,
-  CG=Recharts.CartesianGrid,TT=Recharts.Tooltip,LG=Recharts.Legend,CL=Recharts.Cell,RL=Recharts.ReferenceLine;
+  CG=Recharts.CartesianGrid,TT=Recharts.Tooltip,LG=Recharts.Legend,CL=Recharts.Cell,RL=Recharts.ReferenceLine,
+  LC_=Recharts.LineChart,Line_=Recharts.Line,Area_=Recharts.Area,AC_=Recharts.AreaChart,CC_=Recharts.ComposedChart;
 
-/* ══════ BUILT-IN DATASETS ══════ */
 var PERIODS={
+  "apr":{"report_month":"April 2026","snapshot_date":"2026-04-24","current_label":"Apr 2026","baseline_label":"Apr 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Apr 24, 2026 enrollment snapshot","district_totals":{"current_total":15913,"baseline_total":16546,"current_el":7301,"baseline_el":7755},"grade_band_summary":[{"band":"PK\u20135","current":7603,"baseline":7680,"el_current":4764,"el_baseline":4926},{"band":"Gr 6\u20138","current":3349,"baseline":3498,"el_current":1029,"el_baseline":1050},{"band":"Gr 9\u201312","current":4913,"baseline":5326,"el_current":1498,"el_baseline":1773}],"grade_level_data":[{"grade":"PK","current":603,"baseline":514,"el_current":417,"el_baseline":362},{"grade":"K","current":1034,"baseline":1135,"el_current":745,"el_baseline":797},{"grade":"1","current":1157,"baseline":1175,"el_current":805,"el_baseline":836},{"grade":"2","current":1158,"baseline":1274,"el_current":826,"el_baseline":902},{"grade":"3","current":1235,"baseline":1242,"el_current":817,"el_baseline":802},{"grade":"4","current":1188,"baseline":1227,"el_current":654,"el_baseline":745},{"grade":"5","current":1228,"baseline":1113,"el_current":500,"el_baseline":482},{"grade":"6","current":1061,"baseline":1152,"el_current":336,"el_baseline":342},{"grade":"7","current":1112,"baseline":1186,"el_current":343,"el_baseline":362},{"grade":"8","current":1176,"baseline":1160,"el_current":350,"el_baseline":346},{"grade":"9","current":1142,"baseline":1208,"el_current":353,"el_baseline":422},{"grade":"10","current":1179,"baseline":1388,"el_current":369,"el_baseline":524},{"grade":"11","current":1248,"baseline":1361,"el_current":403,"el_baseline":407},{"grade":"12","current":1344,"baseline":1369,"el_current":373,"el_baseline":420}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":226,"baseline":222,"el_current":90,"el_baseline":82},{"school":"Breed Middle","type":"middle","current":1162,"baseline":1300,"el_current":383,"el_baseline":420},{"school":"Brickett Elementary","type":"elem","current":326,"baseline":326,"el_current":204,"el_baseline":198},{"school":"Callahan Elementary","type":"elem","current":400,"baseline":410,"el_current":196,"el_baseline":197},{"school":"Cobbet Elementary","type":"elem","current":662,"baseline":644,"el_current":492,"el_baseline":481},{"school":"Connery Elementary","type":"elem","current":562,"baseline":568,"el_current":427,"el_baseline":438},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":495,"el_current":329,"el_baseline":346},{"school":"VA Barton ECC","type":"elem","current":249,"baseline":202,"el_current":155,"el_baseline":135},{"school":"Fallon Elementary","type":"elem","current":35,"baseline":32,"el_current":6,"el_baseline":8},{"school":"Ford Elementary","type":"elem","current":499,"baseline":402,"el_current":341,"el_baseline":279},{"school":"Frederick Douglass","type":"high","current":351,"baseline":230,"el_current":32,"el_baseline":32},{"school":"Durgin Success Acad.","type":"high","current":131,"baseline":105,"el_current":53,"el_baseline":16},{"school":"Harrington Elementary","type":"elem","current":672,"baseline":697,"el_current":486,"el_baseline":497},{"school":"Hood Elementary","type":"elem","current":556,"baseline":563,"el_current":348,"el_baseline":366},{"school":"Ingalls Elementary","type":"elem","current":622,"baseline":711,"el_current":452,"el_baseline":528},{"school":"Lincoln Thomson Elem.","type":"elem","current":202,"baseline":219,"el_current":114,"el_baseline":140},{"school":"Lynn Classical HS","type":"high","current":1465,"baseline":1803,"el_current":476,"el_baseline":684},{"school":"Lynn English HS","type":"high","current":1698,"baseline":2046,"el_current":721,"el_baseline":882},{"school":"Lynn Voc. Tech.","type":"high","current":1552,"baseline":1561,"el_current":288,"el_baseline":287},{"school":"Lynn Woods Elementary","type":"elem","current":171,"baseline":155,"el_current":50,"el_baseline":52},{"school":"Pickering Middle","type":"middle","current":546,"baseline":583,"el_current":154,"el_baseline":141},{"school":"Sewell Anderson Elem.","type":"elem","current":239,"baseline":301,"el_current":130,"el_baseline":183},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":356,"el_current":147,"el_baseline":135},{"school":"Sisson Elementary","type":"elem","current":417,"baseline":462,"el_current":194,"el_baseline":216},{"school":"Thurgood Marshall Mid.","type":"middle","current":1206,"baseline":1302,"el_current":409,"el_baseline":409},{"school":"Tracy Elementary","type":"elem","current":401,"baseline":382,"el_current":280,"el_baseline":282},{"school":"Washington Elementary","type":"elem","current":445,"baseline":469,"el_current":288,"el_baseline":321}]},
+  "mar":{"report_month":"March 2026","snapshot_date":"2026-03-20","current_label":"Mar 2026","baseline_label":"Mar 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Mar 20, 2026 enrollment snapshot","district_totals":{"current_total":15896,"baseline_total":16544,"current_el":7277,"baseline_el":7737},"grade_band_summary":[{"band":"PK\u20135","current":7581,"baseline":7658,"el_current":4745,"el_baseline":4904},{"band":"Gr 6\u20138","current":3350,"baseline":3505,"el_current":1026,"el_baseline":1049},{"band":"Gr 9\u201312","current":4916,"baseline":5339,"el_current":1496,"el_baseline":1778}],"grade_level_data":[{"grade":"PK","current":587,"baseline":496,"el_current":402,"el_baseline":345},{"grade":"K","current":1036,"baseline":1131,"el_current":747,"el_baseline":794},{"grade":"1","current":1153,"baseline":1178,"el_current":804,"el_baseline":839},{"grade":"2","current":1153,"baseline":1270,"el_current":818,"el_baseline":897},{"grade":"3","current":1236,"baseline":1244,"el_current":818,"el_baseline":804},{"grade":"4","current":1188,"baseline":1231,"el_current":656,"el_baseline":748},{"grade":"5","current":1228,"baseline":1108,"el_current":500,"el_baseline":477},{"grade":"6","current":1060,"baseline":1157,"el_current":335,"el_baseline":343},{"grade":"7","current":1114,"baseline":1186,"el_current":342,"el_baseline":360},{"grade":"8","current":1176,"baseline":1162,"el_current":349,"el_baseline":346},{"grade":"9","current":1140,"baseline":1206,"el_current":349,"el_baseline":419},{"grade":"10","current":1182,"baseline":1399,"el_current":369,"el_baseline":529},{"grade":"11","current":1250,"baseline":1365,"el_current":404,"el_baseline":409},{"grade":"12","current":1344,"baseline":1369,"el_current":374,"el_baseline":421}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":225,"baseline":222,"el_current":89,"el_baseline":82},{"school":"Breed Middle","type":"middle","current":1161,"baseline":1299,"el_current":383,"el_baseline":417},{"school":"Brickett Elementary","type":"elem","current":329,"baseline":320,"el_current":203,"el_baseline":193},{"school":"Callahan Elementary","type":"elem","current":398,"baseline":405,"el_current":193,"el_baseline":193},{"school":"Cobbet Elementary","type":"elem","current":662,"baseline":636,"el_current":493,"el_baseline":475},{"school":"Connery Elementary","type":"elem","current":560,"baseline":568,"el_current":425,"el_baseline":439},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":495,"el_current":329,"el_baseline":345},{"school":"VA Barton ECC","type":"elem","current":245,"baseline":201,"el_current":151,"el_baseline":133},{"school":"Fallon Elementary","type":"elem","current":34,"baseline":31,"el_current":6,"el_baseline":9},{"school":"Ford Elementary","type":"elem","current":493,"baseline":404,"el_current":338,"el_baseline":280},{"school":"Frederick Douglass","type":"high","current":354,"baseline":230,"el_current":33,"el_baseline":32},{"school":"Durgin Success Acad.","type":"high","current":129,"baseline":99,"el_current":52,"el_baseline":13},{"school":"Harrington Elementary","type":"elem","current":671,"baseline":704,"el_current":486,"el_baseline":501},{"school":"Hood Elementary","type":"elem","current":553,"baseline":562,"el_current":345,"el_baseline":365},{"school":"Ingalls Elementary","type":"elem","current":622,"baseline":710,"el_current":451,"el_baseline":526},{"school":"Lincoln Thomson Elem.","type":"elem","current":196,"baseline":220,"el_current":109,"el_baseline":141},{"school":"Lynn Classical HS","type":"high","current":1467,"baseline":1807,"el_current":477,"el_baseline":682},{"school":"Lynn English HS","type":"high","current":1698,"baseline":2060,"el_current":717,"el_baseline":891},{"school":"Lynn Voc. Tech.","type":"high","current":1554,"baseline":1562,"el_current":289,"el_baseline":287},{"school":"Lynn Woods Elementary","type":"elem","current":171,"baseline":154,"el_current":50,"el_baseline":51},{"school":"Pickering Middle","type":"middle","current":546,"baseline":586,"el_current":155,"el_baseline":142},{"school":"Sewell Anderson Elem.","type":"elem","current":242,"baseline":298,"el_current":132,"el_baseline":181},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":357,"el_current":146,"el_baseline":136},{"school":"Sisson Elementary","type":"elem","current":418,"baseline":458,"el_current":196,"el_baseline":212},{"school":"Thurgood Marshall Mid.","type":"middle","current":1206,"baseline":1306,"el_current":405,"el_baseline":410},{"school":"Tracy Elementary","type":"elem","current":402,"baseline":385,"el_current":281,"el_baseline":284},{"school":"Washington Elementary","type":"elem","current":441,"baseline":465,"el_current":287,"el_baseline":317}]},
   "feb":{"report_month":"February 2026","snapshot_date":"2026-02-27","current_label":"Feb 2026","baseline_label":"Feb 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Feb 27, 2026 enrollment snapshot","district_totals":{"current_total":15894,"baseline_total":16528,"current_el":7267,"baseline_el":7726},"grade_band_summary":[{"band":"PK\u20135","current":7561,"baseline":7636,"el_current":4726,"el_baseline":4890},{"band":"Gr 6\u20138","current":3350,"baseline":3502,"el_current":1027,"el_baseline":1046},{"band":"Gr 9\u201312","current":4934,"baseline":5346,"el_current":1504,"el_baseline":1784}],"grade_level_data":[{"grade":"PK","current":560,"baseline":471,"el_current":379,"el_baseline":330},{"grade":"K","current":1038,"baseline":1130,"el_current":747,"el_baseline":792},{"grade":"1","current":1159,"baseline":1182,"el_current":811,"el_baseline":843},{"grade":"2","current":1152,"baseline":1268,"el_current":816,"el_baseline":897},{"grade":"3","current":1236,"baseline":1241,"el_current":817,"el_baseline":800},{"grade":"4","current":1188,"baseline":1233,"el_current":656,"el_baseline":749},{"grade":"5","current":1228,"baseline":1111,"el_current":500,"el_baseline":479},{"grade":"6","current":1059,"baseline":1152,"el_current":335,"el_baseline":342},{"grade":"7","current":1119,"baseline":1188,"el_current":346,"el_baseline":358},{"grade":"8","current":1172,"baseline":1162,"el_current":346,"el_baseline":346},{"grade":"9","current":1144,"baseline":1203,"el_current":348,"el_baseline":413},{"grade":"10","current":1190,"baseline":1408,"el_current":375,"el_baseline":536},{"grade":"11","current":1262,"baseline":1366,"el_current":409,"el_baseline":414},{"grade":"12","current":1338,"baseline":1369,"el_current":372,"el_baseline":421}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":224,"baseline":226,"el_current":88,"el_baseline":85},{"school":"Breed Middle","type":"middle","current":1164,"baseline":1289,"el_current":388,"el_baseline":413},{"school":"Brickett Elementary","type":"elem","current":329,"baseline":322,"el_current":204,"el_baseline":194},{"school":"Callahan Elementary","type":"elem","current":395,"baseline":402,"el_current":190,"el_baseline":192},{"school":"Cobbet Elementary","type":"elem","current":661,"baseline":626,"el_current":495,"el_baseline":469},{"school":"Connery Elementary","type":"elem","current":559,"baseline":558,"el_current":425,"el_baseline":434},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":494,"el_current":328,"el_baseline":343},{"school":"VA Barton ECC","type":"elem","current":244,"baseline":191,"el_current":150,"el_baseline":129},{"school":"Fallon Elementary","type":"elem","current":32,"baseline":32,"el_current":5,"el_baseline":8},{"school":"Ford Elementary","type":"elem","current":480,"baseline":411,"el_current":327,"el_baseline":283},{"school":"Frederick Douglass","type":"high","current":351,"baseline":231,"el_current":33,"el_baseline":33},{"school":"Durgin Success Acad.","type":"high","current":130,"baseline":101,"el_current":55,"el_baseline":15},{"school":"Harrington Elementary","type":"elem","current":673,"baseline":701,"el_current":484,"el_baseline":498},{"school":"Hood Elementary","type":"elem","current":555,"baseline":556,"el_current":347,"el_baseline":359},{"school":"Ingalls Elementary","type":"elem","current":620,"baseline":717,"el_current":448,"el_baseline":534},{"school":"Lincoln Thomson Elem.","type":"elem","current":188,"baseline":220,"el_current":105,"el_baseline":141},{"school":"Lynn Classical HS","type":"high","current":1472,"baseline":1814,"el_current":477,"el_baseline":687},{"school":"Lynn English HS","type":"high","current":1709,"baseline":2055,"el_current":722,"el_baseline":889},{"school":"Lynn Voc. Tech.","type":"high","current":1555,"baseline":1567,"el_current":287,"el_baseline":288},{"school":"Lynn Woods Elementary","type":"elem","current":172,"baseline":154,"el_current":50,"el_baseline":51},{"school":"Pickering Middle","type":"middle","current":545,"baseline":586,"el_current":153,"el_baseline":141},{"school":"Sewell Anderson Elem.","type":"elem","current":241,"baseline":296,"el_current":131,"el_baseline":180},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":355,"el_current":144,"el_baseline":135},{"school":"Sisson Elementary","type":"elem","current":420,"baseline":461,"el_current":197,"el_baseline":215},{"school":"Thurgood Marshall Mid.","type":"middle","current":1203,"baseline":1313,"el_current":402,"el_baseline":412},{"school":"Tracy Elementary","type":"elem","current":407,"baseline":386,"el_current":286,"el_baseline":283},{"school":"Washington Elementary","type":"elem","current":445,"baseline":464,"el_current":289,"el_baseline":315}]},
   "jan":{"report_month":"January 2026","snapshot_date":"2026-01-30","current_label":"Jan 2026","baseline_label":"Jan 2025","source_note":"Lynn Public Schools PowerSchool SIS \u00b7 Jan 30, 2026 enrollment snapshot","district_totals":{"current_total":15888,"baseline_total":16502,"current_el":7212,"baseline_el":7704},"grade_band_summary":[{"band":"PK\u20135","current":7546,"baseline":7617,"el_current":4671,"el_baseline":4873},{"band":"Gr 6\u20138","current":3344,"baseline":3498,"el_current":1007,"el_baseline":1042},{"band":"Gr 9\u201312","current":4949,"baseline":5343,"el_current":1524,"el_baseline":1783}],"grade_level_data":[{"grade":"PK","current":541,"baseline":453,"el_current":306,"el_baseline":313},{"grade":"K","current":1034,"baseline":1128,"el_current":758,"el_baseline":788},{"grade":"1","current":1162,"baseline":1183,"el_current":809,"el_baseline":843},{"grade":"2","current":1148,"baseline":1266,"el_current":820,"el_baseline":896},{"grade":"3","current":1243,"baseline":1241,"el_current":822,"el_baseline":801},{"grade":"4","current":1192,"baseline":1234,"el_current":661,"el_baseline":752},{"grade":"5","current":1226,"baseline":1112,"el_current":495,"el_baseline":480},{"grade":"6","current":1059,"baseline":1154,"el_current":331,"el_baseline":343},{"grade":"7","current":1116,"baseline":1187,"el_current":338,"el_baseline":357},{"grade":"8","current":1169,"baseline":1157,"el_current":338,"el_baseline":342},{"grade":"9","current":1146,"baseline":1198,"el_current":344,"el_baseline":411},{"grade":"10","current":1192,"baseline":1408,"el_current":374,"el_baseline":534},{"grade":"11","current":1269,"baseline":1366,"el_current":439,"el_baseline":417},{"grade":"12","current":1342,"baseline":1371,"el_current":367,"el_baseline":421}],"school_data":[{"school":"Aborn Elementary","type":"elem","current":224,"baseline":226,"el_current":92,"el_baseline":85},{"school":"Breed Middle","type":"middle","current":1162,"baseline":1281,"el_current":381,"el_baseline":409},{"school":"Brickett Elementary","type":"elem","current":329,"baseline":322,"el_current":204,"el_baseline":194},{"school":"Callahan Elementary","type":"elem","current":392,"baseline":398,"el_current":182,"el_baseline":191},{"school":"Cobbet Elementary","type":"elem","current":652,"baseline":622,"el_current":464,"el_baseline":462},{"school":"Connery Elementary","type":"elem","current":560,"baseline":555,"el_current":425,"el_baseline":432},{"school":"Drewicz Elementary","type":"elem","current":499,"baseline":493,"el_current":340,"el_baseline":343},{"school":"VA Barton ECC","type":"elem","current":239,"baseline":183,"el_current":129,"el_baseline":122},{"school":"Fallon Elementary","type":"elem","current":31,"baseline":30,"el_current":7,"el_baseline":6},{"school":"Ford Elementary","type":"elem","current":470,"baseline":409,"el_current":298,"el_baseline":282},{"school":"Frederick Douglass","type":"high","current":351,"baseline":231,"el_current":35,"el_baseline":33},{"school":"Durgin Success Acad.","type":"high","current":126,"baseline":99,"el_current":38,"el_baseline":14},{"school":"Harrington Elementary","type":"elem","current":676,"baseline":706,"el_current":497,"el_baseline":502},{"school":"Hood Elementary","type":"elem","current":556,"baseline":554,"el_current":346,"el_baseline":356},{"school":"Ingalls Elementary","type":"elem","current":627,"baseline":713,"el_current":446,"el_baseline":532},{"school":"Lincoln Thomson Elem.","type":"elem","current":188,"baseline":220,"el_current":104,"el_baseline":141},{"school":"Lynn Classical HS","type":"high","current":1478,"baseline":1808,"el_current":505,"el_baseline":683},{"school":"Lynn English HS","type":"high","current":1721,"baseline":2060,"el_current":725,"el_baseline":892},{"school":"Lynn Voc. Tech.","type":"high","current":1555,"baseline":1568,"el_current":284,"el_baseline":289},{"school":"Lynn Woods Elementary","type":"elem","current":171,"baseline":153,"el_current":51,"el_baseline":50},{"school":"Pickering Middle","type":"middle","current":539,"baseline":585,"el_current":146,"el_baseline":140},{"school":"Sewell Anderson Elem.","type":"elem","current":246,"baseline":297,"el_current":146,"el_baseline":180},{"school":"Shoemaker Elementary","type":"elem","current":364,"baseline":357,"el_current":144,"el_baseline":136},{"school":"Sisson Elementary","type":"elem","current":420,"baseline":462,"el_current":188,"el_baseline":218},{"school":"Thurgood Marshall Mid.","type":"middle","current":1199,"baseline":1316,"el_current":389,"el_baseline":412},{"school":"Tracy Elementary","type":"elem","current":404,"baseline":387,"el_current":285,"el_baseline":282},{"school":"Washington Elementary","type":"elem","current":447,"baseline":467,"el_current":293,"el_baseline":318}]}
 };
-var PERIOD_LIST=[{key:"feb",label:"Feb 2025 \u2192 Feb 2026"},{key:"jan",label:"Jan 2025 \u2192 Jan 2026"}];
+var PERIOD_LIST=[{key:"apr",label:"Apr 2025 \u2192 Apr 2026"},{key:"mar",label:"Mar 2025 \u2192 Mar 2026"},{key:"feb",label:"Feb 2025 \u2192 Feb 2026"},{key:"jan",label:"Jan 2025 \u2192 Jan 2026"}];
+var MONTH_KEYS=["jan","feb","mar","apr"];
 
-function hasEL(raw){
-  var dt=raw.district_totals;
-  return(dt.current_el>0||dt.baseline_el>0);
-}
+var TREND_DATA=MONTH_KEYS.map(function(k){var d=PERIODS[k].district_totals;return{
+  month:k.charAt(0).toUpperCase()+k.slice(1),y25:d.baseline_total,y26:d.current_total,el25:d.baseline_el,el26:d.current_el}});
+
+var TREND_BANDS=[0,1,2].map(function(bi){
+  var labels=["PK\u20135","Gr 6\u20138","Gr 9\u201312"];
+  return{band:labels[bi],data:MONTH_KEYS.map(function(k){var b=PERIODS[k].grade_band_summary[bi];return{
+    month:k.charAt(0).toUpperCase()+k.slice(1),y25:b.baseline,y26:b.current,el25:b.el_baseline,el26:b.el_current}})};
+});
+
+var TREND_GAP=TREND_DATA.map(function(d){return{month:d.month,gap:d.y25-d.y26,elGap:d.el25-d.el26,
+  pct:(((d.y26-d.y25)/d.y25)*100).toFixed(2),elPct:(((d.el26-d.el25)/d.el25)*100).toFixed(2)}});
+
+function hasEL(raw){var dt=raw.district_totals;return(dt.current_el>0||dt.baseline_el>0)}
 
 function proc(raw){
   var dt=raw.district_totals;
@@ -42,21 +54,15 @@ function proc(raw){
   var ec=dt.current_el-dt.baseline_el,ep=dt.baseline_el>0?((ec/dt.baseline_el)*100).toFixed(2):"0";
   var es=dt.current_total>0?((dt.current_el/dt.current_total)*100).toFixed(1):"0";
   var grades=raw.grade_level_data.map(function(d){return Object.assign({},d,{
-    change:d.current-d.baseline,
-    pct:d.baseline>0?(((d.current-d.baseline)/d.baseline)*100).toFixed(1):"0",
-    elChange:d.el_current-d.el_baseline,
-    elPct:d.el_baseline>0?(((d.el_current-d.el_baseline)/d.el_baseline)*100).toFixed(1):"N/A",
+    change:d.current-d.baseline,pct:d.baseline>0?(((d.current-d.baseline)/d.baseline)*100).toFixed(1):"0",
+    elChange:d.el_current-d.el_baseline,elPct:d.el_baseline>0?(((d.el_current-d.el_baseline)/d.el_baseline)*100).toFixed(1):"N/A",
     elPctCur:d.current>0?((d.el_current/d.current)*100).toFixed(1):"0",
-    elPctBase:d.baseline>0?((d.el_baseline/d.baseline)*100).toFixed(1):"0"
-  })});
+    elPctBase:d.baseline>0?((d.el_baseline/d.baseline)*100).toFixed(1):"0"})});
   var schools=raw.school_data.map(function(d){return Object.assign({},d,{
-    change:d.current-d.baseline,
-    pct:d.baseline>0?(((d.current-d.baseline)/d.baseline)*100).toFixed(1):"N/A",
-    elChange:d.el_current-d.el_baseline,
-    elPct:d.el_baseline>0?(((d.el_current-d.el_baseline)/d.el_baseline)*100).toFixed(1):"N/A",
+    change:d.current-d.baseline,pct:d.baseline>0?(((d.current-d.baseline)/d.baseline)*100).toFixed(1):"N/A",
+    elChange:d.el_current-d.el_baseline,elPct:d.el_baseline>0?(((d.el_current-d.el_baseline)/d.el_baseline)*100).toFixed(1):"N/A",
     elShareCur:d.current>0?((d.el_current/d.current)*100).toFixed(1):"0",
-    elShareBase:d.baseline>0?((d.el_baseline/d.baseline)*100).toFixed(1):"0"
-  })});
+    elShareBase:d.baseline>0?((d.el_baseline/d.baseline)*100).toFixed(1):"0"})});
   var bands=(raw.grade_band_summary||[]).map(function(d){return Object.assign({},d,{change:d.current-d.baseline,elChange:d.el_current-d.el_baseline})});
   return{meta:Object.assign({},raw,{totalChange:tc,totalPct:tp,elChange:ec,elPct:ep,elShare:es,hasEL:hasEL(raw)}),grades:grades,schools:schools,bands:bands};
 }
@@ -69,62 +75,61 @@ var BLB={pk5:"PK\u20135",ms:"6\u20138",hs:"9\u201312"};
 var ELC="#E6A44E";
 var fss=function(v){return(v>=0?"+":"")+v.toLocaleString()};
 var ccc=function(v){return v>=0?"#8FBC8F":"#E8927C"};
-
 var ttS={background:"#1a1a2e",border:"1px solid rgba(255,255,255,0.12)",borderRadius:8,padding:"10px 14px",color:"#e0e0e0",fontSize:13,fontFamily:"'DM Sans',sans-serif",boxShadow:"0 4px 20px rgba(0,0,0,0.4)",maxWidth:280};
 
 function GTT(p){
   if(!p.active||!p.payload||!p.payload.length)return null;
-  var d=p.grades.find(function(g){return g.grade===p.label});
-  if(!d)return null;
-  var kids=[
-    e("div",{key:"h",style:{fontWeight:700,color:"#fff",marginBottom:6,fontSize:14}},"Grade "+p.label),
+  var d=p.grades.find(function(g){return g.grade===p.label});if(!d)return null;
+  var kids=[e("div",{key:"h",style:{fontWeight:700,color:"#fff",marginBottom:6,fontSize:14}},"Grade "+p.label),
     e("div",{key:"s",style:{fontSize:11,color:"rgba(255,255,255,0.35)",marginBottom:4,textTransform:"uppercase",letterSpacing:"0.05em"}},"Total Enrollment"),
-    e("div",{key:"r",style:{display:"flex",gap:16,marginBottom:2}},
-      e("span",null,p.meta.baseline_label+": ",e("strong",null,d.baseline.toLocaleString())),
-      e("span",null,p.meta.current_label+": ",e("strong",null,d.current.toLocaleString()))
-    ),
-    e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+fss(parseFloat(d.pct))+"%)")
-  ];
-  if(p.showEL&&p.meta.hasEL){
-    kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
-      e("div",{style:{fontSize:11,color:ELC,marginBottom:6,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
-      e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elPctBase+"%)"),
-      e("div",{style:{marginBottom:4}},p.meta.current_label+": ",e("strong",null,d.el_current.toLocaleString())," ("+d.elPctCur+"%)"),
-      e("div",{style:{color:ccc(d.elChange),fontWeight:600}},fss(d.elChange)+" ("+(d.elPct!=="N/A"?fss(parseFloat(d.elPct))+"%":"N/A")+")")
-    ));
-  }
+    e("div",{key:"r",style:{display:"flex",gap:16,marginBottom:2}},e("span",null,p.meta.baseline_label+": ",e("strong",null,d.baseline.toLocaleString())),e("span",null,p.meta.current_label+": ",e("strong",null,d.current.toLocaleString()))),
+    e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+fss(parseFloat(d.pct))+"%)")];
+  if(p.showEL&&p.meta.hasEL){kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
+    e("div",{style:{fontSize:11,color:ELC,marginBottom:6,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
+    e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elPctBase+"%)"),
+    e("div",{style:{marginBottom:4}},p.meta.current_label+": ",e("strong",null,d.el_current.toLocaleString())," ("+d.elPctCur+"%)"),
+    e("div",{style:{color:ccc(d.elChange),fontWeight:600}},fss(d.elChange)+" ("+(d.elPct!=="N/A"?fss(parseFloat(d.elPct))+"%":"N/A")+")")));}
   return e("div",{style:ttS},kids);
 }
 
 function STT(p){
   if(!p.active||!p.payload||!p.payload.length)return null;
   var d=p.payload[0]&&p.payload[0].payload;if(!d)return null;
-  var kids=[
-    e("div",{key:"h",style:{fontWeight:700,color:"#fff",marginBottom:2}},d.school),
+  var kids=[e("div",{key:"h",style:{fontWeight:700,color:"#fff",marginBottom:2}},d.school),
     e("div",{key:"t",style:{fontSize:11,color:"rgba(255,255,255,0.4)",marginBottom:8}},TL[d.type]),
     e("div",{key:"s",style:{fontSize:11,color:"rgba(255,255,255,0.35)",marginBottom:4,textTransform:"uppercase",letterSpacing:"0.05em"}},"Total Enrollment"),
-    e("div",{key:"r",style:{display:"flex",gap:16,marginBottom:2}},
-      e("span",null,p.meta.baseline_label+": ",e("strong",null,d.baseline.toLocaleString())),
-      e("span",null,p.meta.current_label+": ",e("strong",null,d.current.toLocaleString()))
-    ),
-    e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+(d.pct!=="N/A"?fss(parseFloat(d.pct))+"%":"N/A")+")")
-  ];
-  if(p.showEL&&p.meta.hasEL){
-    kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
-      e("div",{style:{fontSize:11,color:ELC,marginBottom:4,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
-      e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elShareBase+"%)"),
-      e("div",{style:{marginBottom:4}},p.meta.current_label+": ",e("strong",null,d.el_current.toLocaleString())," ("+d.elShareCur+"%)"),
-      e("div",{style:{color:ccc(d.elChange),fontWeight:600}},fss(d.elChange)+" ("+(d.elPct!=="N/A"?fss(parseFloat(d.elPct))+"%":"N/A")+")")
-    ));
-  }
+    e("div",{key:"r",style:{display:"flex",gap:16,marginBottom:2}},e("span",null,p.meta.baseline_label+": ",e("strong",null,d.baseline.toLocaleString())),e("span",null,p.meta.current_label+": ",e("strong",null,d.current.toLocaleString()))),
+    e("div",{key:"c",style:{color:ccc(d.change),fontWeight:600}},fss(d.change)+" ("+(d.pct!=="N/A"?fss(parseFloat(d.pct))+"%":"N/A")+")")];
+  if(p.showEL&&p.meta.hasEL){kids.push(e("div",{key:"el",style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.08)"}},
+    e("div",{style:{fontSize:11,color:ELC,marginBottom:4,textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600}},"EL Enrollment"),
+    e("div",{style:{marginBottom:2}},p.meta.baseline_label+": ",e("strong",null,d.el_baseline.toLocaleString())," ("+d.elShareBase+"%)"),
+    e("div",{style:{marginBottom:4}},p.meta.current_label+": ",e("strong",null,d.el_current.toLocaleString())," ("+d.elShareCur+"%)"),
+    e("div",{style:{color:ccc(d.elChange),fontWeight:600}},fss(d.elChange)+" ("+(d.elPct!=="N/A"?fss(parseFloat(d.elPct))+"%":"N/A")+")")));}
   return e("div",{style:ttS},kids);
+}
+
+function TrendTT(p){
+  if(!p.active||!p.payload||!p.payload.length)return null;
+  var d=p.payload[0].payload;var gap=d.y25-d.y26;var elGap=d.el25-d.el26;
+  return e("div",{style:ttS},
+    e("div",{style:{fontWeight:700,color:"#fff",marginBottom:8,fontSize:14}},d.month+" Snapshot"),
+    e("div",{style:{fontSize:11,color:"rgba(255,255,255,0.35)",marginBottom:4,textTransform:"uppercase"}},"Total Enrollment"),
+    e("div",{style:{marginBottom:2}},"2024\u201325: ",e("strong",null,d.y25.toLocaleString())),
+    e("div",{style:{marginBottom:4}},"2025\u201326: ",e("strong",null,d.y26.toLocaleString())),
+    e("div",{style:{color:"#E8927C",fontWeight:600,marginBottom:8}},"Gap: "+gap.toLocaleString()+" fewer students"),
+    d.el25>0?e("div",null,
+      e("div",{style:{fontSize:11,color:ELC,marginBottom:4,textTransform:"uppercase",fontWeight:600}},"EL Enrollment"),
+      e("div",{style:{marginBottom:2}},"2024\u201325: ",e("strong",null,d.el25.toLocaleString())),
+      e("div",{style:{marginBottom:4}},"2025\u201326: ",e("strong",null,d.el26.toLocaleString())),
+      e("div",{style:{color:"#E8927C",fontWeight:600}},"Gap: "+elGap.toLocaleString()+" fewer EL students")
+    ):null);
 }
 
 function mkP(a,ac){return{padding:"6px 14px",borderRadius:20,fontSize:12,fontWeight:600,cursor:"pointer",border:"1px solid",outline:"none",transition:"all 0.2s",background:a?(ac?ac+"22":"rgba(255,255,255,0.12)"):"transparent",color:a?(ac||"#fff"):"rgba(255,255,255,0.45)",borderColor:a?(ac?ac+"44":"rgba(255,255,255,0.2)"):"rgba(255,255,255,0.08)"}}
 function mkS(a,ac){var s=mkP(a,ac);s.padding="4px 10px";s.fontSize=11;return s}
 
 function App(){
-  var _p=us("feb"),period=_p[0],setPeriod=_p[1];
+  var _p=us("apr"),period=_p[0],setPeriod=_p[1];
   var _v=us("grade"),view=_v[0],setView=_v[1];
   var _e=us(true),showEL=_e[0],setShowEL=_e[1];
   var _d=us(null),custom=_d[0],setCustom=_d[1];
@@ -133,13 +138,13 @@ function App(){
   var _sm=us("total"),sMetric=_sm[0],setSMetric=_sm[1];
   var _us=us(null),upSt=_us[0],setUpSt=_us[1];
   var _dr=us(false),isDrag=_dr[0],setIsDrag=_dr[1];
+  var _te=us(false),trendEL=_te[0],setTrendEL=_te[1];
   var fRef=ur(null);
 
-  var rawData=custom||(PERIODS[period]||PERIODS["feb"]);
+  var rawData=custom||(PERIODS[period]||PERIODS["apr"]);
   var data=um(function(){return proc(rawData)},[rawData]);
   var meta=data.meta,grades=data.grades,schools=data.schools,bands=data.bands;
-  var elAvail=meta.hasEL;
-  var elActive=showEL&&elAvail;
+  var elAvail=meta.hasEL;var elActive=showEL&&elAvail;
 
   var sorted=um(function(){
     var d=sFilt==="all"?schools.slice():schools.filter(function(s){return s.type===sFilt});
@@ -151,286 +156,233 @@ function App(){
   },[schools,sSort,sFilt,sMetric]);
 
   var hFile=function(f){
-    if(!f)return;
-    if(!f.name.endsWith(".json")){setUpSt({type:"error",msg:"Please upload a .json file"});setTimeout(function(){setUpSt(null)},4000);return}
-    var r=new FileReader();
-    r.onload=function(ev){try{
-      var p=JSON.parse(ev.target.result);
+    if(!f)return;if(!f.name.endsWith(".json")){setUpSt({type:"error",msg:"Please upload a .json file"});setTimeout(function(){setUpSt(null)},4000);return}
+    var r=new FileReader();r.onload=function(ev){try{var p=JSON.parse(ev.target.result);
       if(!p.district_totals||!p.grade_level_data||!p.school_data)throw new Error("Missing required fields");
       setCustom(p);setPeriod("custom");setUpSt({type:"success",msg:"Loaded: "+(p.report_month||"new data")});setTimeout(function(){setUpSt(null)},4000);
-    }catch(err){setUpSt({type:"error",msg:"Invalid: "+err.message});setTimeout(function(){setUpSt(null)},5000)}};
-    r.readAsText(f);
-  };
-
+    }catch(err){setUpSt({type:"error",msg:"Invalid: "+err.message});setTimeout(function(){setUpSt(null)},5000)}};r.readAsText(f);};
   var selectPeriod=function(k){setPeriod(k);if(k!=="custom")setCustom(null)};
 
-  // ── Drag overlay ──
   var overlay=isDrag?e("div",{style:{position:"fixed",inset:0,zIndex:999,background:"rgba(13,13,26,0.92)",display:"flex",alignItems:"center",justifyContent:"center",border:"3px dashed rgba(230,164,78,0.5)",borderRadius:20,margin:20}},
-    e("div",{style:{textAlign:"center"}},
-      e("div",{style:{fontSize:48,marginBottom:12}},"\u{1F4CA}"),
-      e("div",{style:{fontSize:22,fontWeight:700,color:ELC}},"Drop JSON Data File"),
-      e("div",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",marginTop:6}},"Release to load new enrollment data")
-    )
-  ):null;
+    e("div",{style:{textAlign:"center"}},e("div",{style:{fontSize:48,marginBottom:12}},"\u{1F4CA}"),e("div",{style:{fontSize:22,fontWeight:700,color:ELC}},"Drop JSON Data File"),e("div",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",marginTop:6}},"Release to load new enrollment data"))):null;
 
-  // ── Summary cards ──
   var cards=[
     {l:"Total "+meta.baseline_label,v:meta.district_totals.baseline_total.toLocaleString(),s:"Baseline",c:"#7EB8DA"},
     {l:"Total "+meta.current_label,v:meta.district_totals.current_total.toLocaleString(),s:"Current",c:"#7EB8DA"},
     {l:"Total Change",v:(meta.totalChange>=0?"+":"\u2212")+Math.abs(meta.totalChange).toLocaleString(),s:meta.totalPct+"%",c:"#E8927C"}
   ];
-  if(elAvail){
-    cards.push(null);
+  if(elAvail){cards.push(null);
     cards.push({l:"EL "+meta.baseline_label,v:meta.district_totals.baseline_el.toLocaleString(),s:"Baseline",c:ELC});
     cards.push({l:"EL "+meta.current_label,v:meta.district_totals.current_el.toLocaleString(),s:"Current",c:ELC});
     cards.push({l:"EL Change",v:(meta.elChange>=0?"+":"\u2212")+Math.abs(meta.elChange).toLocaleString(),s:meta.elPct+"%",c:"#E8927C"});
   }
-
   var cardCols=elAvail?"repeat(3,1fr) 2px repeat(3,1fr)":"repeat(3,1fr)";
   var cardEls=cards.map(function(cd,i){
     if(!cd)return e("div",{key:i,style:{background:"rgba(255,255,255,0.06)",width:1,margin:"8px auto"}});
     return e("div",{key:i,style:{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:10,padding:"14px 12px",textAlign:"center"}},
       e("div",{style:{fontSize:10,textTransform:"uppercase",letterSpacing:"0.08em",color:"rgba(255,255,255,0.38)",fontWeight:500,marginBottom:4}},cd.l),
       e("div",{style:{fontSize:24,fontWeight:700,color:cd.c,lineHeight:1.1}},cd.v),
-      e("div",{style:{fontSize:11,color:(cd.s.indexOf("\u2212")>=0||cd.s.indexOf("-")>=0)?"#E8927C":"rgba(255,255,255,0.3)",marginTop:3,fontWeight:500}},cd.s)
-    );
+      e("div",{style:{fontSize:11,color:(cd.s.indexOf("\u2212")>=0||cd.s.indexOf("-")>=0)?"#E8927C":"rgba(255,255,255,0.3)",marginTop:3,fontWeight:500}},cd.s));
   });
 
-  // ── Grade view ──
+  // ═══ TREND VIEW ═══
+  var trendView=null;
+  if(view==="trend"){
+    var y25c="#7EB8DA",y26c="#E8927C",el25c="rgba(230,164,78,0.5)",el26c=ELC;var dotR=6;
+    var mainChart=e("div",{style:{marginBottom:24}},
+      e("div",{style:{fontSize:13,fontWeight:600,color:"#fff",marginBottom:12}},"District Total Enrollment"),
+      e(RC,{width:"100%",height:280},
+        e(CC_,{data:TREND_DATA},
+          e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",vertical:false}),
+          e(XA,{dataKey:"month",tick:{fill:"rgba(255,255,255,0.6)",fontSize:13,fontWeight:600},axisLine:{stroke:"rgba(255,255,255,0.1)"},tickLine:false}),
+          e(YA,{domain:["dataMin - 200","dataMax + 200"],tick:{fill:"rgba(255,255,255,0.4)",fontSize:11},axisLine:false,tickLine:false,tickFormatter:function(v){return v.toLocaleString()}}),
+          e(TT,{content:e(TrendTT,null),cursor:{stroke:"rgba(255,255,255,0.15)"}}),
+          e(Area_,{dataKey:"y25",stroke:"none",fill:y25c,fillOpacity:0.06}),
+          e(Area_,{dataKey:"y26",stroke:"none",fill:y26c,fillOpacity:0.06}),
+          e(Line_,{dataKey:"y25",stroke:y25c,strokeWidth:3,name:"2024\u201325",dot:{r:dotR,fill:y25c,stroke:"#1a1a2e",strokeWidth:2},activeDot:{r:8}}),
+          e(Line_,{dataKey:"y26",stroke:y26c,strokeWidth:3,name:"2025\u201326",dot:{r:dotR,fill:y26c,stroke:"#1a1a2e",strokeWidth:2},activeDot:{r:8}}),
+          trendEL?e(Line_,{dataKey:"el25",stroke:el25c,strokeWidth:2,strokeDasharray:"6 3",name:"EL 2024\u201325",dot:{r:4,fill:el25c,stroke:"#1a1a2e",strokeWidth:2}}):null,
+          trendEL?e(Line_,{dataKey:"el26",stroke:el26c,strokeWidth:2,strokeDasharray:"6 3",name:"EL 2025\u201326",dot:{r:4,fill:el26c,stroke:"#1a1a2e",strokeWidth:2}}):null,
+          e(LG,{wrapperStyle:{fontSize:11,paddingTop:8},iconType:"line",iconSize:14}))));
+
+    var gapCards=e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+TREND_GAP.length+",1fr)",gap:10,marginBottom:24}},
+      TREND_GAP.map(function(d,i){
+        return e("div",{key:i,style:{background:"rgba(232,146,124,0.06)",border:"1px solid rgba(232,146,124,0.12)",borderRadius:10,padding:"14px 16px",textAlign:"center"}},
+          e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"rgba(255,255,255,0.4)",marginBottom:4}},d.month+" YoY Gap"),
+          e("div",{style:{fontSize:28,fontWeight:700,color:"#E8927C",lineHeight:1.1}},"\u2212"+d.gap.toLocaleString()),
+          e("div",{style:{fontSize:12,color:"rgba(255,255,255,0.4)",marginTop:4}},d.pct+"% change"),
+          trendEL?e("div",{style:{marginTop:8,paddingTop:8,borderTop:"1px solid rgba(255,255,255,0.06)"}},
+            e("div",{style:{fontSize:11,color:ELC,fontWeight:600}},"\u2212"+d.elGap.toLocaleString()+" EL"),
+            e("div",{style:{fontSize:11,color:"rgba(255,255,255,0.35)"}},d.elPct+"% EL change")):null);
+      }));
+
+    var bandColors=["#5A8BA8","#8B6BAE","#C75B3F"];
+    var bandCharts=e("div",{style:{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14}},
+      TREND_BANDS.map(function(b,bi){
+        var maxY=Math.max.apply(null,b.data.map(function(d){return Math.max(d.y25,d.y26)}))+100;
+        var minY=Math.min.apply(null,b.data.map(function(d){return Math.min(d.y25,d.y26)}))-100;
+        var lastGap=b.data[b.data.length-1].y25-b.data[b.data.length-1].y26;
+        return e("div",{key:bi,style:{background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:12,padding:"16px 12px"}},
+          e("div",{style:{fontSize:12,fontWeight:600,color:bandColors[bi],marginBottom:10}},b.band),
+          e(RC,{width:"100%",height:180},
+            e(CC_,{data:b.data},
+              e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.04)",vertical:false}),
+              e(XA,{dataKey:"month",tick:{fill:"rgba(255,255,255,0.5)",fontSize:11},axisLine:false,tickLine:false}),
+              e(YA,{domain:[minY,maxY],tick:{fill:"rgba(255,255,255,0.3)",fontSize:10},axisLine:false,tickLine:false,tickFormatter:function(v){return(v/1000).toFixed(1)+"k"}}),
+              e(Area_,{dataKey:"y25",stroke:"none",fill:bandColors[bi],fillOpacity:0.05}),
+              e(Line_,{dataKey:"y25",stroke:bandColors[bi],strokeWidth:2.5,strokeOpacity:0.5,dot:{r:5,fill:bandColors[bi],fillOpacity:0.5,stroke:"#1a1a2e",strokeWidth:2}}),
+              e(Line_,{dataKey:"y26",stroke:bandColors[bi],strokeWidth:2.5,dot:{r:5,fill:bandColors[bi],stroke:"#1a1a2e",strokeWidth:2}}),
+              trendEL?e(Line_,{dataKey:"el25",stroke:ELC,strokeWidth:1.5,strokeDasharray:"4 3",strokeOpacity:0.5,dot:{r:3,fill:ELC,fillOpacity:0.5}}):null,
+              trendEL?e(Line_,{dataKey:"el26",stroke:ELC,strokeWidth:1.5,strokeDasharray:"4 3",dot:{r:3,fill:ELC}}):null)),
+          e("div",{style:{display:"flex",justifyContent:"space-between",marginTop:8,fontSize:11}},
+            e("span",{style:{color:"rgba(255,255,255,0.35)"}},"\u25CB Lighter = 2024\u201325"),
+            e("span",{style:{color:"rgba(255,255,255,0.35)"}},"\u25CF Solid = 2025\u201326")),
+          e("div",{style:{textAlign:"center",marginTop:6,fontSize:12,fontWeight:600,color:"#E8927C"}},
+            "Apr gap: \u2212"+lastGap.toLocaleString()));
+      }));
+
+    var janGap=TREND_GAP[0].gap,aprGap=TREND_GAP[TREND_GAP.length-1].gap,widen=aprGap-janGap;
+    var marGap=TREND_GAP[2].gap;
+    var gapNote=null;
+    if(widen>0){gapNote=e("div",{style:{marginTop:16,padding:"12px 18px",background:"rgba(232,146,124,0.06)",border:"1px solid rgba(232,146,124,0.12)",borderRadius:10,textAlign:"center",fontSize:13}},
+      e("span",{style:{color:"#E8927C",fontWeight:700}},"The enrollment gap widened by "+widen+" students"),
+      e("span",{style:{color:"rgba(255,255,255,0.45)"}}," from January (\u2212"+janGap.toLocaleString()+") to April (\u2212"+aprGap.toLocaleString()+")"),
+      marGap>aprGap?e("span",{style:{color:"#8FBC8F",fontWeight:600,marginLeft:6}}," \u2014 but narrowed from March (\u2212"+marGap.toLocaleString()+")"):null);}
+    else{gapNote=e("div",{style:{marginTop:16,padding:"12px 18px",background:"rgba(107,142,107,0.06)",border:"1px solid rgba(107,142,107,0.12)",borderRadius:10,textAlign:"center",fontSize:13}},
+      e("span",{style:{color:"#8FBC8F",fontWeight:700}},"The enrollment gap narrowed by "+Math.abs(widen)+" students"),
+      e("span",{style:{color:"rgba(255,255,255,0.45)"}}," from January (\u2212"+janGap.toLocaleString()+") to April (\u2212"+aprGap.toLocaleString()+")"));}
+
+    trendView=e("div",{style:{maxWidth:960,margin:"0 auto 28px",background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:16,padding:"24px 20px 16px"}},
+      e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12,marginBottom:16}},
+        e("div",null,
+          e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Monthly Enrollment Trends"),
+          e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:0}},"Tracking enrollment across Jan \u2192 Feb \u2192 Mar \u2192 Apr for both school years")),
+        e("button",{onClick:function(){setTrendEL(!trendEL)},style:Object.assign({},mkP(trendEL,ELC),{display:"flex",alignItems:"center",gap:6})},
+          e("span",{style:{width:8,height:8,borderRadius:"50%",background:trendEL?ELC:"rgba(255,255,255,0.25)",transition:"all 0.2s"}}),"EL Overlay")),
+      mainChart,gapCards,
+      e("div",{style:{fontSize:13,fontWeight:600,color:"#fff",marginBottom:12}},"Trends by Grade Band"),
+      bandCharts,gapNote);
+  }
+
+  // ═══ GRADE VIEW ═══
   var gradeView=null;
   if(view==="grade"){
     var gBars=[
-      e(Bar_,{key:"b",dataKey:"baseline",name:"Total "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},
-        grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.3})})
-      ),
-      e(Bar_,{key:"c",dataKey:"current",name:"Total "+meta.current_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},
-        grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.85})})
-      )
-    ];
+      e(Bar_,{key:"b",dataKey:"baseline",name:"Total "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.3})})),
+      e(Bar_,{key:"c",dataKey:"current",name:"Total "+meta.current_label,radius:[3,3,0,0],maxBarSize:elActive?22:34},grades.map(function(d,i){return e(CL,{key:i,fill:BCC[bgr(d.grade)],fillOpacity:0.85})}))];
     if(elActive){
-      gBars.push(e(Bar_,{key:"eb",dataKey:"el_baseline",name:"EL "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:22},
-        grades.map(function(_,i){return e(CL,{key:i,fill:ELC,fillOpacity:0.3})})
-      ));
-      gBars.push(e(Bar_,{key:"ec",dataKey:"el_current",name:"EL "+meta.current_label,radius:[3,3,0,0],maxBarSize:22},
-        grades.map(function(_,i){return e(CL,{key:i,fill:ELC,fillOpacity:0.85})})
-      ));
-    }
-
+      gBars.push(e(Bar_,{key:"eb",dataKey:"el_baseline",name:"EL "+meta.baseline_label,radius:[3,3,0,0],maxBarSize:22},grades.map(function(_,i){return e(CL,{key:i,fill:ELC,fillOpacity:0.3})})));
+      gBars.push(e(Bar_,{key:"ec",dataKey:"el_current",name:"EL "+meta.current_label,radius:[3,3,0,0],maxBarSize:22},grades.map(function(_,i){return e(CL,{key:i,fill:ELC,fillOpacity:0.85})})));}
     var changeBadges=e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+grades.length+",1fr)",gap:4,marginTop:8,padding:"0 46px"}},
       grades.map(function(d,i){
         var kids=[e("div",{key:"v",style:{fontSize:12,fontWeight:700,color:ccc(d.change)}},fss(d.change))];
         if(elActive)kids.push(e("div",{key:"e",style:{fontSize:10,fontWeight:600,color:d.elChange>=0?ELC:"#E8927C",marginTop:2}},"EL "+fss(d.elChange)));
-        return e("div",{key:i,style:{textAlign:"center",background:d.change>=0?"rgba(107,142,107,0.12)":"rgba(199,91,63,0.1)",borderRadius:6,padding:"5px 2px",border:"1px solid "+(d.change>=0?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.18)")}},kids);
-      })
-    );
-
+        return e("div",{key:i,style:{textAlign:"center",background:d.change>=0?"rgba(107,142,107,0.12)":"rgba(199,91,63,0.1)",borderRadius:6,padding:"5px 2px",border:"1px solid "+(d.change>=0?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.18)")}},kids);}));
     var legendItems=Object.keys(BCC).map(function(k){return e("div",{key:k,style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:BCC[k],display:"inline-block"}}),BLB[k])});
     if(elActive)legendItems.push(e("div",{key:"el",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,display:"inline-block"}}),"EL Enrollment"));
-
     var elShare=null;
-    if(elActive){
-      elShare=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
-        e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:8}},"EL Share of Total by Grade ("+meta.current_label+")"),
-        e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+grades.length+",1fr)",gap:4}},
-          grades.map(function(d,i){
-            var s=parseFloat(d.elPctCur);
-            return e("div",{key:i,style:{textAlign:"center"}},
-              e("div",{style:{height:50,display:"flex",flexDirection:"column",justifyContent:"flex-end",alignItems:"center"}},
-                e("div",{style:{width:"70%",height:Math.max(4,s*0.6),background:"linear-gradient(180deg,"+ELC+" 0%,rgba(230,164,78,0.4) 100%)",borderRadius:"3px 3px 0 0"}})
-              ),
-              e("div",{style:{fontSize:10,fontWeight:600,color:ELC,marginTop:3}},d.elPctCur+"%"),
-              e("div",{style:{fontSize:9,color:"rgba(255,255,255,0.3)"}},"Gr "+d.grade)
-            );
-          })
-        )
-      );
-    }
-
+    if(elActive){elShare=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
+      e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:8}},"EL Share of Total by Grade ("+meta.current_label+")"),
+      e("div",{style:{display:"grid",gridTemplateColumns:"repeat("+grades.length+",1fr)",gap:4}},
+        grades.map(function(d,i){var s=parseFloat(d.elPctCur);return e("div",{key:i,style:{textAlign:"center"}},
+          e("div",{style:{height:50,display:"flex",flexDirection:"column",justifyContent:"flex-end",alignItems:"center"}},e("div",{style:{width:"70%",height:Math.max(4,s*0.6),background:"linear-gradient(180deg,"+ELC+" 0%,rgba(230,164,78,0.4) 100%)",borderRadius:"3px 3px 0 0"}})),
+          e("div",{style:{fontSize:10,fontWeight:600,color:ELC,marginTop:3}},d.elPctCur+"%"),e("div",{style:{fontSize:9,color:"rgba(255,255,255,0.3)"}},"Gr "+d.grade))})));}
     gradeView=e("div",{style:{maxWidth:960,margin:"0 auto 28px",background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:16,padding:"24px 20px 16px"}},
       e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Enrollment Change by Grade Level"),
       e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:"0 0 16px"}},"Lighter bars = "+meta.baseline_label+" \u00b7 Solid bars = "+meta.current_label+(elActive?" \u00b7 Gold bars = EL enrollment":"")),
-      e(RC,{width:"100%",height:380},
-        e(BC_,{data:grades,barCategoryGap:"14%",barGap:2},
-          e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",vertical:false}),
-          e(XA,{dataKey:"grade",tick:{fill:"rgba(255,255,255,0.6)",fontSize:12,fontWeight:500},axisLine:{stroke:"rgba(255,255,255,0.1)"},tickLine:false}),
-          e(YA,{tick:{fill:"rgba(255,255,255,0.4)",fontSize:11},axisLine:false,tickLine:false,tickFormatter:function(v){return v.toLocaleString()}}),
-          e(TT,{content:e(GTT,{grades:grades,showEL:showEL,meta:meta}),cursor:{fill:"rgba(255,255,255,0.03)"}}),
-          e(LG,{wrapperStyle:{fontSize:11,paddingTop:4},iconType:"square",iconSize:9}),
-          gBars
-        )
-      ),
+      e(RC,{width:"100%",height:380},e(BC_,{data:grades,barCategoryGap:"14%",barGap:2},
+        e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",vertical:false}),
+        e(XA,{dataKey:"grade",tick:{fill:"rgba(255,255,255,0.6)",fontSize:12,fontWeight:500},axisLine:{stroke:"rgba(255,255,255,0.1)"},tickLine:false}),
+        e(YA,{tick:{fill:"rgba(255,255,255,0.4)",fontSize:11},axisLine:false,tickLine:false,tickFormatter:function(v){return v.toLocaleString()}}),
+        e(TT,{content:e(GTT,{grades:grades,showEL:showEL,meta:meta}),cursor:{fill:"rgba(255,255,255,0.03)"}}),
+        e(LG,{wrapperStyle:{fontSize:11,paddingTop:4},iconType:"square",iconSize:9}),gBars)),
       changeBadges,
       e("div",{style:{display:"flex",justifyContent:"center",gap:16,marginTop:12,fontSize:11,color:"rgba(255,255,255,0.45)",flexWrap:"wrap"}},legendItems),
-      elShare
-    );
+      elShare);
   }
 
-  // ── School view ──
+  // ═══ SCHOOL VIEW ═══
   var schoolView=null;
   if(view==="school"){
-    var sBars=[
-      e(Bar_,{key:"tc",dataKey:"change",name:"Total Change",radius:[0,4,4,0],maxBarSize:elActive?14:20,minPointSize:3},
-        sorted.map(function(d,i){return e(CL,{key:i,fill:d.change>=0?"#6B8E6B":TC[d.type],fillOpacity:0.8})})
-      )
-    ];
-    if(elActive){
-      sBars.push(e(Bar_,{key:"ec",dataKey:"elChange",name:"EL Change",radius:[0,4,4,0],maxBarSize:14,minPointSize:3},
-        sorted.map(function(d,i){return e(CL,{key:i,fill:d.elChange>=0?ELC:"#B8864A",fillOpacity:0.75})})
-      ));
-    }
-
-    var filterBtns=[{k:"all",l:"All"},{k:"elem",l:"Elem."},{k:"middle",l:"Middle"},{k:"high",l:"High"}].map(function(f){
-      return e("button",{key:f.k,onClick:function(){setSFilt(f.k)},style:mkS(sFilt===f.k)},f.l);
-    });
-    var sortBtns=[{k:"change",l:"# Change"},{k:"pct",l:"% Change"},{k:"alpha",l:"A \u2192 Z"}].map(function(s){
-      return e("button",{key:s.k,onClick:function(){setSSort(s.k)},style:mkS(sSort===s.k)},s.l);
-    });
-
+    var sBars=[e(Bar_,{key:"tc",dataKey:"change",name:"Total Change",radius:[0,4,4,0],maxBarSize:elActive?14:20,minPointSize:3},
+      sorted.map(function(d,i){return e(CL,{key:i,fill:d.change>=0?"#6B8E6B":TC[d.type],fillOpacity:0.8})}))];
+    if(elActive){sBars.push(e(Bar_,{key:"ec",dataKey:"elChange",name:"EL Change",radius:[0,4,4,0],maxBarSize:14,minPointSize:3},
+      sorted.map(function(d,i){return e(CL,{key:i,fill:d.elChange>=0?ELC:"#B8864A",fillOpacity:0.75})})));}
+    var filterBtns=[{k:"all",l:"All"},{k:"elem",l:"Elem."},{k:"middle",l:"Middle"},{k:"high",l:"High"}].map(function(f){return e("button",{key:f.k,onClick:function(){setSFilt(f.k)},style:mkS(sFilt===f.k)},f.l)});
+    var sortBtns=[{k:"change",l:"# Change"},{k:"pct",l:"% Change"},{k:"alpha",l:"A \u2192 Z"}].map(function(s){return e("button",{key:s.k,onClick:function(){setSSort(s.k)},style:mkS(sSort===s.k)},s.l)});
     var sLegend=[e("div",{key:"g",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:"#6B8E6B",opacity:0.8}}),"Total Gain")];
     Object.keys(TC).forEach(function(k){sLegend.push(e("div",{key:k,style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:TC[k],opacity:0.8}}),TL[k]+" Decline"))});
-    if(elActive){
-      sLegend.push(e("div",{key:"eg",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,opacity:0.75}}),"EL Gain"));
-      sLegend.push(e("div",{key:"ed",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:"#B8864A",opacity:0.75}}),"EL Decline"));
-    }
-
-    var topGains=schools.slice().sort(function(a,b){return b.change-a.change}).slice(0,5).map(function(d,i){
-      return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#8FBC8F",fontWeight:600}},"+"+d.change));
-    });
-    var topDecl=schools.slice().sort(function(a,b){return a.change-b.change}).slice(0,5).map(function(d,i){
-      return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.change));
-    });
-
+    if(elActive){sLegend.push(e("div",{key:"eg",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:ELC,opacity:0.75}}),"EL Gain"));
+      sLegend.push(e("div",{key:"ed",style:{display:"flex",alignItems:"center",gap:5}},e("span",{style:{width:10,height:10,borderRadius:2,background:"#B8864A",opacity:0.75}}),"EL Decline"));}
+    var topGains=schools.slice().sort(function(a,b){return b.change-a.change}).slice(0,5).map(function(d,i){return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#8FBC8F",fontWeight:600}},"+"+d.change))});
+    var topDecl=schools.slice().sort(function(a,b){return a.change-b.change}).slice(0,5).map(function(d,i){return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.change))});
     var sumCols=elActive?"1fr 1fr 1fr":"1fr 1fr";
     var sumPanels=[
-      e("div",{key:"g",style:{background:"rgba(107,142,107,0.08)",border:"1px solid rgba(107,142,107,0.15)",borderRadius:10,padding:"14px 16px"}},
-        e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#8FBC8F",fontWeight:600,marginBottom:8}},"Largest Total Gains"),topGains),
-      e("div",{key:"d",style:{background:"rgba(199,91,63,0.08)",border:"1px solid rgba(199,91,63,0.15)",borderRadius:10,padding:"14px 16px"}},
-        e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#E8927C",fontWeight:600,marginBottom:8}},"Largest Total Declines"),topDecl)
-    ];
-    if(elActive){
-      var topElDecl=schools.slice().sort(function(a,b){return a.elChange-b.elChange}).slice(0,5).map(function(d,i){
-        return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.elChange));
-      });
-      sumPanels.push(e("div",{key:"e",style:{background:"rgba(230,164,78,0.08)",border:"1px solid rgba(230,164,78,0.15)",borderRadius:10,padding:"14px 16px"}},
-        e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:8}},"Largest EL Declines"),topElDecl));
-    }
-
+      e("div",{key:"g",style:{background:"rgba(107,142,107,0.08)",border:"1px solid rgba(107,142,107,0.15)",borderRadius:10,padding:"14px 16px"}},e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#8FBC8F",fontWeight:600,marginBottom:8}},"Largest Total Gains"),topGains),
+      e("div",{key:"d",style:{background:"rgba(199,91,63,0.08)",border:"1px solid rgba(199,91,63,0.15)",borderRadius:10,padding:"14px 16px"}},e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:"#E8927C",fontWeight:600,marginBottom:8}},"Largest Total Declines"),topDecl)];
+    if(elActive){var topElDecl=schools.slice().sort(function(a,b){return a.elChange-b.elChange}).slice(0,5).map(function(d,i){return e("div",{key:i,style:{display:"flex",justifyContent:"space-between",padding:"3px 0",fontSize:12,color:"rgba(255,255,255,0.6)"}},e("span",null,d.school),e("span",{style:{color:"#E8927C",fontWeight:600}},d.elChange))});
+      sumPanels.push(e("div",{key:"e",style:{background:"rgba(230,164,78,0.08)",border:"1px solid rgba(230,164,78,0.15)",borderRadius:10,padding:"14px 16px"}},e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:8}},"Largest EL Declines"),topElDecl));}
     var elConc=null;
-    if(elActive){
-      elConc=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
-        e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:10}},"EL Concentration by School ("+meta.current_label+" \u2014 % of total)"),
-        e("div",{style:{display:"flex",flexWrap:"wrap",gap:6}},
-          schools.slice().sort(function(a,b){return parseFloat(b.elShareCur)-parseFloat(a.elShareCur)}).map(function(d,i){
-            var s=parseFloat(d.elShareCur),n=Math.min(1,s/80);
-            return e("div",{key:i,style:{padding:"5px 10px",borderRadius:6,fontSize:11,background:"rgba(230,164,78,"+(0.05+n*0.2)+")",border:"1px solid rgba(230,164,78,"+(0.1+n*0.3)+")",color:n>0.5?ELC:"rgba(255,255,255,0.55)",fontWeight:s>50?700:500,whiteSpace:"nowrap"}},
-              d.school+" ",e("span",{style:{fontWeight:700,color:ELC}},d.elShareCur+"%")
-            );
-          })
-        )
-      );
-    }
-
-    var ctrlRow=e("div",{style:{display:"flex",gap:5,flexWrap:"wrap",alignItems:"center"}},
-      filterBtns,
-      e("span",{key:"sep1",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),
-      sortBtns,
-      elActive?[
-        e("span",{key:"sep2",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),
-        e("button",{key:"sm",onClick:function(){setSMetric(sMetric==="total"?"el":"total")},style:mkS(sMetric==="el",ELC)},"Sort by "+(sMetric==="el"?"Total":"EL"))
-      ]:null
-    );
-
+    if(elActive){elConc=e("div",{style:{marginTop:16,padding:"14px 16px",background:"rgba(230,164,78,0.06)",border:"1px solid rgba(230,164,78,0.12)",borderRadius:10}},
+      e("div",{style:{fontSize:11,textTransform:"uppercase",letterSpacing:"0.07em",color:ELC,fontWeight:600,marginBottom:10}},"EL Concentration by School ("+meta.current_label+" \u2014 % of total)"),
+      e("div",{style:{display:"flex",flexWrap:"wrap",gap:6}},schools.slice().sort(function(a,b){return parseFloat(b.elShareCur)-parseFloat(a.elShareCur)}).map(function(d,i){
+        var s=parseFloat(d.elShareCur),n=Math.min(1,s/80);
+        return e("div",{key:i,style:{padding:"5px 10px",borderRadius:6,fontSize:11,background:"rgba(230,164,78,"+(0.05+n*0.2)+")",border:"1px solid rgba(230,164,78,"+(0.1+n*0.3)+")",color:n>0.5?ELC:"rgba(255,255,255,0.55)",fontWeight:s>50?700:500,whiteSpace:"nowrap"}},
+          d.school+" ",e("span",{style:{fontWeight:700,color:ELC}},d.elShareCur+"%"))})));}
+    var ctrlRow=e("div",{style:{display:"flex",gap:5,flexWrap:"wrap",alignItems:"center"}},filterBtns,
+      e("span",{key:"sep1",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),sortBtns,
+      elActive?[e("span",{key:"sep2",style:{width:1,height:18,background:"rgba(255,255,255,0.08)",margin:"0 2px"}}),
+        e("button",{key:"sm",onClick:function(){setSMetric(sMetric==="total"?"el":"total")},style:mkS(sMetric==="el",ELC)},"Sort by "+(sMetric==="el"?"Total":"EL"))]:null);
     schoolView=e("div",{style:{maxWidth:960,margin:"0 auto 28px",background:"rgba(255,255,255,0.025)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:16,padding:"24px 20px 16px"}},
       e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:12,marginBottom:16}},
-        e("div",null,
-          e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Enrollment Change by School"),
-          e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:0}},"Year-over-year change \u00b7 "+(elActive?"Gold = EL change \u00b7 ":"")+"Hover for details")
-        ),
-        ctrlRow
-      ),
+        e("div",null,e("h2",{style:{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,color:"#fff",margin:"0 0 4px"}},"Enrollment Change by School"),
+          e("p",{style:{fontSize:13,color:"rgba(255,255,255,0.4)",margin:0}},"Year-over-year change \u00b7 "+(elActive?"Gold = EL change \u00b7 ":"")+"Hover for details")),ctrlRow),
       e(RC,{width:"100%",height:Math.max(420,sorted.length*(elActive?38:30)+40)},
         e(BC_,{data:sorted,layout:"vertical",barCategoryGap:elActive?"22%":"18%",barGap:2},
           e(CG,{strokeDasharray:"3 3",stroke:"rgba(255,255,255,0.05)",horizontal:false}),
           e(XA,{type:"number",tick:{fill:"rgba(255,255,255,0.4)",fontSize:11},axisLine:{stroke:"rgba(255,255,255,0.08)"},tickLine:false}),
           e(YA,{type:"category",dataKey:"school",width:155,tick:{fill:"rgba(255,255,255,0.65)",fontSize:11,fontWeight:500},axisLine:false,tickLine:false}),
-          e(TT,{content:e(STT,{showEL:showEL,meta:meta}),cursor:{fill:"rgba(255,255,255,0.03)"}}),
-          e(RL,{x:0,stroke:"rgba(255,255,255,0.15)",strokeWidth:1}),
-          sBars
-        )
-      ),
+          e(TT,{content:e(STT,{showEL:showEL,meta:meta}),cursor:{fill:"rgba(255,255,255,0.03)"}}),e(RL,{x:0,stroke:"rgba(255,255,255,0.15)",strokeWidth:1}),sBars)),
       e("div",{style:{display:"flex",justifyContent:"center",gap:16,marginTop:10,fontSize:11,color:"rgba(255,255,255,0.45)",flexWrap:"wrap"}},sLegend),
-      e("div",{style:{display:"grid",gridTemplateColumns:sumCols,gap:12,marginTop:16}},sumPanels),
-      elConc
-    );
+      e("div",{style:{display:"grid",gridTemplateColumns:sumCols,gap:12,marginTop:16}},sumPanels),elConc);
   }
 
-  // ── Period selector ──
   var periodSel=e("div",{style:{display:"flex",gap:6,alignItems:"center",justifyContent:"center",flexWrap:"wrap"}},
-    PERIOD_LIST.map(function(p){
-      return e("button",{key:p.key,onClick:function(){selectPeriod(p.key)},style:Object.assign({},mkP(period===p.key,"#7EB8DA"),{fontSize:13,padding:"7px 18px"})},p.label);
-    }),
-    custom?e("button",{key:"custom",style:Object.assign({},mkP(period==="custom",ELC),{fontSize:13,padding:"7px 18px"})},"Custom: "+(custom.report_month||"Uploaded")):null
-  );
+    PERIOD_LIST.map(function(p){return e("button",{key:p.key,onClick:function(){selectPeriod(p.key)},style:Object.assign({},mkP(period===p.key,"#7EB8DA"),{fontSize:13,padding:"7px 18px"})},p.label)}),
+    custom?e("button",{key:"custom",style:Object.assign({},mkP(period==="custom",ELC),{fontSize:13,padding:"7px 18px"})},"Custom: "+(custom.report_month||"Uploaded")):null);
 
-  // ── Tabs ──
   var tabs=e("div",{style:{maxWidth:960,margin:"0 auto 18px",display:"flex",justifyContent:"center",alignItems:"center",gap:10,flexWrap:"wrap"}},
+    e("button",{onClick:function(){setView("trend")},style:mkP(view==="trend")},"Trend"),
     e("button",{onClick:function(){setView("grade")},style:mkP(view==="grade")},"By Grade Level"),
     e("button",{onClick:function(){setView("school")},style:mkP(view==="school")},"By School"),
-    elAvail?[
-      e("span",{key:"sep",style:{width:1,height:24,background:"rgba(255,255,255,0.1)",margin:"0 4px"}}),
+    elAvail?[e("span",{key:"sep",style:{width:1,height:24,background:"rgba(255,255,255,0.1)",margin:"0 4px"}}),
       e("button",{key:"el",onClick:function(){setShowEL(!showEL)},style:Object.assign({},mkP(showEL&&elAvail,ELC),{display:"flex",alignItems:"center",gap:6})},
-        e("span",{style:{width:8,height:8,borderRadius:"50%",background:showEL?ELC:"rgba(255,255,255,0.25)",transition:"all 0.2s"}}),
-        "EL Overlay"
-      )
-    ]:null
-  );
+        e("span",{style:{width:8,height:8,borderRadius:"50%",background:showEL?ELC:"rgba(255,255,255,0.25)",transition:"all 0.2s"}}),"EL Overlay")]:null);
 
-  // ── EL callout ──
   var elCallout=null;
-  if(elAvail){
+  if(elAvail&&view!=="trend"){
     elCallout=e("div",{style:{maxWidth:960,margin:"0 auto 20px",background:"linear-gradient(135deg,rgba(230,164,78,0.06) 0%,rgba(230,164,78,0.02) 100%)",border:"1px solid rgba(230,164,78,0.15)",borderRadius:10,padding:"12px 18px",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:8}},
-      e("div",{style:{fontSize:13,color:"rgba(255,255,255,0.6)"}},
-        e("span",{style:{color:ELC,fontWeight:700}},"EL students represent "+meta.elShare+"%")," of total district enrollment",
-        e("span",{style:{color:"rgba(255,255,255,0.35)",marginLeft:6}},"(EL: "+meta.elPct+"% vs total: "+meta.totalPct+"%)")
-      ),
+      e("div",{style:{fontSize:13,color:"rgba(255,255,255,0.6)"}},e("span",{style:{color:ELC,fontWeight:700}},"EL students represent "+meta.elShare+"%")," of total district enrollment",
+        e("span",{style:{color:"rgba(255,255,255,0.35)",marginLeft:6}},"(EL: "+meta.elPct+"% vs total: "+meta.totalPct+"%)")),
       bands.length>0&&bands[0].current>0?e("div",{style:{display:"flex",gap:4,flexWrap:"wrap"}},
-        bands.map(function(b,i){return e("span",{key:i,style:{fontSize:10,padding:"3px 8px",borderRadius:12,background:"rgba(255,255,255,0.05)",color:"rgba(255,255,255,0.45)",border:"1px solid rgba(255,255,255,0.06)"}},b.band+": EL "+fss(b.elChange))})
-      ):null
-    );
-  }
-  if(!elAvail){
-    elCallout=e("div",{style:{maxWidth:960,margin:"0 auto 20px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:10,padding:"10px 18px",textAlign:"center",fontSize:12,color:"rgba(255,255,255,0.35)",fontStyle:"italic"}},"EL enrollment data not yet available for this period");
+        bands.map(function(b,i){return e("span",{key:i,style:{fontSize:10,padding:"3px 8px",borderRadius:12,background:"rgba(255,255,255,0.05)",color:"rgba(255,255,255,0.45)",border:"1px solid rgba(255,255,255,0.06)"}},b.band+": EL "+fss(b.elChange))})):null);
   }
 
   return e("div",{onDrop:function(ev){ev.preventDefault();setIsDrag(false);hFile(ev.dataTransfer.files[0])},onDragOver:function(ev){ev.preventDefault();setIsDrag(true)},onDragLeave:function(){setIsDrag(false)},style:{position:"relative"}},
     overlay,
-    // Header
     e("div",{style:{maxWidth:960,margin:"0 auto 20px",textAlign:"center"}},
       e("div",{style:{display:"inline-block",background:"rgba(199,91,63,0.15)",border:"1px solid rgba(199,91,63,0.3)",borderRadius:20,padding:"4px 14px",fontSize:11,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase",color:"#E8927C",marginBottom:12}},"Lynn Public Schools \u00b7 Enrollment Update"),
       e("h1",{style:{fontFamily:"'Playfair Display',serif",fontSize:30,fontWeight:800,color:"#fff",margin:"0 0 6px",lineHeight:1.15}},"Enrollment Change Analysis"),
-      e("p",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",margin:"0 0 16px",fontWeight:300}},meta.baseline_label+" \u2192 "+meta.current_label+" \u00b7 Year-over-year comparison")
-    ),
-    // Period selector
-    e("div",{style:{maxWidth:960,margin:"0 auto 20px",textAlign:"center"}},
-      periodSel,
+      e("p",{style:{fontSize:14,color:"rgba(255,255,255,0.45)",margin:"0 0 16px",fontWeight:300}},meta.baseline_label+" \u2192 "+meta.current_label+" \u00b7 Year-over-year comparison")),
+    e("div",{style:{maxWidth:960,margin:"0 auto 20px",textAlign:"center"}},periodSel,
       e("div",{style:{display:"inline-flex",alignItems:"center",gap:8,marginTop:10,flexWrap:"wrap",justifyContent:"center"}},
         e("input",{ref:fRef,type:"file",accept:".json",style:{display:"none"},onChange:function(ev){hFile(ev.target.files[0])}}),
         e("button",{onClick:function(){fRef.current&&fRef.current.click()},style:Object.assign({},mkP(false),{padding:"4px 12px",display:"flex",alignItems:"center",gap:5,fontSize:11,color:"rgba(255,255,255,0.4)",borderColor:"rgba(255,255,255,0.08)"})},"\u{1F4C1} Load Custom Data"),
-        upSt?e("span",{style:{fontSize:12,fontWeight:600,padding:"4px 12px",borderRadius:12,background:upSt.type==="success"?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.2)",color:upSt.type==="success"?"#8FBC8F":"#E8927C",border:"1px solid "+(upSt.type==="success"?"rgba(107,142,107,0.3)":"rgba(199,91,63,0.3)"),animation:"fadeIn 0.3s"}},(upSt.type==="success"?"\u2713":"\u2715")+" "+upSt.msg):null
-      )
-    ),
-    // Cards
+        upSt?e("span",{style:{fontSize:12,fontWeight:600,padding:"4px 12px",borderRadius:12,background:upSt.type==="success"?"rgba(107,142,107,0.2)":"rgba(199,91,63,0.2)",color:upSt.type==="success"?"#8FBC8F":"#E8927C",border:"1px solid "+(upSt.type==="success"?"rgba(107,142,107,0.3)":"rgba(199,91,63,0.3)"),animation:"fadeIn 0.3s"}},(upSt.type==="success"?"\u2713":"\u2715")+" "+upSt.msg):null)),
     e("div",{style:{maxWidth:960,margin:"0 auto 24px",display:"grid",gridTemplateColumns:cardCols,gap:10,alignItems:"stretch"}},cardEls),
-    // EL callout
-    elCallout,
-    tabs,
-    gradeView,
-    schoolView,
-    // Footer
+    elCallout,tabs,trendView,gradeView,schoolView,
     e("div",{style:{maxWidth:960,margin:"0 auto",textAlign:"center",fontSize:11,color:"rgba(255,255,255,0.2)",paddingTop:8}},
-      meta.source_note,e("br"),
-      "Note: CASA and TEAMS Academy excluded (no prior-year baseline available)"
-    )
+      meta.source_note,e("br"),"Note: CASA and TEAMS Academy excluded (no prior-year baseline available)")
   );
 }
 
