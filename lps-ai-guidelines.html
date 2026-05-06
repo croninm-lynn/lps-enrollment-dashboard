@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Guidelines | Lynn Public Schools</title>
+<meta name="description" content="Lynn Public Schools Guidelines for the Use of Artificial Intelligence — a framework for responsible, equitable, and effective AI use in our schools." />
+<style>
+  :root {
+    --navy: #1f3864;
+    --navy-dark: #142647;
+    --navy-light: #d9e2f3;
+    --gold: #bf8f00;
+    --gold-light: #fff2cc;
+    --green: #548235;
+    --green-light: #e2efda;
+    --red: #c00000;
+    --red-light: #fbe5e1;
+    --yellow: #bf9000;
+    --yellow-light: #fff2cc;
+    --gray-bg: #f7f8fa;
+    --gray-line: #e5e7eb;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --shadow: 0 4px 14px rgba(31,56,100,0.08);
+    --shadow-lg: 0 10px 30px rgba(31,56,100,0.12);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+    background: #fff;
+  }
+  a { color: var(--navy); }
+
+  /* === Header === */
+  .topbar {
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 8px 0;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .topbar .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: #fff; opacity: 0.85; text-decoration: none; margin-left: 16px; }
+  .topbar a:hover { opacity: 1; }
+
+  .header {
+    background: #fff;
+    border-bottom: 4px solid var(--gold);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .brand-logo {
+    height: 56px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+  .brand-text { line-height: 1.2; }
+  .brand-text .sub { font-size: 13px; color: var(--text-muted); }
+  .nav { display: flex; gap: 22px; align-items: center; }
+  .nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .nav a:hover { color: var(--navy); }
+  .nav .pdf-btn {
+    background: var(--navy); color: #fff;
+    padding: 8px 18px; border-radius: 6px;
+    font-weight: 600;
+  }
+  .nav .pdf-btn:hover { background: var(--navy-dark); color: #fff; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* === Hero === */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: #fff;
+    padding: 72px 0 88px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: rgba(191, 143, 0, 0.12);
+    pointer-events: none;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    left: -100px; bottom: -100px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 760px; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    margin: 0 0 18px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: normal; }
+  .hero p {
+    font-size: 19px;
+    color: rgba(255,255,255,0.9);
+    margin: 0 0 30px;
+    max-width: 600px;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    font-size: 16px;
+  }
+  .btn-primary { background: var(--gold); color: #fff; }
+  .btn-primary:hover { background: #d9a300; transform: translateY(-1px); }
+  .btn-secondary { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  .btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+  /* === Vision strip === */
+  .vision-strip {
+    background: var(--gray-bg);
+    padding: 32px 0;
+    border-bottom: 1px solid var(--gray-line);
+  }
+  .vision-strip p {
+    margin: 0;
+    font-size: 17px;
+    color: var(--text);
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .vision-strip strong { color: var(--navy); }
+
+  /* === Sections === */
+  section { padding: 64px 0; }
+  section.alt { background: var(--gray-bg); }
+  .section-head {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+  .section-head .eyebrow {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-size: 36px;
+    color: var(--navy);
+    margin: 0 0 12px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .section-head p {
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 17px;
+  }
+
+  /* === Principle cards === */
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px;
+    border-top: 5px solid var(--navy);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .card-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    background: var(--navy-light);
+    color: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+  }
+  .card.privacy { border-top-color: var(--red); }
+  .card.privacy .card-icon { background: var(--red-light); color: var(--red); }
+  .card.transparency { border-top-color: var(--navy); }
+  .card.bias { border-top-color: var(--gold); }
+  .card.bias .card-icon { background: var(--gold-light); color: var(--gold); }
+  .card.oversight { border-top-color: var(--green); }
+  .card.oversight .card-icon { background: var(--green-light); color: var(--green); }
+  .card.integrity { border-top-color: #6b21a8; }
+  .card.integrity .card-icon { background: #f3e8ff; color: #6b21a8; }
+
+  .card h3 {
+    margin: 0;
+    color: var(--navy);
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .card p {
+    margin: 0;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .card details { margin-top: 8px; }
+  .card summary {
+    cursor: pointer;
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 14px;
+    list-style: none;
+    padding: 6px 0;
+    border-top: 1px solid var(--gray-line);
+  }
+  .card summary::-webkit-details-marker { display: none; }
+  .card summary::after { content: " ▾"; transition: transform 0.2s; display: inline-block; }
+  .card details[open] summary::after { content: " ▴"; }
+  .card details ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .card details li { margin-bottom: 6px; }
+
+  /* === AI Use Scale === */
+  .scale {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .scale-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .scale-head {
+    padding: 22px;
+    color: #fff;
+    text-align: center;
+  }
+  .scale-head .label {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 6px;
+  }
+  .scale-head .icon {
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .scale-card.green .scale-head { background: linear-gradient(135deg, var(--green), #3f6128); }
+  .scale-card.yellow .scale-head { background: linear-gradient(135deg, var(--yellow), #997300); }
+  .scale-card.red .scale-head { background: linear-gradient(135deg, var(--red), #8b0000); }
+  .scale-body { padding: 20px 22px 24px; }
+  .scale-body .lead { font-weight: 600; margin: 0 0 12px; color: var(--text); font-size: 15px; }
+  .scale-body ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--text); }
+  .scale-body li { margin-bottom: 6px; }
+
+  /* === Audience tabs === */
+  .audience {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 24px;
+  }
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--gray-line);
+    background: var(--gray-bg);
+  }
+  .tab {
+    flex: 1;
+    padding: 18px 22px;
+    background: none;
+    border: none;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .tab.active {
+    color: var(--navy);
+    background: #fff;
+    border-bottom-color: var(--gold);
+  }
+  .tab:hover:not(.active) { color: var(--navy); background: rgba(255,255,255,0.5); }
+  .tab-panel { padding: 32px; display: none; }
+  .tab-panel.active { display: block; }
+  .tab-panel h3 {
+    margin: 0 0 14px;
+    color: var(--navy);
+    font-size: 22px;
+  }
+  .tab-panel .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 18px;
+  }
+  .tab-panel .col h4 {
+    margin: 0 0 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  .tab-panel .col.do h4 { background: var(--green-light); color: var(--green); }
+  .tab-panel .col.dont h4 { background: var(--red-light); color: var(--red); }
+  .tab-panel .col ul { margin: 0; padding-left: 20px; font-size: 15px; }
+  .tab-panel .col li { margin-bottom: 8px; }
+  .tab-panel .col li strong { color: var(--navy); }
+
+  /* === Tools table === */
+  .tools-table {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 24px;
+  }
+  .tools-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .tools-table th {
+    background: var(--navy);
+    color: #fff;
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tools-table td {
+    padding: 14px 18px;
+    border-top: 1px solid var(--gray-line);
+    font-size: 15px;
+    vertical-align: top;
+  }
+  .tools-table tr:nth-child(even) { background: var(--gray-bg); }
+  .tools-table .tool-name { font-weight: 600; color: var(--navy); }
+  .status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .status.approved { background: var(--green-light); color: var(--green); }
+  .status.pending { background: var(--yellow-light); color: var(--yellow); }
+  .status.not-approved { background: var(--red-light); color: var(--red); }
+
+  /* === Resources === */
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+  }
+  .resource {
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--gold);
+    transition: transform 0.15s;
+  }
+  .resource:hover { transform: translateY(-2px); }
+  .resource h4 { margin: 0 0 8px; color: var(--navy); font-size: 17px; }
+  .resource p { margin: 0 0 12px; color: var(--text-muted); font-size: 14px; }
+  .resource a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .resource a:hover { text-decoration: underline; }
+  .resource a::after { content: " →"; }
+
+  /* === Callout === */
+  .callout {
+    background: var(--red-light);
+    border-left: 6px solid var(--red);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-top: 36px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+  .callout .ico { font-size: 28px; flex-shrink: 0; }
+  .callout h4 { margin: 0 0 8px; color: var(--red); font-size: 17px; }
+  .callout p { margin: 0; font-size: 15px; color: var(--text); }
+  .callout strong { color: var(--red); }
+
+  /* === Footer === */
+  .footer {
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 40px 0 24px;
+  }
+  .footer .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+  .footer h4 { color: var(--gold-light); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 14px; }
+  .footer p, .footer li { color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin: 0 0 6px; }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .footer a:hover { color: #fff; text-decoration: underline; }
+  .footer .copy {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* === Mobile === */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 36px; }
+    .hero p { font-size: 17px; }
+    .nav { gap: 10px; }
+    .nav a:not(.pdf-btn) { display: none; }
+    .scale { grid-template-columns: 1fr; }
+    .tab-panel .two-col { grid-template-columns: 1fr; }
+    .footer .grid { grid-template-columns: 1fr; gap: 24px; }
+    .section-head h2 { font-size: 28px; }
+    .topbar .wrap { flex-direction: column; gap: 4px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top utility bar -->
+<div class="topbar">
+  <div class="wrap">
+    <div>Lynn Public Schools  |  Office of Strategy &amp; Innovation</div>
+    <div>
+      <a href="https://www.lynnschools.org" target="_blank" rel="noopener">lynnschools.org</a>
+      <a href="mailto:strategyandinnovation@lynnschools.net">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Site header -->
+<header class="header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img class="brand-logo" src="lps-logo.png" alt="Lynn Public Schools" />
+      <div class="brand-text">
+        <div class="sub">AI Guidelines &amp; Resources</div>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#principles">Principles</a>
+      <a href="#scale">AI Use Scale</a>
+      <a href="#audiences">Educators &amp; Students</a>
+      <a href="#tools">Tools</a>
+      <a class="pdf-btn" href="LPS Guidelines for the Use of AI.docx">Download Document</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="top" style="padding-top: 72px;">
+  <div class="wrap hero-inner">
+    <span class="hero-tag">A Living Framework • Issued 2026</span>
+    <h1>Guidelines for the Use of <em>Artificial Intelligence</em></h1>
+    <p>A framework for the responsible, equitable, and effective integration of AI across instruction and operations in Lynn Public Schools — aligned with LPS Policy IJNDG and DESE guidance.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="LPS Guidelines for the Use of AI.docx">📄 Download Full Document</a>
+      <a class="btn btn-secondary" href="#principles">Explore the Principles</a>
+    </div>
+  </div>
+</section>
+
+<!-- Vision strip -->
+<div class="vision-strip">
+  <div class="wrap">
+    <p><strong>Our Vision:</strong> LPS aims to leverage AI-powered tools to empower educators, center student experiences, and improve administrative processes — while continuously evaluating impact and risk to ensure implementation aligns with our core values of <strong>equity, access, and opportunity</strong> for every learner.</p>
+  </div>
+</div>
+
+<!-- Core Principles -->
+<section id="principles">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Foundation</div>
+      <h2>Five Core Principles for AI Use</h2>
+      <p>These principles, adapted from DESE guidance and tailored for Lynn, define what responsible AI use looks like in our schools and offices.</p>
+    </div>
+
+    <div class="principle-grid">
+      <article class="card privacy">
+        <div class="card-icon">🔒</div>
+        <h3>Data Privacy &amp; Security</h3>
+        <p>AI use complies with FERPA, COPPA, and all relevant data governance laws. Only district-approved tools may be used, and protected information is never shared with AI.</p>
+        <details>
+          <summary>What this looks like</summary>
+          <ul>
+            <li>Only AI tools vetted through a Data Use Agreement are approved.</li>
+            <li>Personal accounts and unapproved platforms are not used for district business.</li>
+            <li>PII, IEPs, health records, and disciplinary data are never entered into AI tools.</li>
+            <li>Annual training on AI data privacy is required for all staff.</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card transparency">
+        <div class="card-icon">👁️</div>
+        <h3>Transparency &amp; Accountability</h3>
+        <p>Educators, students, and families deserve to know when AI is involved in learning, grading, or decisions. Notification happens through general communications like the annual handbook.</p>
+        <details>
+          <summary>What this looks like</summary>
+          <ul>
+            <li>Schools inform families about classroom AI through handbooks and newsletters — not separate notifications for every use.</li>
+            <li>Educators communicate to students when AI is used for learning or feedback.</li>
+            <li>AI is a productivity aid, never a replacement for educator expertise or required team discussions.</li>
+            <li>Staff explain AI-supported processes in plain language.</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card bias">
+        <div class="card-icon">⚖️</div>
+        <h3>Bias Awareness &amp; Mitigation</h3>
+        <p>AI tools are critically examined for embedded bias. The district reviews whether certain groups are disproportionately impacted and acts to reduce harm.</p>
+        <details>
+          <summary>What this looks like</summary>
+          <ul>
+            <li>Procurement includes bias analysis for every new tool.</li>
+            <li>Educators are trained to evaluate AI output for stereotypes and inaccuracies.</li>
+            <li>AI is never the sole basis for placement, discipline, grading, or service decisions.</li>
+            <li>AI access and usage are reviewed for equity — who is using AI, and who isn't.</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card oversight">
+        <div class="card-icon">🧠</div>
+        <h3>Human Oversight &amp; Educator Judgment</h3>
+        <p>AI supports — but does not replace — educators. Educator judgment, empathy, and contextual knowledge remain central to every consequential decision.</p>
+        <details>
+          <summary>What this looks like</summary>
+          <ul>
+            <li>Educators review and edit all AI-generated materials before use.</li>
+            <li>IEP, 504, and MTSS teams use AI as a support tool — never a decision-maker.</li>
+            <li>Final grading, placement, and instructional decisions are always made by educators.</li>
+            <li>Required team discussions cannot be replaced by AI summaries.</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="card integrity">
+        <div class="card-icon">🎓</div>
+        <h3>Academic Integrity</h3>
+        <p>AI is used in ways that reinforce learning, with clear expectations that emphasize originality, transparency, and reflection — not penalties for use.</p>
+        <details>
+          <summary>What this looks like</summary>
+          <ul>
+            <li>Schools teach students when, how, and why AI tools may be used.</li>
+            <li>Assignments emphasize critical thinking, reflection, and personal voice.</li>
+            <li>Students are taught to cite or acknowledge AI assistance.</li>
+            <li>Focus is on building critical thinking — not catching students who use AI.</li>
+          </ul>
+        </details>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- AI Use Scale -->
+<section id="scale" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Classroom Practice</div>
+      <h2>The LPS AI Use Scale</h2>
+      <p>AI use is a case-by-case decision made by the educator based on the learning goals of each assignment. Educators communicate which level applies at the start of every assignment.</p>
+    </div>
+
+    <div class="scale">
+      <div class="scale-card green">
+        <div class="scale-head">
+          <div class="icon">✅</div>
+          <p class="label">AI Encouraged</p>
+          <p style="margin:0;font-size:14px;opacity:0.9;">Use AI to support your work</p>
+        </div>
+        <div class="scale-body">
+          <p class="lead">Students are encouraged to use generative AI for this assignment.</p>
+          <ul>
+            <li>The AI tool is district-approved.</li>
+            <li>The educator has explicitly permitted AI use for the task.</li>
+            <li>Final ideas, understanding, and product must reflect the student's own thinking.</li>
+            <li>Students cite or acknowledge AI use as directed.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scale-card yellow">
+        <div class="scale-head">
+          <div class="icon">⚙️</div>
+          <p class="label">AI Assisted</p>
+          <p style="margin:0;font-size:14px;opacity:0.9;">Use AI for specific parts</p>
+        </div>
+        <div class="scale-body">
+          <p class="lead">Students may use specific AI tools for designated parts of the work.</p>
+          <ul>
+            <li>The AI tool is district-approved.</li>
+            <li>The educator specifies the exact tool that may be used.</li>
+            <li>The educator specifies the part of the assignment where AI is permitted.</li>
+            <li>Final work must be the student's own.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scale-card red">
+        <div class="scale-head">
+          <div class="icon">🚫</div>
+          <p class="label">AI Restricted</p>
+          <p style="margin:0;font-size:14px;opacity:0.9;">No AI use for this work</p>
+        </div>
+        <div class="scale-body">
+          <p class="lead">Students will not use generative AI for this assignment or activity.</p>
+          <ul>
+            <li>Any AI use will be treated as academic dishonesty.</li>
+            <li>Educators design assignments that demonstrate authentic student thinking — in-class writing, oral defenses, drafts and revisions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Educators / Students -->
+<section id="audiences">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Guidance by Audience</div>
+      <h2>For Educators &amp; For Students</h2>
+      <p>What responsible AI use looks like in practice — illustrative examples of where AI fits and where it doesn't.</p>
+    </div>
+
+    <div class="audience">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-target="panel-edu" role="tab" aria-selected="true">👩‍🏫 Educators &amp; Staff</button>
+        <button class="tab" data-target="panel-stu" role="tab" aria-selected="false">🎒 Students</button>
+      </div>
+
+      <div class="tab-panel active" id="panel-edu" role="tabpanel">
+        <h3>Generative AI Use by Educators, School Leaders &amp; Staff</h3>
+        <p>Generative AI offers numerous opportunities to enhance practice, streamline tasks, personalize learning, and provide additional support for multilingual learners and students with disabilities. Staff must remain vigilant about overreliance, bias, and data privacy — and must maintain human oversight on every consequential decision.</p>
+        <div class="two-col">
+          <div class="col do">
+            <h4>✅ Potential Uses</h4>
+            <ul>
+              <li><strong>Lesson and unit planning:</strong> outlining, generating discussion questions, brainstorming differentiation.</li>
+              <li><strong>Assessment design:</strong> drafting quizzes, rubrics, or surveys for educator review.</li>
+              <li><strong>Communication:</strong> drafting administrative emails, family newsletters, and announcements.</li>
+              <li><strong>Translation:</strong> first-draft translations, always reviewed and verified by a qualified speaker.</li>
+              <li><strong>Adaptations and modifications:</strong> suggesting scaffolds and visual supports that maintain grade-level rigor.</li>
+              <li><strong>Documentation:</strong> summarizing non-confidential documents and meeting notes.</li>
+              <li><strong>Thought partner:</strong> testing ideas and surfacing alternative perspectives.</li>
+            </ul>
+          </div>
+          <div class="col dont">
+            <h4>🚫 Inappropriate Uses</h4>
+            <ul>
+              <li><strong>Unapproved tools:</strong> only district-approved tools may be used for LPS work.</li>
+              <li><strong>Sharing private information:</strong> never enter PII, IEPs, health records, or confidential staff data.</li>
+              <li><strong>Replacing professional judgment:</strong> AI output must always be reviewed and validated.</li>
+              <li><strong>Decisions without oversight:</strong> grading, placement, discipline, and AI-detection accusations require human review.</li>
+              <li><strong>Replacing required team discussions:</strong> IEP, 504, and MTSS meetings cannot be replaced by AI summaries.</li>
+              <li><strong>Impersonating others:</strong> never use AI to imitate other staff, students, or community members.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panel-stu" role="tabpanel">
+        <h3>Generative AI Use by Students</h3>
+        <p>Students may benefit from generative AI through personalized learning, creativity tools, and language support. Critical thinking is the goal — not catching students who use AI. Our focus is on educating students about how to use AI thoughtfully and how to retain their own voice as learners.</p>
+        <div class="two-col">
+          <div class="col do">
+            <h4>✅ Potential Uses (with educator permission)</h4>
+            <ul>
+              <li><strong>Brainstorming:</strong> exploring different perspectives, expanding on initial ideas.</li>
+              <li><strong>Feedback and revision:</strong> using AI as a writing coach to suggest improvements.</li>
+              <li><strong>Accessibility:</strong> text-to-speech, alt-text descriptions, language support.</li>
+              <li><strong>Study support:</strong> generating practice questions, flashcards, or personalized explanations.</li>
+              <li><strong>Conversation partner:</strong> practicing a language, interview, or debate.</li>
+              <li><strong>Executive functioning:</strong> coaching on time management and task organization.</li>
+            </ul>
+          </div>
+          <div class="col dont">
+            <h4>🚫 Inappropriate Uses</h4>
+            <ul>
+              <li><strong>Without permission:</strong> using AI when guidelines or the educator restrict it.</li>
+              <li><strong>Replacing critical thinking:</strong> using AI in place of skills the assignment is meant to build.</li>
+              <li><strong>On assessments:</strong> using AI to complete quizzes, tests, or skill-evaluation assignments.</li>
+              <li><strong>Plagiarism:</strong> submitting AI-generated content as one's own without acknowledgment.</li>
+              <li><strong>Harmful content:</strong> creating misinformation, deepfakes, or harassing content about others.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="ico">⚠️</div>
+      <div>
+        <h4>A note on AI Detection Tools</h4>
+        <p>AI detection tools are currently <strong>unreliable</strong> and have been shown to bias against multilingual and non-native English writers. LPS strongly discourages using detection tools as the sole indicator of AI use. Any flagged work must be reviewed by a human educator considering past work, writing style, and revision history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools -->
+<section id="tools" class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Tools &amp; Approval</div>
+      <h2>Approved AI Tools</h2>
+      <p>All tools are reviewed by the LPS AI Review Committee. Data Use Agreements must be in place before any tool is used with students. The list below is illustrative; the official list is maintained on the LPS AI Hub.</p>
+    </div>
+
+    <div class="tools-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Description</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-name">Microsoft Copilot</td>
+            <td>General-purpose generative AI assistant integrated with Microsoft 365 (staff use).</td>
+            <td><span class="status approved">Approved</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Microsoft Copilot for Education</td>
+            <td>Education-specific Copilot features for staff and qualifying students.</td>
+            <td><span class="status pending">Pending review</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">MagicSchool</td>
+            <td>Educator-facing AI tools for lesson planning, differentiation, and feedback.</td>
+            <td><span class="status pending">Pending review</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Canva (Magic Studio)</td>
+            <td>AI design features within Canva for staff and students.</td>
+            <td><span class="status pending">Pending review</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Public ChatGPT (free)</td>
+            <td>Public ChatGPT account on chatgpt.com without district data agreement.</td>
+            <td><span class="status not-approved">Not approved</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="text-align: center; margin-top: 24px; color: var(--text-muted); font-size: 14px;">Want to propose a new tool? Submit a request to the LPS AI Review Committee with the proposed use case and audience.</p>
+  </div>
+</section>
+
+<!-- Resources -->
+<section id="resources">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Learning &amp; Support</div>
+      <h2>Professional Learning &amp; Resources</h2>
+      <p>LPS provides ongoing AI literacy training and curated resources for educators, students, and families.</p>
+    </div>
+
+    <div class="resource-grid">
+      <div class="resource">
+        <h4>📘 Full Guidelines Document</h4>
+        <p>The complete LPS Guidelines for the Use of AI — principles, audience guidance, glossary, and references.</p>
+        <a href="LPS Guidelines for the Use of AI.docx">Download Word document</a>
+      </div>
+      <div class="resource">
+        <h4>🏛️ DESE Guidance</h4>
+        <p>Massachusetts Department of Elementary and Secondary Education guidance for AI in K–12.</p>
+        <a href="https://www.doe.mass.edu/edtech/ai/ai-guidance.pdf" target="_blank" rel="noopener">View DESE guidance</a>
+      </div>
+      <div class="resource">
+        <h4>📜 LPS Policy IJNDG</h4>
+        <p>The LPS School Committee policy on Generative AI and cybersecurity, adopted June 26.</p>
+        <a href="https://z2policy.ctspublish.com/masc/browse/lynnset/lynn/IJNDG" target="_blank" rel="noopener">View Policy IJNDG</a>
+      </div>
+      <div class="resource">
+        <h4>🧰 TeachAI Toolkit</h4>
+        <p>AI Guidance for Schools Toolkit from TeachAI — sample policies, lesson plans, and family resources.</p>
+        <a href="https://www.teachai.org/toolkit" target="_blank" rel="noopener">Open TeachAI Toolkit</a>
+      </div>
+      <div class="resource">
+        <h4>🎓 Common Sense Education</h4>
+        <p>Practical AI guidance for educators — how to handle AI in schools, lesson plans, and family conversations.</p>
+        <a href="https://www.commonsense.org/education" target="_blank" rel="noopener">Visit Common Sense Education</a>
+      </div>
+      <div class="resource">
+        <h4>💡 AI Literacy for Educators</h4>
+        <p>Code.org AI 101 and AI for Education resources to build educator AI literacy.</p>
+        <a href="https://www.aiforeducation.io" target="_blank" rel="noopener">Open AI for Education</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <h4>Lynn Public Schools</h4>
+        <p>The Office of Strategy &amp; Innovation supports the responsible integration of AI across the district. These guidelines are a living document; we welcome feedback as the technology evolves.</p>
+        <p style="margin-top: 12px;"><strong>Contact:</strong> strategyandinnovation@lynnschools.net</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#principles">Core Principles</a></li>
+          <li><a href="#scale">AI Use Scale</a></li>
+          <li><a href="#audiences">Educator &amp; Student Guidance</a></li>
+          <li><a href="#tools">Approved Tools</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Documents</h4>
+        <ul>
+          <li><a href="LPS Guidelines for the Use of AI.docx">Full Guidelines (DOCX)</a></li>
+          <li><a href="https://z2policy.ctspublish.com/masc/browse/lynnset/lynn/IJNDG" target="_blank" rel="noopener">Policy IJNDG</a></li>
+          <li><a href="https://www.doe.mass.edu/edtech/ai/ai-guidance.pdf" target="_blank" rel="noopener">DESE AI Guidance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">
+      © 2026 Lynn Public Schools • Aligned with LPS Policy IJNDG and Massachusetts DESE Guidance for AI in K–12 Education
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tab switcher
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
