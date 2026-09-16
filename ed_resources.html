@@ -1,0 +1,294 @@
+<title>LPS Educator Resource Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#f3f5f7; --surface:#ffffff; --ink:#14222f; --muted:#56657a; --line:#d8dee6;
+  --navy:#123a5c; --navy-ink:#ffffff; --gold:#e3a21a; --gold-soft:#fbf0d6; --teal:#1f7a78; --teal-soft:#dff0ee;
+  --flag:#a4481b; --flag-soft:#fbe7dc;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#0f1720; --surface:#17222e; --ink:#e6edf4; --muted:#9aabbd; --line:#2b3a4a;
+  --navy:#2c6a9c; --gold:#f0b53c; --gold-soft:#3a2f16; --teal:#5cc3bf; --teal-soft:#16332f; --flag:#f19a6f; --flag-soft:#3b2519;
+}}
+:root[data-theme="dark"]{
+  --ground:#0f1720; --surface:#17222e; --ink:#e6edf4; --muted:#9aabbd; --line:#2b3a4a;
+  --navy:#2c6a9c; --gold:#f0b53c; --gold-soft:#3a2f16; --teal:#5cc3bf; --teal-soft:#16332f; --flag:#f19a6f; --flag-soft:#3b2519;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font:16px/1.55 var(--body);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.15}
+a{color:var(--teal)}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.mono{font-family:var(--mono);font-size:.86em}
+
+/* review bar */
+.review{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;padding-block:18px 14px;border-bottom:1px solid var(--line)}
+.review h1{font-size:1.15rem;font-weight:700}
+.review p{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;font-size:.9rem}
+.tabs button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:var(--navy-ink)}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tools button{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 12px;border-radius:6px;font-size:.88rem}
+.tools button[aria-pressed="true"]{background:var(--gold-soft);border-color:var(--gold)}
+.note{margin:14px 0 22px;padding:10px 14px;background:var(--flag-soft);border-radius:6px;font-size:.9rem;display:flex;gap:10px;align-items:flex-start}
+.chk{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--flag);margin-left:.35em;vertical-align:.12em}
+.vdesc{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+
+/* shared brand strip */
+.brand{background:var(--navy);color:var(--navy-ink);border-radius:10px 10px 0 0;padding:18px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.brand small{display:block;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;opacity:.8}
+.brand h2{font-size:1.6rem;font-weight:800}
+.brand .yr{font-family:var(--mono);font-size:.85rem;opacity:.85}
+.panel{background:var(--surface);border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px}
+.pill{display:inline-block;font-size:.74rem;padding:2px 8px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-weight:700;white-space:nowrap}
+.pill.staff{background:var(--gold-soft);color:var(--ink)}
+
+/* ---------- A: help center ---------- */
+.hc{display:grid;grid-template-columns:260px 1fr;min-height:560px}
+.hc nav{border-right:1px solid var(--line);padding:16px 10px}
+.hc nav input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--ground);color:var(--ink);font:inherit;margin-bottom:12px}
+.hc nav button{display:flex;justify-content:space-between;width:100%;text-align:left;background:none;border:0;color:var(--ink);padding:7px 10px;border-radius:6px;font-size:.93rem}
+.hc nav button[aria-current="true"]{background:var(--teal-soft);color:var(--teal);font-weight:700}
+.hc nav button span{color:var(--muted);font-family:var(--mono);font-size:.8rem}
+.hc main{padding:22px 28px}
+.crumb{font-size:.82rem;color:var(--muted);margin-bottom:10px}
+.crumb button{background:none;border:0;color:var(--teal);padding:0;text-decoration:underline}
+.hc .list a{display:block;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.hc .list a strong{color:var(--teal);font-size:1.05rem}
+.hc .list a p{margin:2px 0 0;color:var(--muted);font-size:.92rem}
+.article{max-width:68ch}
+.article h3{font-size:1.9rem;margin-bottom:6px}
+.article h4{font-size:1.1rem;margin:22px 0 6px}
+.article ol{padding-left:1.2em;margin:0}
+.article .meta{color:var(--muted);font-size:.82rem;margin-top:26px;border-top:1px solid var(--line);padding-top:10px}
+.helpbox{background:var(--ground);border-radius:8px;padding:12px 14px}
+
+/* ---------- B: cards ---------- */
+.cb{padding:20px 22px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
+.filters input{flex:1 1 220px;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--ground);color:var(--ink);font:inherit}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 12px;border-radius:999px;font-size:.85rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.card .top{display:flex;gap:10px;align-items:center}
+.mark{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;font-family:var(--display);font-weight:800;color:#fff;flex:none;font-size:1rem}
+.card h3{font-size:1.05rem}
+.card .cat{font-size:.78rem;color:var(--muted)}
+.card p{margin:0;font-size:.9rem}
+.card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:auto 0 0;font-size:.82rem;padding-top:8px;border-top:1px dashed var(--line)}
+.card dt{color:var(--muted)}
+.card dd{margin:0;overflow-wrap:anywhere}
+.empty{color:var(--muted);padding:30px 0}
+
+/* ---------- C: quick reference ---------- */
+.qr{padding:18px 20px;columns:2 340px;column-gap:22px}
+.qr section{break-inside:avoid;margin-bottom:16px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.qr h3{font-size:.95rem;background:var(--gold-soft);padding:6px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.qr h3 span{font-family:var(--body);font-weight:400;font-size:.78rem;color:var(--muted)}
+.qr table{width:100%;border-collapse:collapse;font-size:.82rem}
+.qr td{padding:4px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.qr tr:last-child td{border-bottom:0}
+.qr td:first-child{font-weight:700}
+.qr td:last-child{color:var(--muted);white-space:nowrap;text-align:right}
+.qr .login{padding:10px 12px;font-size:.84rem;background:var(--teal-soft)}
+.qr .login b{color:var(--teal)}
+.contacts td:last-child{white-space:normal;font-family:var(--mono);font-size:.76rem;color:var(--ink)}
+.legend{padding:0 20px 16px;font-size:.78rem;color:var(--muted)}
+
+/* print-preview simulation */
+.paper .stage{background:#fff;color:#14222f;max-width:8.5in;margin:0 auto;box-shadow:0 2px 18px rgba(0,0,0,.18);padding:.4in}
+.paper .stage *{--surface:#fff;--ground:#f3f5f7;--ink:#14222f;--muted:#56657a;--line:#d8dee6;--teal:#1f7a78;--teal-soft:#dff0ee;--gold-soft:#fbf0d6;--navy:#123a5c}
+.paper .hc{grid-template-columns:1fr}.paper .hc nav{display:none}
+.paper .filters{display:none}
+.paper .grid{grid-template-columns:repeat(3,1fr);gap:8px}
+.paper .card{padding:8px 10px;gap:4px}.paper .card p{font-size:.78rem}.paper .card dl{font-size:.72rem}
+.paper .mark{width:28px;height:28px;font-size:.8rem}
+.paper .qr{columns:2}
+.printonly{display:none}
+.paper .printonly{display:block}
+
+@media print{
+  body{background:#fff;padding:0}
+  .review,.note,.vdesc,.hc nav,.filters,.crumb{display:none!important}
+  .hc{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .card,.qr section{break-inside:avoid}
+  .qr{columns:2}
+  .printonly{display:block}
+  .brand{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{size:letter;margin:.4in}
+}
+@media (max-width:760px){
+  .hc{grid-template-columns:1fr}
+  .hc nav{border-right:0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px}
+  .hc nav button{width:auto}
+  .hc main{padding:18px 16px}
+  .paper .stage{padding:16px}
+  .paper .grid{grid-template-columns:1fr 1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="review">
+    <div>
+      <h1>Educator Resource Directory · 3 draft versions</h1>
+      <p>Lynn Public Schools · review copy · built from the ClassLink app export and the 2026 Platform Contacts list (rev. 7/9/26)</p>
+    </div>
+    <div class="tools">
+      <div class="tabs" role="tablist" aria-label="Draft version">
+        <button role="tab" id="tab-a" data-v="a" aria-selected="true">A · Help Center</button>
+        <button role="tab" id="tab-b" data-v="b" aria-selected="false">B · Card Directory</button>
+        <button role="tab" id="tab-c" data-v="c" aria-selected="false">C · Quick Reference</button>
+      </div>
+      <button id="paperBtn" aria-pressed="false">Paper view</button>
+      <button id="printBtn">Print</button>
+    </div>
+  </header>
+  <div class="note"><span class="chk" style="margin:.45em 0 0"></span><div><strong>Draft data.</strong> Grade levels, subjects and descriptions marked with a dot are my best guesses and need checking. No passwords are shown; every app lists its login method and a support contact instead.</div></div>
+  <p class="vdesc" id="vdesc"></p>
+  <div class="stage" id="stage"></div>
+</div>
+
+<script>
+const DC = {name:"Data Center", email:"dp@lynnschools.org"};
+const CATS = ["Portal & Getting Started","ELA & Literacy","Math","Science","Social Studies","World Languages & MLL","Assessment & MTSS","Special Education","Arts, PE & Electives","Classroom Tools","Staff Systems"];
+const COLORS = {"Portal & Getting Started":"#123a5c","ELA & Literacy":"#8a3b8f","Math":"#1f6fb2","Science":"#1f7a78","Social Studies":"#9a5a12","World Languages & MLL":"#b23a48","Assessment & MTSS":"#4b5a6b","Special Education":"#3b7d2a","Arts, PE & Electives":"#c0501f","Classroom Tools":"#5a4bb0","Staff Systems":"#2f3e4e"};
+// v = verified from source docs; g = grade guess; s = description guess (flagged)
+const APPS = [
+ {n:"ClassLink LaunchPad",c:"Portal & Getting Started",g:"PreK–12",who:"Students & staff",d:"The district's single sign-on portal. Most apps below open from a tile in ClassLink using your LPS account.",login:"Sign in with Office 365 (LPS email)",ct:{name:"Data Center",email:"dp@lynnschools.org"},v:true},
+ {n:"Amplify",c:"ELA & Literacy",g:"K–8",who:"Students & teachers",d:"Core literacy curriculum with digital lessons, texts and assessments.",login:"ClassLink tile",ct:{name:"Data Center & Curriculum ELA",email:"winslowm@lynnschools.org"},vc:true},
+ {n:"Benchmark Universe",c:"ELA & Literacy",g:"K–5",who:"Students & teachers",d:"Digital home for Benchmark literacy materials and leveled texts.",login:"ClassLink tile"},
+ {n:"Letterland Phonics Online",c:"ELA & Literacy",g:"PreK–2",who:"Students & teachers",d:"Early phonics program with character-based lessons and practice.",login:"ClassLink tile",ct:DC,vc:true},
+ {n:"SchoolPace / myARC",c:"ELA & Literacy",g:"K–8",who:"Students & teachers",d:"American Reading Company platform for independent reading and reading-level tracking.",login:"ClassLink tile"},
+ {n:"Newsela",c:"ELA & Literacy",g:"3–12",who:"Students & teachers",d:"Current-events and content articles at multiple reading levels.",login:"ClassLink tile"},
+ {n:"Actively Learn",c:"ELA & Literacy",g:"6–12",who:"Students & teachers",d:"Reading assignments with embedded questions for ELA, science and social studies.",login:"ClassLink (rostered)"},
+ {n:"Learning Ally",c:"ELA & Literacy",g:"K–12",who:"Eligible students & teachers",d:"Human-read audiobooks for students who need reading support.",login:"ClassLink tile"},
+ {n:"IXL",c:"Math",g:"K–12",who:"Students & teachers",d:"Adaptive practice for math and ELA with real-time diagnostics.",login:"ClassLink tile",ct:{name:"Data Center & Deb Koutoulas",email:"koutoulasd@lynnschools.org"},vc:true},
+ {n:"HMH Go Math (ThinkCentral)",c:"Math",g:"K–6",who:"Students & teachers",d:"Go Math digital textbook, practice and teacher resources.",login:"ClassLink tile"},
+ {n:"HMH Ed",c:"Math",g:"K–12",who:"Students & teachers",d:"HMH's current platform for its curriculum programs.",login:"ClassLink tile"},
+ {n:"IL Classroom",c:"Math",g:"6–12",who:"Students & teachers",d:"Illustrative Mathematics curriculum delivery and lesson tools.",login:"ClassLink tile"},
+ {n:"ExploreLearning Gizmos",c:"Science",g:"3–12",who:"Students & teachers",d:"Interactive math and science simulations.",login:"ClassLink tile"},
+ {n:"Cengage – Exploring Science",c:"Science",g:"6–8",who:"Students & teachers",d:"National Geographic / Cengage middle-school science program.",login:"ClassLink tile (NGL Sync)"},
+ {n:"Savvas EasyBridge",c:"Social Studies",g:"6–12",who:"Students & teachers",d:"Savvas textbooks (U.S. History, World History, Civics, Biology and more). Choose the course your department uses.",login:"ClassLink tile"},
+ {n:"McGraw Hill",c:"Social Studies",g:"K–12",who:"Students & teachers",d:"McGraw Hill K-12 digital textbooks and resources.",login:"ClassLink tile"},
+ {n:"DBQ Online",c:"Social Studies",g:"6–12",who:"Students & teachers",d:"Document-Based Questions for history reading and writing.",login:"ClassLink tile"},
+ {n:"inquirED",c:"Social Studies",g:"K–5",who:"Students & teachers",d:"Inquiry-based elementary social studies curriculum.",login:"ClassLink (rostered)"},
+ {n:"Infobase",c:"Social Studies",g:"6–12",who:"Students & teachers",d:"Research databases, reference e-books and educational video.",login:"ClassLink tile"},
+ {n:"Ellevation",c:"World Languages & MLL",g:"K–12",who:"Staff only",staff:true,d:"Multilingual learner data, plans and instructional strategies.",login:"ClassLink tile",ct:{name:"Stacey Floyd",email:"floyds@lynnschools.org"},vc:true},
+ {n:"Imagine Language & Literacy / Español",c:"World Languages & MLL",g:"K–5",who:"Students & teachers",d:"Adaptive English and Spanish language and literacy program.",login:"ClassLink tile"},
+ {n:"Rosetta Stone",c:"World Languages & MLL",g:"6–12",who:"Students & teachers",d:"Language learning; English for MLL students and Spanish for others.",login:"ClassLink tile (Teacher/Admin, ENG, ESP)"},
+ {n:"Vista Higher Learning",c:"World Languages & MLL",g:"6–12",who:"Students & teachers",d:"World language textbooks and online practice.",login:"ClassLink tile"},
+ {n:"Avant Assessment",c:"World Languages & MLL",g:"7–12",who:"Students & teachers",d:"Language proficiency testing, including Seal of Biliteracy.",login:"ClassLink tile"},
+ {n:"Edcite",c:"Assessment & MTSS",g:"K–12",who:"Students & teachers",d:"District assessment platform with MCAS-style item types.",login:"ClassLink tile",ct:{name:"Deb Koutoulas",email:"altierik@lynnschools.org"},vc:true},
+ {n:"Renaissance Star",c:"Assessment & MTSS",g:"K–12",who:"Students & teachers",d:"Star screening and progress-monitoring assessments.",login:"ClassLink tile",ct:{name:"Amanda Campbell (MLE)",email:"campbella@lynnschools.org"},vc:true},
+ {n:"Branching Minds",c:"Assessment & MTSS",g:"K–12",who:"Staff only",staff:true,d:"MTSS platform for intervention plans and progress monitoring.",login:"ClassLink tile"},
+ {n:"ESGI",c:"Assessment & MTSS",g:"PreK–K",who:"Teachers",staff:true,d:"One-on-one early childhood skill assessments.",login:"ClassLink tile"},
+ {n:"Edgenuity",c:"Assessment & MTSS",g:"6–12",who:"Students & teachers",d:"Online courses for credit recovery and alternative pathways.",login:"ClassLink tile (Educator / Student)"},
+ {n:"TeachTown",c:"Special Education",g:"K–12",who:"Students & teachers",d:"Curriculum and social-emotional lessons for students with autism and other disabilities.",login:"ClassLink tile"},
+ {n:"QuaverEd",c:"Arts, PE & Electives",g:"K–8",who:"Students & teachers",d:"General music curriculum and interactive activities.",login:"ClassLink tile"},
+ {n:"PLT4M",c:"Arts, PE & Electives",g:"6–12",who:"Students & teachers",d:"Physical education and fitness programming.",login:"ClassLink (rostered)"},
+ {n:"TypingClub",c:"Arts, PE & Electives",g:"K–8",who:"Students & teachers",d:"Self-paced keyboarding lessons.",login:"ClassLink tile"},
+ {n:"Canva for Education",c:"Classroom Tools",g:"K–12",who:"Students & staff",d:"Design tool for presentations, posters and video.",login:"ClassLink tile"},
+ {n:"Nearpod",c:"Classroom Tools",g:"K–12",who:"Students & teachers",d:"Interactive lessons, videos and formative checks.",login:"ClassLink tile"},
+ {n:"Storyboard That",c:"Classroom Tools",g:"K–12",who:"Students & teachers",d:"Storyboard and comic creator for projects.",login:"ClassLink tile"},
+ {n:"SmartPass",c:"Classroom Tools",g:"6–12",who:"Students & staff",d:"Digital hall pass system.",login:"ClassLink tile"},
+ {n:"StudentSquare",c:"Classroom Tools",g:"6–12",who:"Students & staff",d:"Student-facing side of ParentSquare for school messages.",login:"ClassLink tile"},
+ {n:"Littera",c:"Classroom Tools",g:"K–12",who:"Tutors & students",d:"High-dosage tutoring platform. Currently no users rostered.",login:"ClassLink tile"},
+ // staff systems from contacts doc (not ClassLink rostered)
+ {n:"PowerSchool & PowerTeacher Pro",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Student information system and teacher gradebook.",login:"LPS PowerSchool URL",ct:{name:"Data Center",email:"dp@lynnschools.org"},vc:true,vd:true},
+ {n:"Schoology",c:"Staff Systems",g:"—",who:"Staff & students",d:"PowerSchool learning management system.",login:"ClassLink / PowerSchool",ct:{name:"Data Center / April Weinburg",email:"dp@lynnschools.org"},vc:true},
+ {n:"Canvas",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Learning management / course platform.",login:"Direct URL",ct:{name:"Kelsey Benjamin",email:"benjamink@lynnschools.org"},vc:true},
+ {n:"Naviance",c:"Staff Systems",g:"6–12",who:"Students & counselors",d:"College and career readiness planning.",login:"ClassLink tile",ct:{name:"Shannon Gardiner",email:"gardners@lynnschools.org"},vc:true},
+ {n:"EdPlan",c:"Staff Systems",g:"—",who:"SPED staff",staff:true,d:"Special education IEP management.",login:"Direct URL",ct:{name:"Jess Germano",email:"germanoj@lynnschools.org"},vc:true},
+ {n:"Open Architects",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Student data and early-warning dashboards.",login:"Direct URL",ct:{name:"Padmasini Krishnan Venkat",email:"krishnanvenkatp@lynnschools.org"},vc:true},
+ {n:"PowerSchool Perform & Professional Learning",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Educator evaluations and PD course catalog.",login:"Direct URL",ct:{name:"Debbie Morel",email:"wryd@lynnschools.org"},vc:true},
+ {n:"DESE MCAS Access",c:"Staff Systems",g:"—",who:"Test coordinators",staff:true,d:"State MCAS portal access.",login:"DESE Security Portal",ct:{name:"Maura Scherrer",email:"scherrerm@lynnschools.org"},vc:true},
+ {n:"Frontline (Absence & Sub Mgmt.)",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Report absences and request substitutes. Applicant tracking is also handled by HR.",login:"Direct URL",ct:{name:"Human Resources",email:"humanresources@lynnschools.org"},vc:true},
+ {n:"ESS & Part-Time Worksheets",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Employee self-service and part-time pay worksheets.",login:"Direct URL",ct:{name:"Payroll",email:"payroll@lynnschools.org"},vc:true},
+ {n:"Laptop / desktop passwords & issues",c:"Staff Systems",g:"—",who:"Staff",staff:true,d:"Device logins, password resets and hardware problems.",login:"Email or call the Service Desk",ct:{name:"Instructional Technology Service Desk",email:"servicedesk@lynnschools.org"},vc:true},
+];
+APPS.forEach(a=>{ if(!a.ct) a.ct=DC; a.slug=a.n.toLowerCase().replace(/[^a-z0-9]+/g,"-"); a.init=a.n.replace(/[^A-Za-z ]/g,"").split(" ").filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase(); });
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const flag=a=>a.vd?"":'<span class="chk" title="Best guess: needs review"></span>';
+const brand=(sub)=>`<div class="brand"><div><small>Lynn Public Schools · Data Center</small><h2>${sub}</h2></div><div class="yr">SY 2026–27 · Updated 9/2026</div></div>`;
+
+const DESC={
+ a:"Version A mirrors the Boston help center: category list on the left, a short article per app (What is it? Who has access? How do I log in? Who do I contact?). Paper view prints every article in the current category.",
+ b:"Version B is a searchable card directory with grade and category filters. Paper view becomes a 3-across card sheet for posting or handing out.",
+ c:"Version C is a one-to-two page quick reference that updates the 2021 flyer: apps grouped by subject, one login note, and a contact block. Built to print first."
+};
+
+let V="a", catA="Portal & Getting Started", appA=null, q="", fCat="All", fBand="All";
+
+function renderA(){
+  const apps=APPS.filter(a=>!q||a.n.toLowerCase().includes(q)||a.d.toLowerCase().includes(q));
+  const nav=CATS.map(c=>`<button data-cat="${c}" aria-current="${c===catA&&!q}">${c}<span>${apps.filter(a=>a.c===c).length}</span></button>`).join("");
+  const art=a=>`<article class="article">
+    <h3>${esc(a.n)}</h3><div><span class="pill">${esc(a.c)}</span> ${a.staff?'<span class="pill staff">Staff only</span>':""}</div>
+    <h4>What is ${esc(a.n)}?</h4><p>${esc(a.d)}${flag(a)}</p>
+    <h4>Who has access?</h4><p>${esc(a.who)} · Grades ${esc(a.g)}${flag(a)}</p>
+    <h4>How do I log in?</h4><ol><li>Go to <strong>ClassLink LaunchPad</strong> and sign in with your LPS Office 365 account.</li><li>Find the <strong>${esc(a.n)}</strong> tile (login: ${esc(a.login)}).</li><li>Still can't get in? Your class roster may not have synced yet; contact support below.</li></ol>
+    <h4>Need help?</h4><div class="helpbox"><strong>${esc(a.ct.name)}</strong>${a.vc?"":' <span class="pill staff">default contact</span>'}<br><a class="mono" href="mailto:${a.ct.email}">${a.ct.email}</a></div>
+    <p class="meta">Updated September 2026 · LPS Data Center</p></article>`;
+  let main;
+  if(appA){const a=APPS.find(x=>x.slug===appA); main=`<div class="crumb"><button data-back>${esc(a.c)}</button> › ${esc(a.n)}</div>${art(a)}`;}
+  else{
+    const list=q?apps:apps.filter(a=>a.c===catA);
+    main=`<div class="crumb">Educator Resources › ${q?"Search results":esc(catA)}</div>
+      <h3 style="font-size:1.6rem;margin-bottom:6px">${q?`Results for “${esc(q)}”`:esc(catA)}</h3>
+      <p style="color:var(--muted);margin:0 0 8px">${list.length} article${list.length===1?"":"s"}</p>
+      <div class="list">${list.map(a=>`<a href="#" data-app="${a.slug}"><strong>${esc(a.n)}</strong><p>${esc(a.d)}</p></a>`).join("")||'<p class="empty">No matching apps.</p>'}</div>
+      <div class="printonly">${list.map(art).join('<hr style="border:0;border-top:1px solid #d8dee6;margin:18px 0">')}</div>`;
+  }
+  return brand("Educator Resources Help Center")+`<div class="panel hc"><nav aria-label="Categories"><input id="qA" type="search" placeholder="Search apps" value="${esc(q)}">${nav}</nav><main>${main}</main></div>`;
+}
+function band(g){ if(g==="—")return ["Staff"]; const m=g.replace("PreK","-1").replace(/K/g,"0").split("–").map(Number); const out=[]; if(m[0]<=5)out.push("Elementary"); if(m[0]<=8&&m[1]>=6)out.push("Middle"); if(m[1]>=9)out.push("High"); return out; }
+function renderB(){
+  const list=APPS.filter(a=>(fCat==="All"||a.c===fCat)&&(fBand==="All"||band(a.g).includes(fBand))&&(!q||(a.n+a.d).toLowerCase().includes(q)));
+  const chips=(arr,cur,key)=>arr.map(x=>`<button class="chip" data-${key}="${x}" aria-pressed="${x===cur}">${x}</button>`).join("");
+  return brand("Educator App Directory")+`<div class="panel cb">
+   <div class="filters"><input id="qB" type="search" placeholder="Search by app name or what it does" value="${esc(q)}">${chips(["All","Elementary","Middle","High","Staff"],fBand,"band")}</div>
+   <div class="filters">${chips(["All",...CATS],fCat,"cat")}</div>
+   <div class="grid">${list.map(a=>`<div class="card"><div class="top"><div class="mark" style="background:${COLORS[a.c]}">${a.init}</div><div><h3>${esc(a.n)}</h3><div class="cat">${esc(a.c)}</div></div></div>
+     <p>${esc(a.d)}${flag(a)}</p>
+     <dl><dt>Grades</dt><dd>${esc(a.g)}${flag(a)} ${a.staff?'<span class="pill staff">Staff</span>':""}</dd><dt>Login</dt><dd>${esc(a.login)}</dd><dt>Help</dt><dd>${esc(a.ct.name)}<br><span class="mono">${a.ct.email}</span></dd></dl></div>`).join("")||'<p class="empty">No apps match those filters.</p>'}</div></div>`;
+}
+function renderC(){
+  const secs=CATS.filter(c=>c!=="Portal & Getting Started"&&c!=="Staff Systems").map(c=>`<section><h3>${c}<span>Grades</span></h3><table>${APPS.filter(a=>a.c===c).map(a=>`<tr><td>${esc(a.n)}${a.staff?' <span class="pill staff">Staff</span>':""}</td><td>${esc(a.g)}</td></tr>`).join("")}</table></section>`).join("");
+  const contacts=APPS.filter(a=>a.vc).map(a=>`<tr><td>${esc(a.n)}</td><td>${esc(a.ct.name)}<br>${a.ct.email}</td></tr>`).join("");
+  return brand("Online Curricular Resources · Quick Reference")+`<div class="panel">
+   <div class="qr">
+    <section><div class="login"><b>How to log in.</b> Almost every app below opens from <b>ClassLink LaunchPad</b> with your LPS Office 365 account; no separate password. Student rosters sync nightly from PowerSchool. If a class is missing, email the <b>Data Center</b> at <span class="mono">dp@lynnschools.org</span>.</div></section>
+    ${secs}
+    <section class="contacts"><h3>Platform contacts<span>rev. 7/9/26</span></h3><table>${contacts}</table></section>
+   </div>
+   <div class="legend">Grade bands and descriptions are drafts pending curriculum review. Passwords are never printed on this sheet.</div></div>`;
+}
+function render(){
+  document.getElementById("stage").innerHTML={a:renderA,b:renderB,c:renderC}[V]();
+  document.getElementById("vdesc").textContent=DESC[V];
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("button,a"); if(!t)return;
+  if(t.dataset.v){V=t.dataset.v;q="";document.querySelectorAll("[role=tab]").forEach(b=>b.setAttribute("aria-selected",b===t));render();}
+  else if(t.dataset.cat&&V==="a"){catA=t.dataset.cat;appA=null;q="";render();}
+  else if(t.dataset.app){e.preventDefault();appA=t.dataset.app;render();}
+  else if(t.hasAttribute("data-back")){appA=null;render();}
+  else if(t.dataset.cat){fCat=t.dataset.cat;render();}
+  else if(t.dataset.band){fBand=t.dataset.band;render();}
+  else if(t.id==="paperBtn"){const on=document.body.classList.toggle("paper");t.setAttribute("aria-pressed",on);appA=null;render();}
+  else if(t.id==="printBtn"){try{window.print()}catch(_){}}
+});
+document.addEventListener("input",e=>{
+  if(e.target.id==="qA"||e.target.id==="qB"){q=e.target.value.toLowerCase();appA=null;const id=e.target.id,pos=e.target.selectionStart;render();const el=document.getElementById(id);if(el){el.focus();el.setSelectionRange(pos,pos);}}
+});
+render();
+</script>
