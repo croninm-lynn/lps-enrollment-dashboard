@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>App Usage Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Roboto+Slab:wght@700&display=swap">
+<style>
+/* Layout: LPS dashboard header over a roster ledger. Platforms run across, audiences run down, and the period control governs every number on the page. */
+:root {
+  --bg: #f2f5f8; --panel: #fcfcfb; --ink: #14202e; --ink-2: #4b5a6a; --ink-3: #6b7987;
+  --line: #d9e0e7; --line-2: #e8edf1; --chip: #e4eaf0; --focus: #14202e;
+  --ixl: #1baf7a; --bm: #2a78d6; --ell: #eb6834; --all: #4b5a6a;
+  --navy: #292f60; --gold: #eca61f; --band-sub: #bfc6e0; --title: #292f60; --head-bg: rgb(255 255 255 / .94);
+  --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --slab: "Roboto Slab", Georgia, "Times New Roman", serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 15px/1.5 var(--sans); font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 56px; display: grid; gap: 40px; }
+h1, h2, h3, p { margin: 0; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+.inner { max-width: 1180px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.topband { background: var(--navy); color: #fff; padding-block: 9px; font-size: 12px; }
+.topband .inner { gap: 2px 16px; }
+.org { font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.unit { color: var(--band-sub); font-weight: 500; letter-spacing: .02em; }
+.site-head { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--head-bg); backdrop-filter: blur(10px); border-bottom: 3px solid var(--gold); padding-block: 12px; }
+.site-head .inner { gap: 10px 24px; }
+.brand { display: flex; align-items: center; gap: 15px; min-width: 0; }
+.logo { height: 48px; width: auto; display: block; flex: none; background: #fff; padding: 4px 6px; border: 2px solid var(--navy); border-radius: 6px; box-sizing: content-box; }
+.titles { border-left: 1px solid var(--line); padding-left: 16px; min-width: 0; }
+h1 { font: 700 20px/1.15 var(--slab); color: var(--title); letter-spacing: -.01em; }
+.subtitle { font-size: 12.5px; color: var(--ink-2); font-weight: 500; margin-top: 3px; }
+.filter { display: flex; flex-direction: column; gap: 5px; }
+.filter-lab { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.lede { color: var(--ink-2); font-size: 16px; max-width: 68ch; margin-bottom: -16px; }
+
+.seg { display: inline-flex; flex-wrap: wrap; gap: 2px; background: var(--chip); padding: 3px; border-radius: 8px; }
+.seg button { border: 0; background: transparent; padding: 6px 12px; border-radius: 6px; font-weight: 600; font-size: 14px; color: var(--ink-2); cursor: pointer; }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 2px rgb(0 0 0 / .14); }
+
+section { display: grid; gap: 14px; min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 6px 20px; }
+h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.sec-sub { color: var(--ink-2); font-size: 14px; max-width: 72ch; }
+
+.plats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.plat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.plat-name { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; }
+.swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; }
+.big { font-size: clamp(34px, 4vw, 44px); line-height: 1; font-weight: 800; letter-spacing: -.025em; }
+.lab { color: var(--ink-2); font-size: 13px; line-height: 1.3; margin-top: 5px; }
+.aud { border-top: 1px solid var(--line-2); padding-top: 12px; display: grid; gap: 6px; }
+.aud-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.aud-name { font-weight: 600; font-size: 14px; }
+.aud-pct { font-weight: 700; font-size: 20px; }
+.meter { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--c) 17%, transparent); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--c); border-radius: 4px; }
+.aud-det { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; color: var(--ink-2); font-size: 13px; }
+.aud.none { color: var(--ink-3); font-size: 14px; }
+
+.months { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px 18px 10px; min-width: 0; }
+.m-row { display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr); gap: 8px 32px; align-items: end; padding-block: 14px; border-top: 1px solid var(--line-2); }
+.m-row.m-h { border-top: 0; padding-block: 10px 0; font-size: 13px; color: var(--ink-2); font-weight: 600; align-items: start; }
+.m-pop { align-self: center; font-weight: 600; line-height: 1.3; }
+.m-pop .plat-name { font-size: 15px; font-weight: 700; }
+.m-pop small { display: block; font-size: 13px; font-weight: 500; color: var(--ink-2); padding-left: 18px; }
+.cols { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 4px; }
+.col { border: 0; background: none; padding: 0; cursor: pointer; display: grid; gap: 4px; justify-items: center; min-width: 0; }
+.col .plot { position: relative; width: 100%; height: 76px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.col .val { position: relative; font-size: 12.5px; font-weight: 600; line-height: 1.2; padding-bottom: 3px; white-space: nowrap; }
+.col .fill { position: relative; width: 100%; background: var(--c); border-radius: 4px 4px 0 0; }
+.col .track { position: absolute; bottom: 1px; left: 0; right: 0; height: 56px; background: color-mix(in srgb, var(--c) 17%, transparent); border-radius: 4px 4px 0 0; }
+.col .base { width: 100%; height: 1px; background: var(--line); }
+.col.partial .fill { background: color-mix(in srgb, var(--c) 45%, var(--panel)); }
+.col .mon { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+.col[aria-pressed="true"] .mon { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.col:hover .val { text-decoration: underline; text-underline-offset: 2px; }
+
+.trend { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px 8px; min-width: 0; display: grid; gap: 8px; }
+.tr-legend { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; font-weight: 600; }
+.tr-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.tr-legend i { width: 18px; height: 3px; border-radius: 1.5px; background: var(--c); }
+.tr-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.tr-panel + .tr-panel { border-top: 1px solid var(--line-2); padding-top: 10px; margin-top: 4px; }
+.trend-plot { display: block; max-width: 100%; touch-action: pan-y; }
+.trend-plot text { font-family: var(--sans); font-size: 12px; fill: var(--ink-2); }
+.trend-plot text.pk { fill: var(--ink); font-weight: 600; paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+.trend-table { border-top: 1px solid var(--line-2); padding-block: 8px; font-size: 14px; }
+.trend-table summary { cursor: pointer; font-weight: 600; color: var(--ink-2); }
+.trend-table summary:hover { color: var(--ink); }
+.trend-table .table-scroll { overflow-x: auto; margin-top: 8px; }
+.trend-table th:first-child { text-align: left; }
+.trend-table td:first-child { min-width: 120px; }
+
+.table-box { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow-x: auto; min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { padding: 8px 12px; text-align: right; white-space: nowrap; }
+tbody tr + tr td { border-top: 1px solid var(--line-2); }
+th { font-weight: 600; font-size: 13px; color: var(--ink-2); vertical-align: bottom; }
+thead tr:last-child th { border-bottom: 1px solid var(--line); }
+th.grp { text-align: center; padding-bottom: 0; color: var(--ink); }
+th[data-k="0"], td:first-child { text-align: left; font-weight: 500; white-space: normal; min-width: 200px; }
+.sort { border: 0; background: none; padding: 0; font-weight: 600; cursor: pointer; color: inherit; }
+.sort:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+th[aria-sort] .sort { color: var(--ink); }
+th[aria-sort="descending"] .sort::after { content: " ↓"; }
+th[aria-sort="ascending"] .sort::after { content: " ↑"; }
+td.spark { width: 22%; min-width: 130px; padding-left: 6px; }
+.spark i { display: block; height: 8px; min-width: 2px; border-radius: 0 4px 4px 0; background: var(--c); }
+.na { color: var(--ink-3); }
+
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 36px; color: var(--ink-2); font-size: 14px; }
+.notes p { max-width: 62ch; }
+.notes b { color: var(--ink); font-weight: 600; }
+
+#tip { position: fixed; z-index: 20; pointer-events: none; white-space: pre-line; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.35; padding: 6px 9px; border-radius: 6px; max-width: 240px; }
+
+@media (max-width: 700px) { .site-head { position: static; } }
+@media (max-width: 900px) {
+  .plats { grid-template-columns: minmax(0, 1fr); }
+  .m-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 18px; }
+  .m-pop { grid-column: 1 / -1; }
+  .m-row.m-h { display: none; }
+  .m-sublab { display: block !important; }
+  .notes { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 460px) { .col .val { font-size: 11px; } .col .mon { font-size: 10.5px; } }
+.m-sublab { display: none; font-size: 12px; color: var(--ink-2); font-weight: 600; margin-bottom: 4px; }
+@media (prefers-reduced-motion: no-preference) { .meter i, .spark i, .col .fill { transition: width .22s ease, height .22s ease; } }
+</style>
+</head>
+<body>
+<div class="topband"><div class="inner">
+  <span class="org">Lynn Public Schools</span>
+</div></div>
+<header class="site-head"><div class="inner">
+  <div class="brand">
+    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAABkCAYAAADZup+FAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAInNJREFUeAHtXQt0HNV5/mclGcmS7XUKxhiD1zxtg/GaBJJTHhalEELj2D7BeUHCmvYkbmhj+SSUhJwiue0hadMer8khpTk5eN1CAtjEckJCEkq95tFDMOCFgG0ewSswJjyCF1myhSXt5P/uzF3duXtnd1balYQ93zmjnZ2589T/3f9571o0jnF2PNGat+laXl3qbuqMWLThuUwqTSFC1AAWjTOABIN5WmJZlLCJoj7NspZNqXyENuzOpLIUIkSVMC4IITRBnhbx3bSVIIEf0tAaz2dSKQoRYoQYM0LMiSdikTxda7Mm4K8xGjmylkuO0KQKMVyMKiFi8US0mSjBfsES/tpKtUOWibFmkAkSmlQhKkHNCTGKJPBDJz/lhl2ZVCeFCFEGNSGES4KlboSolcYHhEmVZ80Rao0QfqgJIdg/SHAUaD2NX2TYpFoXOuIhdNRTDcA9cOqeTVtz/5HcuNmyrFx3d2/gyBEzNMd/0mecfhItWHBqbt6cWVZs1vQs9v1x/4Hom2++S9muP0xJb8vQW2/nYmRXroH4GrF85dGsEEcBauZD2LbdetmVN2x98Jffmz134YoYXyhBjglluonccdOinV//2vLo4k/+OTa1UjCBzfKSSW14gO7b8lj096+83urX0CVaJxMBuYs0hQhhwKgQgrVEFtsQauWP1gjRKtumOIR02dKLs19vW05Toy1xtOk+cJC2P7mbXt/3Dr3wwmviEwswadJEmszLiTOOpTPPPInmnHmyWLAN2JN9I/Pd790dfeSxZ2Puw+U4rJvh1XWH2H/IZlI5ChGiBGpJiDgTYodKCBXf/8/NrV/6wmWbJ09ujoIEnT97lP5v6w56gslQKc7/yBxa+qkLeLlQfH9t79u5677yb+te3vdOMiRBiEpQM0JA4H9w+5atOzPrFzIhMvp+JkySP1Z993s/ZjI8JjTDSAHNAVJcvxIRXlrB101RiBAVIEI1wmmnnhhzV/18AbH9v+96sCpkAGBaQdO4iFGIEBWiZoR4/PGdi/D57X/8USuFCPEBQc0I8fSOl2L4bJjQMItChPiAoCZ5CGDS5CZhEj23M0sjASJIk9woEiAjTiFC1AK1I0TLREGIk0+aFlO3I/rEH1gWqdvnchj1PI4Wnclh1Lm8THLDq36Q4djdL7wqlhd42cVhWoU8CxD6Zcc6TSFCjDWuWHzjnrkLEvbiZd/eiu8QTl622hp+u32X/V53r10N7H39bXvX7i598x5eEryEmekQZVEzDSFx6qkz4hBKUqI+6NFlZAlaYB96+ipFmnA+mcvAOi8xXkVdVTvfR5o/15jyIiFCADUjxPHTpsa6Xn2TmpqOQc9c6J1vu72Tly00GkAW+6f3rJFfY0RiMBK0RYpCYoQwoOqEgGnEH+ulFmiJvEu9T/8THXPKVVQfnTeqTvEBResc3vsbsiZMpoZpH8PXBC9LkRxkUqyhECFcVI0Qro0O00TMkHHmKVHqfepWen/PJurj7xNmXk5jCRAC9wJCNM1vwyfutwP+BX9eUm1tMSeeaK2rIDk4SJQNiw7HHlUhBAsVSAAyCNOo/83H6cAjXya7v5vGC0AIoP+tx6n/oc/RMbOvookfvpkiDZNjvBmOd0c1tYXljBK8NnB7i9L8kaYQY4oRJ+ZYkNbyx2ZS/IT6qfNovEEn5wATg8mgboK22MFLjEIctRg2IWAiIYzKq236Ptjq8BnGM6AhDEB+ZKubKwlxFGJYhHB70R28tKLnPfDwl4UpomKsfYZy0AkLkyrfuxerMXJIEdjcCXHkoGIfwiUDNEMMAvQe2+P4BDEaLr270A7OKxadKOMB0A6R5pmebYiE4Rmaz70Z+2H+pfhZ2ba3NtAwsCuTSpATzRIDoyyb9uht6iy6JJxDanyhIg3hRwYAgi/XJcarlpg432vlvf/KJofUh7up5/Fv0KHfJeWuVKgpji4EJoRKBnxHj6oT4NALd3i+oye2vI7rmMOkHQ4+lyz6DpK4CElxFCGQyeTmGApkACae3VYIZUogzo8Yv4zeSOe6j4ky2LOXTSgShXud9BiNBtQqWQk/7aCijgnTcPzH1E1JfgfPmEb+jQXcselloc8/Velxfu05r5TzG5or5unFJBE2OWX/FnXZRJkgY9oxn1ejz4Ayv7m0CnOA5WkBh66j8prc06eHY44G9SEQWo2pG+o4tArhV8wLYXK8v/sOsV0CZhMIgTAnMTm+ePXlQlBRvlHLrPWXrr6MvrrSmUVf9vbwacppB0CQ2tsOL3ozk+KSsS738PNHTGDh9PgofJynUysBq1T7Jl7OOieRfP7Z1Gq5be45iVUskB2DtibQduGY7Nx4Yh37Vkm/izIZ4u41izB3QSJrW1bH7sx64dOBCBPztIrP3yamFLIKlxIrnOhsd46hSyqZmK6sycRC0E6ucziQ2+nZ13TGdaI3VXHoxTsor8T8pXMN7SHJg3HPqR/dKIS22pD1S9+84QtiLMXg/p0FoW8KoB0az7zOLyQbIxrXk6+NKvIWtUEbYH3egsR6FshkmZnbMYfWWiZFGw0P3BGIcfiiU2iyaQcLe0e5azLBdpwVTwQOo5ckhOs3dGD9IPsMCK+qwg6TqPlj/+49xtUSKiBk4hwsmMhgQwhRiSqFtpr45g2fF6RAxAgEzP3qSnE9YQZNGzKDsF/XDmijm1Q4VpzDeW6UsHdQCAEWxhhrhrW222EGPGhtUNPNgKirIYNqOnFM3hYWTiCU0xBCfaEnhcMM4Tj0rFeIIGR6j2rSEtK5ht+B6FStgXtWBV7XDvJ5VEzmsLEaBABpcK/QMr0cfXLRPuaJO5R5OKUe2eJdzsyHWGyse3dmghxX1N4yl5SICawtqrjHj/gQaNB7D1njsTbBYolRZWiV2qwcfH0I11QS4VVVsPpY2CecdLmnt0XsHoIuyyN0XwKapHHOdR5/Q6JaM25I7HP9kkFF2NHzq6TFMylRJAEECXT/AvcrSYPngy/kajuYTgtpDODaw5dgHQWEus0NO5od2GUmB5bt92X4ZNu6qIdlE2j1bm2uW9leHBNPbOaTL9VOWfjuTgq3wcZs644w+87WaDvbOvTtL2VSGflscfYR3rdpf9GxXjLBR9hQ51yT8q5ZRgbCDDr3mqYyMGoI1VRSMrgFIFavm04Tz9F64Be9ZhP8jcJF3V74QJXJoELt6XXt0KdpBxDG1EYPI6NjcJ8bg56GawtXDaiOtXQtwCZCMxUJbgFy9kRtc3Z3+Ymf3yuxL8uEWsgEasM9gbT4RHLScoVVQ4zKIFNugjkmwiG+Jl+n43kmEhb85MExvM3wTgJdE/AzmdrlCnpWvVgPwqSYEAKNLPAeGx1aQumFlbEIYh3orgEh5Dkj7jVM2kEVdBBnspJhl22QZ9EBUisFge3jYVgqC+K6om0lqmzrDD9PYFnDr7J1NYNvJMd0f8AI/AggC7KZtCCIBK1hOGYKBUARIVztkJDfIbyT/+LuomiSNCFUtLCDrfbMiCyp0HvhWmiIwjnd+9D9m4Oa2aaHWGUGXgdMKu3+QYYx1xIcqjSFMVsRljS1Z3Nllb6NTY3hl72zwJcJa5baNyyAgGWaZGmYMGmIdn2DIMWlxaQQJoRiekCw4CtIiLEHSi2TdK6lAHbXkBBSQ6hFfMJ3UEg64cTLqenM6zzH9z5VnIE3kEFi1VhrCde0SOvbmwyO6+kcfrSdit4hWCP72TEmU4pGEwHuN2I2mQLBQwhVO+i9P4RYJ4Ws/VEB4VFNLN2RBmGkyVQLdB84JD5Fllwr01C1A56j+cM3e44FwQ+/7s2+m8iA4IGbkxkXWoJ7zOIe3vkJMw8aDNqBCTKs4kUBa/R/w49NtG1UQ+gaQmgH2P6woXVhhnBNuuiHHrMIGkBvN/Hcmz37VS0BO1wev6+GmWpoCDWnoGsH3VSCCVj0HAYyiLzEA1fSwacKPsaYawkf57pVt9PtYv8ht3sEv6Jk1cAcKgeUgVANUSCE+09NYF1GiNBj6kKCko1JF//Qsw3tdNOoUTFF1HOInruGVbD79r3t3Gd0nq92gObQHW3difYjg6zwFdW9TsQJ762Vxhgm51WN989x4vAxdT870530AUPdCMyhIFA1hAjVDbIpgESUhIkUEPgWLUOth2IhUNK80rVEnWtS1aKWSZpMKlTtYMpGq2XsRGYy4J3o7ZSMfJEpUg2gh8dkb+oyL57oMLU1OdeqAx0xRJ64hzdGgI5mqIQQL2xg/86iRiZSoIdt0kwSNYstchOK6TRoOG8tYIpcDbqlGwBKTTyaQytjN5EBZNbJACgmWOs4da6jMkOrm0tMBhG7pxAeCEK4znQr1iHourMJmEihCw+y2GpJOCpdpTaRJlTPY+upf59DjlrP0ZS7/18o39ct7gEBARBUzZXoyTcTGSD03UwGfZICeU4FCRpjmJxrZGg5ywztH1O3++UHjnZIDeEJxSHJNvVTjxrDrCZSqP5Cz2+/4elJ4W9Iez33i3/mxRHSWkElWd/OB+mt7y9mrbdXaAU1xCpKUpRnMZEBz6tH0RAQALFABq3Uo5XGGK5z7e31OdpkGSJOFE55Y4SsZSp6YTLMiri8Goo0lVKjlklkprk3laFY2XvKiNL+Tf/Ajut9zrkbZZTpj1RrgAzv/OhqOvZv7uJwsCPAsmhP9vp+ZNDJj3Ayomx6zZOLReoXbbBLzHQAx/CvnVei6Mwexk8Hc8+/hQmgdnCxInPJotSu8MfrjZCEEC8QAqKGVEWYlXt4XTj8SAGHHD6IdKKleaKSAbAm1nZYKbQEysvrmAADub1FpMA9Si1mJANCzi8Ul7A3n1tsSuKdoaAu0jAZ0/LE5ai6Jji5ZSYqY6c3QVUGnOvDCAV7yRRT20QC5h7cIsBW8cUu3o/75zYJrINkOzOpFRQQGOTExzrnsWi2zGcgcFDquEGbtsrjKpqkwaZW5dzZXc+kZpuaRVxnUBBi/5YLjRWpEBr0jKoJpZNELfFQxx50P3SrhwxAfdQ5Ty2L+3SAFO/e+bcFnwICbiKDmGRAIUOdqylNZIC/hHemBAziNMZwa3nSJZpkw5k+/AEfQvwT0bvLQTP7f3ahcQYNPVNtJAW3keYSbPjuh/x9t+4aEUISrW7qiZ7th9/YSd3/e6tYh4CrZMCzYyCQmryD7zPlE7/0OOIA3g0cbTld58A4IgRglwinGrPaIQqAyeQQomeIAHKUmO4ww4SKsrONJJYs7dDNJ2lfo0dGlEeH9B+AWmmIUkTr+f/11DTvL+mYU4aEXAg4C7fs6WE24nn0OicAzw1nXPofaGsN7Y4pTTHYJUtVhh0gMQXnms2DNJkd/TQFhUVdFDAbbZcqD6/kPVThneXLv3vffSBEDCt6/gHOMQQfvgB6U9WRxPe6lpl08NmkZyim2uPCVIL9riPSNESIWmkIWRISaZpk3L//vhtp2t//XJBTn19Khol1x1mMmuP3gfcEbVnP7SYcXzRpwQK5grEBNIZ1TmzTb2Mbv9W7kbZUUnvkTrY2IrjXmx20PV8zcNsS5+gkGl4WHoSYhRWRveWu7vArmzyjzWAnQwigLdTKUYRmUS0K02HQHVVXf7wzoQC0w0HNb5CQGmI0/AdVG6nA/SEfMvnSVeLeCw42zChNK4DwmM0cbURHYJjI+b1D/TSlqQGrMRonsM0OfYpClAQIUYhGCBOJ7eY+ZYYMAMKA/AK0xUSlKE4PzUr/AtrBD1aj02t315AQhUFCjf7RrJ7HUtRywYrCmHAQwSTsMIn0GQhBgPt/9zo9uy/Hn/uo691e6lm7XOxDkIIjTTWttykHTAlDxeTMuj1niBLwEAKAkEtigACHX/uN+ERPCYcT6zAppKMpQ7PYjvVS2kFFLTVEYUxEkz8hEG06+NR9ghR6XZYJj7z8Ft3/3D7+fJuefb1Y3hUtgfc5KoSA4NsRrxkk50cqil2GmelAKBBi497XaHpjI53eMkl8RtyhlzLLLHILbDpgwjGYSXrIUhLk8J7flrygjPx0jwIhrMbS+Y5DHAUDIUyAgD/7+n66c3sX/YK1QY6/64gyAebPiNI5J45+GdNZ8QR+kCXJ8fwkO9DIfeQsjPXm2zIE8rOHQnMpEAqzbjzyztu0I+dMcnB6SwudxsS46NjjaGF0KrXU1xcmHANk+TOcTJgaqmPZ+9RPS14w0hRoaOuIICte/UwmbJ/44U9T09ziidKgCUqR4BwmwEWnHUefnH+iIIKrFVTEaBTGCeRtz8hGJ7Hq0zZimWfhCFEM4zQ0L/X0iOWBP7whvoMU8WhUfGIZ0h7Fx76/p/T09xHXh9g3Cj++aGlRpmNmf5RDrpcJMqhkkebQXU9ki0ggtcAn58+ga86fbSLAqEMU69nlHXgMGsL0MmFVa3AUCHHL2ecwCQ4ITfEyk0FqCwDrWNbTHmFOgRTQHlh0/Nk1twtTBEm5WhbxlYIcJCSFHkRAROmYUz5aaAOT6M4n9hT8AhWSBNecHxOawI8Eb/T1USb3Lr+bHK2InUIn8LuhUdAOGDVmYWaJUqUhnK3mePyK3WHNUkUAIYQqhVkkNQDQMzAgSACCZPgf/kafY4b8gYUAmkNqD0kMLDgHemAsAJzrg88zOXY9OHRBt8CulqXfBZOJnerpN2wrXBMopQ0uOvW4kpoA70R2Go/yAkJI3DRn9H5XzxXyRCyeaGvi5JulZMgxrLOXY/ChiTQ8gBBZMpQcQLhVLQAigCAggqo9IBxYAJDpE9NPKJBj4rmfFgsiT3C2y/kX1QDmil36qQvEOjSE1BJ3MgHu2p41aoOvXnwGXb/odF8S4JnxjCADvuuYVD903GjODu4K/bCTUCGKAUKIlPuNmzOi54TDeCH3lBefNo1O/tDQRMQwlSDsWCAU0gl/9J136MCA09NK0wqQZEJ79NBYQA6JamsIEOGLV18mptuXEyjDLLrt4RfpB9teMmqDm644SzyvDpUEKvlV6H6Vi7BX/oDDcmezbocJ8ZWfbPfsRBRFRFTOnsGf03xPIrWESg4JqWlADEVwBJ54cjd1/uxRXob/Ayoo875+5RIxxb6EHxHKaQPhJ2X3GDUBtMCFxx7Lz8Dv5Nhp4rkMYNveEnO+Rts2xwZoIKY3sMnO9SY/U5GT29x2b9wiK1pP9ZlcclkuaBu+h2g/9ccqvZ4K9xxLLbIxV2umjibg/Nkgx7a0bWzFZ6n7riZwr/zOhbXTk1yepmFAmkw0H8LPveYjvx8yKZCAwnIbCxaE6UJBjhOLtIdqWklySB9D9rZYoGWunD5DkAPr539kjliuX7mUtjM5KvkRFRMRXuWM8S2/3inMIxWzPtTMRDjN6Bvg/pCDuXfvq0YSXDF9eiH87AclKdcltw1QX8ymes4L2ItYkLbI7bD3m9s2Lmig+hVBBStCkVieBpfyPztFPsV5pjb9Tgg4QcOsqWpkUvfTwHo+9zp+DnbSbb7GwHom3+ogJONjYvy3tdR9VxN91Beto7oYOZM+DGsyassdT71H3Qg7G6UJIiu7z0xsqTkWz5/pIYeENKt0n0NC+htYVJTTGiYiwFEGEXT/oJRZJLWBfm8gwWmch1kRmy2SlCZNIEs3HubOA/mK7y6Ni4gUYw1riA7ZrrHtJ7F6iiR6kp/tUI/H9jpqaO9NXhV4QA0LYYI1QLZUzxekTSWY2Hbv5gk0uDqX/HxWbpvUtmmpTYNx/ZlG656CXXPj1t7k8nLTXRpRDyeQSQGpL6RbIUBSiNDrPuwS5FEWAGmCQPiw3Nj5jDCtrj5vloccECQp8NIhhwDKaJX0N+7IviLIcR2HLXWt8dDWp+l/7npQaA2Tj1ApEUppAxlKxv2aSIB6JbwDU5hWyVSnKQD6WMDYnIjRMCHNo+EKmTSlyp0D+1UyANwDp/uoP2M4pzARS5lH0qThNlk/7aicp1SbQPevIug7E6X8TAgxVDDDAtrMwoCe0Q8QBvgbMK0gJDoghFefFysyqyRkpEoN5Ur4aQ0Q4zwmiSQCSAp/Z6REKGcSSV9Ekl+HzFc88HetctNUtbDPT0MA6H3ryN6Qp7olqOBnE6SgLZxelZZg7IPcjm345G1L+B8rp3NcEqH8ugPJz3YOHef0xvIcfMQz6vWbVm9aZdn5VpzDonzUpsgi9RwqmtvuSVkUSZXRSigXaY8QflwREbY82/CR/dxDr1bvyXbuBT3HNphRfN09B5PL1wy9q82xCPWvdc6DiRLsVqaf3UB1a1RiqPfvbMnH9XOpGgLnrWMzj4bMVtyHr8knu0KcvBUCesvuXYXkm1ymOwknAVV7mMihCg9i+vA5XHNCQI3KSN9Cmi2q1oCQfu20M8T2Sy85V3z6+Qh+RJDkk/6MBIhw1cyZ9JmZJxdpg1IJO2DW1GbnuYpLNzJBq1zxT7KoP+cKYScLjee36/iflWIypbk31ieebp9ADQuVHjgJYnGPmdZ7ZXkOEFJum9i2sT1iD1pMkGVqW/f6RYRooAlt/XQ42dy2iROA+XW6EOE52FtaO4Hql6nXb2m7NxnlzkBqF1tMkeoRwlSLc99ReRyEtoEGVygaCffP57fXcztxfkEue3Cqfv8tbfd0NLXd3XYo+bmk/gz11N/G1y9cm8/Z6b6TkoRI89KO6AnRrqLkmzQnEGZUtUc5cqA0Gst3WIgdzTHLE61STSqQQGoNaUJJQEhv+fXzwrlXUYoIJv8A54VvYNIGpRJ2IMHVTGr1eQ0wTsKbJ2uB7N0B7kVnsbsb53/+aqoY+XW64NdRZEM/vZ8g87T4HiBSxMJk8luMlbDutRKOzxPpYPJNiZC1TmqMOhpsb6ABFuLlnnsaoMFkj8fUsrM6mfg9bHMjQmnn/dgbdPPMNS3XDNBhBAU6+Amu7Ul+psg3gAZ0O4ZUsblm5/JC2zgEwDm5ne+7EoTgni0NP4J7yygyrrojrOYXoC1kVEkVLBM57n/OKZADQbqe6BU9OyI+3/r4PI9JhXPKTC9MGtlr+4VPq0WEcuUbMP2gCfxIgEz1CUPas2xyjKM1/M/JZ1g41gyn1teiuqJejW1pDoXWLSl3rBMCzXeZ9pWLGPU5gppweuy6tXwuEda02eTShVhpr9y3ZZjlA36r5e4XVbopMgA+yWHu5aFN+NN3mGqETUP4FaT1/CALNBbMKJAOmrNUCFi1F3DTq9Tkm1/pBuxxWS4u7X4TOd47FKefsyMqNQcAcqx08x0wpXStATJUiwjyWUxEKJew86lkLbwTlG5Mb2yiW+PCnMuiUyEDIo4Nn6IKUUeNURE4VQCb39TOKiEoEhwCznG7EdWpu73rChbMFH9Nl/1N5wrAGrOsucnE2V9ir++zsVZpc7RcXSuIUSrkrRICPVxhcly9dAPVr4+885ZIviFxBaimldQcEEBpVkGgIPRYYP/f+USXKJ9Q/Y2/Ots7Mwa0CEws1WEfDhFk1EoFzKLbHn5JmHEqgiTsZAhZdcpXDJl1aRoBuHc0JDn644Z22NaptwsyRTw/VfawO1w4CFwBaledfQC9K2sIWcPfBc0z8pCq1Tng2PUd+h4nKUiduC6bRVHV71DBJtgCdqSL3oO8P1drCb+K8yP4YcZlpjspEMI1m3DC+KvvOgpdjRJhjAQWCBqIIAVEJYfUHGi3nB1W1SE/mU2lm66YJxZn1Nl+T6LMFEKV5pXqlAPDIYJfeBa+wWJDRWupEC0gNaOLkU7tYqv/aNfpjuvjG/iffq1rJ2fx3Qk/DlyrxtxNWgRwnNKN2+BYqxEZYFLbPUv1KFMjNeYOGzQKojy2nRcmEHyFOqqH0+sJkUIIS4VNdUBgWdhXIWKlmm+u0154Pvgv/TQIYfaQFM8Ec8h0bsehH+qw8FwD1E9+sDwHO7+suRaC84nb0oFKN0zkUKHWNJlgCqH69djS+dajRsMhQqUJO8AnV5HmzqTI0YOj6IRIkS2OZDh8uNrPdoUA4R/HwrzNprpZnPjqmkATkizsm3l3BiFMNewaIaeAEJljNXHmEmSzFA71+jIJyKTAbBILLL4Gb58CreMXdkUSjq+xypkvNv9eXhyX39arRHOkw40QKc6JNjAT68X993ew/7DAIbZjv6vvB04y0eAWnM+598NJJv0UHI/3wPssRLrU9+a9J+cdIHyt3j+eERUCeDeD1BBX2zta1j/sqhMCPQKy1lEQQu+tJTngaJoAs2oj96imHMPymScJoVUdZj1y5EcE2VuDDCoqIYJ0kq9fdEZRfqSUNoC2u5BJYArRuljBhEhRFRAVPSLlytX9QHjwEbQHLnEtCnIOeb1S9xakTcD7CnSeSu6/kvaWvkEW+6GGaeWPtxtLNyBcIEUpcsgcAHp1NcLj59Bew8KKXlsVVj9B9Ysa+RHBzz/APeL8snxdImgNEznO9GwKccTARIiClsB3WbqhRopUSHLo0SIT4DB/szMTKHIkNUKtiOAXnvUr35CTDty1vYtu//x5cnPVtEOI8QHLtFH6Evp2ta4JsXsdMKtADAi4Cggsap7U6VvQFoJlihzdsnun0CwSJ3B481tz5o6YCHpmXKKShB3u2XXyjb5DiA82LL8dTApoiZjffl1zmATRT2C/9fGzRDsVpl4bpksiFhP2u4pKiCDLz2F2qSSTZhHOrfsgfgk7mIh3//UF8uvs0RwdF2J0UIoQrfyBoj9hvsgx17rwACDHlKYJBUEcaeTIr9bIr5bpJpdgJkfcVNDnV8dUbrz1f33hfOnjeMq8Qxw5sErtZFIgvLZKOMZPPsGC1e/JTJt6VlPN0fVMBOQfggisHo2S5w3qiAMm/6McEUzhWR8Sh470EYxyhIBjvYOXGEyZr2WeFttNIVS/UgulVy0AppEpcoR6JpVklZZwQMuACLppZCKCNIt+8PDLRWXspfIUFJpKRzSscg3cEXUgRRQCp2qGSgUW4c1bX37RI7B+Dm2lJRy6I16KCH7jrZGnQOa6xNSUoal0hKMsIQAmRYI/CjX71Si+Q+QIRNAz2H4lHBimuXj+jLLnHQ4RStUxKVjHZGijEEc0AhECkAk7rCOEetu2Fwv7SoVQgwpsJY54NYhQauIBmVRUsuCF2TRCHNkITAhAJcVKV3hNxXeVRI4qKeGo9LwmImCy4q/yefV7VmcHwTrKuqcPTU25cKx/8yHE6KAiQgAqKXRAkKTDrMJUc1SNEo5Kzht0vDVK1zHPrUKGS0In+uhBxYQAdFJUWnMEgf3Or3ZWvYTDVBri53+Y7hllG4h0uZoG1ZDLQjIcXainYQCRFiYFVgUpUPatDp4pVXO08idPeiJHlZRwVHpekznnR14M9rkuVkgvpMkhQ2gmHWUYloaQYFIsJSf6FJX2vWnI5khLOCqJSEn/A4lAFRVosTCadBRjRIQA3DwFSjxi+r5Kao5AKOQo1FLsakSkKiACtMHqsHr16MaICSGh+xUYt/y5O4amo6x08I9fCYepNKSSWiYfsytNTil3lkIc1agaIQBdW4hivF85PwhfyeCfoCUci8+eQf+6bOFIBhVBKyD7nKQQIajKhJBwM9vQFjHT/pFGjiqpZSox1gGTc3WEjnMIFTUhBOBqiwQv+B20mNwOHwGEkE5zJYN/KsmIy5k/DJMbpMjRClkKEUJDzQihwqQx5O+1VSsiBQdc/qIPJgU4wVuaDi0AjZAKiRCiFEaFEBLuoKMEL4vIYE7J310QU1++e1D4IBinbSq8wwwfmK0cvgZ+U/uE4oFLIAGSayBCOjSNQgTBqBJChUsOLCBHnJTfpxgBQIBt5MxulwlJEKJSjBkhdDBBQIoYOeSYRUMaRM7TI5Elp/fH0uV+BxGyIQFCjBR/AtighoWF0aPeAAAAAElFTkSuQmCC" alt="Lynn Public Schools">
+    <div class="titles">
+      <h1>App Usage Dashboard</h1>
+      <p class="subtitle" id="rangeText"></p>
+    </div>
+  </div>
+  <div class="filter">
+    <span class="filter-lab" id="periodLab">Period</span>
+    <div class="seg" id="periodSeg" role="group" aria-labelledby="periodLab"></div>
+  </div>
+</div></header>
+<main class="wrap">
+  <p class="lede" id="lede"></p>
+
+  <section aria-labelledby="h-plat">
+    <div class="sec-head">
+      <h2 id="h-plat">Accounts logged in</h2>
+      <p class="sec-sub" id="platSub"></p>
+    </div>
+    <div class="plats" id="plats"></div>
+  </section>
+
+  <section aria-labelledby="h-month">
+    <div class="sec-head">
+      <h2 id="h-month">Month by month</h2>
+
+    </div>
+    <div class="months" id="months"></div>
+  </section>
+
+  <section aria-labelledby="h-week">
+    <div class="sec-head">
+      <div>
+        <h2 id="h-week">Week by week</h2>
+        <p class="sec-sub">App launches by all users, staff and students combined, starting September 1. Weeks run Monday to Sunday.</p>
+      </div>
+      <div class="seg" id="trendSeg" role="group" aria-label="Chart scale"></div>
+    </div>
+    <div class="trend">
+      <div id="trendPlot"></div>
+      <details class="trend-table">
+        <summary>Show weekly numbers</summary>
+        <div class="table-scroll">
+          <table>
+            <thead><tr id="weekHead"></tr></thead>
+            <tbody id="weekRows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-school">
+    <div class="sec-head">
+      <div>
+        <h2 id="h-school">By school</h2>
+        <p class="sec-sub" id="schoolSub"></p>
+      </div>
+      <div class="seg" id="schoolSeg" role="group" aria-label="Platform shown in the school table"></div>
+    </div>
+    <div class="table-box" tabindex="0" aria-label="Usage by school table">
+      <table>
+        <thead>
+          <tr><th rowspan="2" data-k="0"><button class="sort" data-sort="0">School</button></th>
+              <th colspan="2" class="grp">Accounts logged in</th>
+              <th colspan="2" class="grp">App launches</th>
+              <th rowspan="2" data-k="5"><button class="sort" data-sort="5">Total launches</button></th></tr>
+          <tr><th data-k="1"><button class="sort" data-sort="1">Staff</button></th>
+              <th data-k="3"><button class="sort" data-sort="3">Students</button></th>
+              <th data-k="2"><button class="sort" data-sort="2">Staff</button></th>
+              <th data-k="4"><button class="sort" data-sort="4">Students</button></th></tr>
+        </thead>
+        <tbody id="schoolRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-notes">
+    <h2 id="h-notes">About these numbers</h2>
+    <div class="notes" id="notes"></div>
+  </section>
+</main>
+<div id="tip" hidden></div>
+
+<script>
+const D = {"periods":[{"id":"all","label":"All dates","range":"Aug 1 – Oct 31, 2026","partial":false},{"id":"2026-08","label":"Aug","range":"August 2026","partial":true},{"id":"2026-09","label":"Sep","range":"September 2026","partial":false},{"id":"2026-10","label":"Oct","range":"October 2026","partial":false}],"plats":[{"id":"ixl","name":"IXL","roster":15224},{"id":"bm","name":"Branching Minds","roster":1959},{"id":"ell","name":"Ellevation","roster":8751}],"pops":[{"id":"ixl-staff","plat":"ixl","aud":"Staff","roster":1165},{"id":"ixl-students","plat":"ixl","aud":"Students","roster":14059},{"id":"bm-staff","plat":"bm","aud":"Staff","roster":1959},{"id":"ell-staff","plat":"ell","aud":"Staff","roster":2719},{"id":"ell-students","plat":"ell","aud":"Students","roster":6032}],"stats":{"ixl-staff":{"all":[996,14722],"2026-08":[407,740],"2026-09":[870,7666],"2026-10":[795,6316]},"ixl-students":{"all":[11806,221691],"2026-08":[10,14],"2026-09":[11349,94449],"2026-10":[9851,127228]},"bm-staff":{"all":[1399,6553],"2026-08":[209,722],"2026-09":[368,1668],"2026-10":[1325,4163]},"ell-staff":{"all":[912,5018],"2026-08":[173,419],"2026-09":[686,2374],"2026-10":[605,2225]},"ell-students":{"all":[4830,20489],"2026-08":[0,0],"2026-09":[0,0],"2026-10":[4830,20489]}},"platStats":{"ixl":{"all":[12802,236413],"2026-08":[417,754],"2026-09":[12219,102115],"2026-10":[10646,133544]},"bm":{"all":[1399,6553],"2026-08":[209,722],"2026-09":[368,1668],"2026-10":[1325,4163]},"ell":{"all":[5742,25507],"2026-08":[173,419],"2026-09":[686,2374],"2026-10":[5435,22714]}},"schools":{"all":{"all":[["Aborn Elementary",30,666,255,7263],["Breed Middle School",109,1856,1075,28512],["Brickett Elementary",31,659,294,6552],["Callahan Elementary",44,810,322,6977],["City Arts & Sciences Academy (CASA)",33,288,390,3730],["Cobbet Elementary",69,1395,481,9019],["Connery Elementary",56,791,406,7292],["Drewicz Elementary",55,1289,380,8317],["Early Childhood",12,41,0,0],["Fallon Elementary",18,255,31,1115],["Ford Elementary",45,1015,382,9708],["Frederick Douglass Collegiate Academy",19,285,179,2462],["Harold Durgin Success Academy",43,474,63,528],["Harrington Elementary",64,842,392,4719],["Hood Elementary",50,1130,440,9607],["Ingalls Elementary",61,1355,519,11817],["Lincoln - Thomson Elementary",22,418,185,5781],["Lynn Classical High School",142,1355,918,6909],["Lynn English High School",133,1639,1034,7439],["Lynn SD (district level)",46,829,0,0],["Lynn Vocational Technical Institute",135,1321,1349,18513],["Lynn Woods Elementary",17,426,138,5109],["No school listed",34,63,0,0],["Pickering Middle School",67,1044,539,26136],["Sewell Anderson Elementary",29,793,221,7649],["Shoemaker Elementary",50,725,250,4549],["Sisson Elementary",41,1096,333,8916],["TEAMS Academy at Virginia Barton Center",4,10,0,0],["Thurgood Marshall Middle School",117,1648,1099,21292],["Tracy Elementary",39,968,385,6284],["Washington Elementary",44,807,353,5985]],"ixl":[["Aborn Elementary",26,494,255,6960],["Breed Middle School",79,1351,1075,26796],["Brickett Elementary",26,358,294,5979],["Callahan Elementary",31,483,322,6473],["City Arts & Sciences Academy (CASA)",10,132,388,3363],["Cobbet Elementary",46,703,476,7929],["Connery Elementary",35,467,338,6193],["Drewicz Elementary",36,668,380,7313],["Fallon Elementary",11,190,31,1103],["Ford Elementary",33,673,380,8825],["Frederick Douglass Collegiate Academy",12,162,178,2414],["Harold Durgin Success Academy",19,217,57,484],["Harrington Elementary",34,291,253,3488],["Hood Elementary",39,689,440,8613],["Ingalls Elementary",47,926,519,10379],["Lincoln - Thomson Elementary",19,280,185,5494],["Lynn Classical High School",71,706,810,5561],["Lynn English High School",55,828,856,5943],["Lynn SD (district level)",21,225,0,0],["Lynn Vocational Technical Institute",48,704,1330,17521],["Lynn Woods Elementary",14,299,138,5028],["No school listed",4,10,0,0],["Pickering Middle School",59,648,539,25747],["Sewell Anderson Elementary",24,473,221,7055],["Shoemaker Elementary",32,420,250,4291],["Sisson Elementary",32,623,333,8384],["Thurgood Marshall Middle School",85,1017,1076,20024],["Tracy Elementary",28,331,385,5240],["Washington Elementary",34,354,350,5091]],"bm":[["Aborn Elementary",28,100,0,0],["Breed Middle School",96,326,0,0],["Brickett Elementary",29,227,0,0],["Callahan Elementary",38,124,0,0],["City Arts & Sciences Academy (CASA)",33,104,0,0],["Cobbet Elementary",31,194,0,0],["Connery Elementary",49,180,0,0],["Drewicz Elementary",51,393,0,0],["Early Childhood",7,32,0,0],["Fallon Elementary",16,54,0,0],["Ford Elementary",39,118,0,0],["Frederick Douglass Collegiate Academy",18,67,0,0],["Harold Durgin Success Academy",29,202,0,0],["Harrington Elementary",57,322,0,0],["Hood Elementary",47,206,0,0],["Ingalls Elementary",45,250,0,0],["Lincoln - Thomson Elementary",20,86,0,0],["Lynn Classical High School",132,421,0,0],["Lynn English High School",124,263,0,0],["Lynn SD (district level)",41,474,0,0],["Lynn Vocational Technical Institute",129,520,0,0],["Lynn Woods Elementary",15,99,0,0],["Pickering Middle School",59,258,0,0],["Sewell Anderson Elementary",28,221,0,0],["Shoemaker Elementary",42,222,0,0],["Sisson Elementary",38,270,0,0],["TEAMS Academy at Virginia Barton Center",4,9,0,0],["Thurgood Marshall Middle School",111,385,0,0],["Tracy Elementary",26,293,0,0],["Washington Elementary",25,133,0,0]],"ell":[["Aborn Elementary",21,72,67,303],["Breed Middle School",47,179,333,1716],["Brickett Elementary",24,74,131,573],["Callahan Elementary",31,203,89,504],["City Arts & Sciences Academy (CASA)",13,52,87,367],["Cobbet Elementary",56,498,302,1090],["Connery Elementary",40,144,242,1099],["Drewicz Elementary",43,228,188,1004],["Early Childhood",5,9,0,0],["Fallon Elementary",7,11,8,12],["Ford Elementary",34,224,218,883],["Frederick Douglass Collegiate Academy",6,56,10,48],["Harold Durgin Success Academy",15,55,15,44],["Harrington Elementary",42,229,274,1231],["Hood Elementary",33,235,189,994],["Ingalls Elementary",40,179,314,1438],["Lincoln - Thomson Elementary",11,52,70,287],["Lynn Classical High School",76,228,361,1348],["Lynn English High School",74,548,480,1496],["Lynn SD (district level)",17,130,0,0],["Lynn Vocational Technical Institute",41,97,267,992],["Lynn Woods Elementary",8,28,24,81],["No school listed",31,53,0,0],["Pickering Middle School",36,138,120,389],["Sewell Anderson Elementary",20,99,97,594],["Shoemaker Elementary",26,83,63,258],["Sisson Elementary",31,203,138,532],["TEAMS Academy at Virginia Barton Center",1,1,0,0],["Thurgood Marshall Middle School",45,246,374,1268],["Tracy Elementary",30,344,188,1044],["Washington Elementary",32,320,184,894]]},"2026-08":{"all":[["Aborn Elementary",18,60,0,0],["Breed Middle School",54,100,4,4],["Brickett Elementary",15,52,0,0],["Callahan Elementary",11,36,0,0],["City Arts & Sciences Academy (CASA)",7,11,0,0],["Cobbet Elementary",39,120,0,0],["Connery Elementary",15,49,0,0],["Drewicz Elementary",23,58,0,0],["Early Childhood",2,4,0,0],["Fallon Elementary",9,24,0,0],["Ford Elementary",21,71,0,0],["Frederick Douglass Collegiate Academy",4,15,0,0],["Harold Durgin Success Academy",5,13,0,0],["Harrington Elementary",15,52,0,0],["Hood Elementary",20,64,0,0],["Ingalls Elementary",27,67,0,0],["Lincoln - Thomson Elementary",9,23,0,0],["Lynn Classical High School",45,95,0,0],["Lynn English High School",26,85,0,0],["Lynn SD (district level)",42,258,0,0],["Lynn Vocational Technical Institute",13,29,4,4],["Lynn Woods Elementary",7,26,0,0],["No school listed",18,31,0,0],["Pickering Middle School",33,86,1,1],["Sewell Anderson Elementary",15,78,0,0],["Shoemaker Elementary",16,51,0,0],["Sisson Elementary",15,76,0,0],["Thurgood Marshall Middle School",38,111,1,5],["Tracy Elementary",11,59,0,0],["Washington Elementary",25,77,0,0]],"ixl":[["Aborn Elementary",16,41,0,0],["Breed Middle School",50,70,4,4],["Brickett Elementary",13,19,0,0],["Callahan Elementary",9,15,0,0],["City Arts & Sciences Academy (CASA)",5,5,0,0],["Cobbet Elementary",28,41,0,0],["Connery Elementary",9,11,0,0],["Drewicz Elementary",15,24,0,0],["Fallon Elementary",8,20,0,0],["Ford Elementary",16,27,0,0],["Frederick Douglass Collegiate Academy",3,5,0,0],["Harold Durgin Success Academy",3,3,0,0],["Harrington Elementary",8,13,0,0],["Hood Elementary",16,28,0,0],["Ingalls Elementary",19,33,0,0],["Lincoln - Thomson Elementary",7,16,0,0],["Lynn Classical High School",40,67,0,0],["Lynn English High School",10,28,0,0],["Lynn SD (district level)",8,18,0,0],["Lynn Vocational Technical Institute",8,13,4,4],["Lynn Woods Elementary",6,11,0,0],["No school listed",3,8,0,0],["Pickering Middle School",31,57,1,1],["Sewell Anderson Elementary",7,15,0,0],["Shoemaker Elementary",13,25,0,0],["Sisson Elementary",4,8,0,0],["Thurgood Marshall Middle School",32,71,1,5],["Tracy Elementary",4,11,0,0],["Washington Elementary",20,37,0,0]],"bm":[["Aborn Elementary",4,16,0,0],["Breed Middle School",7,9,0,0],["Brickett Elementary",3,22,0,0],["Callahan Elementary",5,7,0,0],["City Arts & Sciences Academy (CASA)",1,5,0,0],["Cobbet Elementary",12,30,0,0],["Connery Elementary",10,20,0,0],["Drewicz Elementary",10,22,0,0],["Early Childhood",1,3,0,0],["Fallon Elementary",3,4,0,0],["Ford Elementary",6,15,0,0],["Frederick Douglass Collegiate Academy",1,7,0,0],["Harold Durgin Success Academy",2,10,0,0],["Harrington Elementary",8,29,0,0],["Hood Elementary",10,28,0,0],["Ingalls Elementary",11,17,0,0],["Lincoln - Thomson Elementary",3,7,0,0],["Lynn Classical High School",5,15,0,0],["Lynn English High School",5,25,0,0],["Lynn SD (district level)",38,227,0,0],["Lynn Vocational Technical Institute",6,11,0,0],["Lynn Woods Elementary",3,13,0,0],["Pickering Middle School",4,10,0,0],["Sewell Anderson Elementary",12,48,0,0],["Shoemaker Elementary",4,22,0,0],["Sisson Elementary",12,40,0,0],["Thurgood Marshall Middle School",8,25,0,0],["Tracy Elementary",7,18,0,0],["Washington Elementary",10,17,0,0]],"ell":[["Aborn Elementary",3,3,0,0],["Breed Middle School",10,21,0,0],["Brickett Elementary",8,11,0,0],["Callahan Elementary",4,14,0,0],["City Arts & Sciences Academy (CASA)",1,1,0,0],["Cobbet Elementary",16,49,0,0],["Connery Elementary",6,18,0,0],["Drewicz Elementary",7,12,0,0],["Early Childhood",1,1,0,0],["Ford Elementary",8,29,0,0],["Frederick Douglass Collegiate Academy",1,3,0,0],["Harrington Elementary",7,10,0,0],["Hood Elementary",3,8,0,0],["Ingalls Elementary",7,17,0,0],["Lynn Classical High School",8,13,0,0],["Lynn English High School",17,32,0,0],["Lynn SD (district level)",6,13,0,0],["Lynn Vocational Technical Institute",4,5,0,0],["Lynn Woods Elementary",2,2,0,0],["No school listed",15,23,0,0],["Pickering Middle School",5,19,0,0],["Sewell Anderson Elementary",6,15,0,0],["Shoemaker Elementary",4,4,0,0],["Sisson Elementary",7,28,0,0],["Thurgood Marshall Middle School",4,15,0,0],["Tracy Elementary",5,30,0,0],["Washington Elementary",10,23,0,0]]},"2026-09":{"all":[["Aborn Elementary",25,308,216,1956],["Breed Middle School",75,743,1057,13322],["Brickett Elementary",27,299,288,2654],["Callahan Elementary",42,371,297,2182],["City Arts & Sciences Academy (CASA)",16,109,374,2132],["Cobbet Elementary",62,774,470,4020],["Connery Elementary",48,391,329,2437],["Drewicz Elementary",44,538,371,2982],["Early Childhood",8,13,0,0],["Fallon Elementary",13,99,31,506],["Ford Elementary",40,372,372,2690],["Frederick Douglass Collegiate Academy",14,143,160,1480],["Harold Durgin Success Academy",26,239,52,329],["Harrington Elementary",51,348,250,1474],["Hood Elementary",42,526,437,4456],["Ingalls Elementary",52,675,506,4468],["Lincoln - Thomson Elementary",22,199,159,2197],["Lynn Classical High School",94,610,753,3811],["Lynn English High School",87,825,775,3782],["Lynn SD (district level)",27,230,0,0],["Lynn Vocational Technical Institute",52,496,1297,8558],["Lynn Woods Elementary",16,215,137,2060],["No school listed",16,27,0,0],["Pickering Middle School",57,454,533,9040],["Sewell Anderson Elementary",26,357,198,2836],["Shoemaker Elementary",41,367,249,1855],["Sisson Elementary",37,518,330,3324],["TEAMS Academy at Virginia Barton Center",2,3,0,0],["Thurgood Marshall Middle School",89,592,1051,5885],["Tracy Elementary",36,492,330,2141],["Washington Elementary",40,375,342,1872]],"ixl":[["Aborn Elementary",24,266,216,1956],["Breed Middle School",62,619,1057,13322],["Brickett Elementary",25,213,288,2654],["Callahan Elementary",30,268,297,2182],["City Arts & Sciences Academy (CASA)",8,74,374,2132],["Cobbet Elementary",43,456,470,4020],["Connery Elementary",33,274,329,2437],["Drewicz Elementary",34,326,371,2982],["Fallon Elementary",11,80,31,506],["Ford Elementary",30,272,372,2690],["Frederick Douglass Collegiate Academy",9,102,160,1480],["Harold Durgin Success Academy",18,132,52,329],["Harrington Elementary",30,162,250,1474],["Hood Elementary",33,382,437,4456],["Ingalls Elementary",40,500,506,4468],["Lincoln - Thomson Elementary",19,142,159,2197],["Lynn Classical High School",51,375,753,3811],["Lynn English High School",50,489,775,3782],["Lynn SD (district level)",14,85,0,0],["Lynn Vocational Technical Institute",37,317,1297,8558],["Lynn Woods Elementary",14,172,137,2060],["No school listed",1,2,0,0],["Pickering Middle School",52,315,533,9040],["Sewell Anderson Elementary",23,259,198,2836],["Shoemaker Elementary",29,255,249,1855],["Sisson Elementary",28,370,330,3324],["Thurgood Marshall Middle School",73,376,1051,5885],["Tracy Elementary",28,208,330,2141],["Washington Elementary",27,175,342,1872]],"bm":[["Aborn Elementary",6,16,0,0],["Breed Middle School",11,58,0,0],["Brickett Elementary",3,53,0,0],["Callahan Elementary",13,23,0,0],["City Arts & Sciences Academy (CASA)",6,14,0,0],["Cobbet Elementary",19,77,0,0],["Connery Elementary",27,57,0,0],["Drewicz Elementary",18,106,0,0],["Early Childhood",3,7,0,0],["Fallon Elementary",5,14,0,0],["Ford Elementary",10,16,0,0],["Frederick Douglass Collegiate Academy",3,11,0,0],["Harold Durgin Success Academy",12,79,0,0],["Harrington Elementary",16,91,0,0],["Hood Elementary",13,40,0,0],["Ingalls Elementary",14,86,0,0],["Lincoln - Thomson Elementary",8,31,0,0],["Lynn Classical High School",18,78,0,0],["Lynn English High School",19,36,0,0],["Lynn SD (district level)",19,106,0,0],["Lynn Vocational Technical Institute",21,139,0,0],["Lynn Woods Elementary",7,23,0,0],["Pickering Middle School",11,75,0,0],["Sewell Anderson Elementary",17,50,0,0],["Shoemaker Elementary",15,65,0,0],["Sisson Elementary",12,70,0,0],["TEAMS Academy at Virginia Barton Center",2,3,0,0],["Thurgood Marshall Middle School",21,79,0,0],["Tracy Elementary",9,119,0,0],["Washington Elementary",11,46,0,0]],"ell":[["Aborn Elementary",11,26,0,0],["Breed Middle School",27,66,0,0],["Brickett Elementary",15,33,0,0],["Callahan Elementary",26,80,0,0],["City Arts & Sciences Academy (CASA)",10,21,0,0],["Cobbet Elementary",44,241,0,0],["Connery Elementary",26,60,0,0],["Drewicz Elementary",33,106,0,0],["Early Childhood",5,6,0,0],["Fallon Elementary",5,5,0,0],["Ford Elementary",27,84,0,0],["Frederick Douglass Collegiate Academy",6,30,0,0],["Harold Durgin Success Academy",7,28,0,0],["Harrington Elementary",36,95,0,0],["Hood Elementary",29,104,0,0],["Ingalls Elementary",28,89,0,0],["Lincoln - Thomson Elementary",10,26,0,0],["Lynn Classical High School",68,157,0,0],["Lynn English High School",62,300,0,0],["Lynn SD (district level)",8,39,0,0],["Lynn Vocational Technical Institute",21,40,0,0],["Lynn Woods Elementary",7,20,0,0],["No school listed",16,25,0,0],["Pickering Middle School",22,64,0,0],["Sewell Anderson Elementary",17,48,0,0],["Shoemaker Elementary",23,47,0,0],["Sisson Elementary",26,78,0,0],["Thurgood Marshall Middle School",29,137,0,0],["Tracy Elementary",23,165,0,0],["Washington Elementary",32,154,0,0]]},"2026-10":{"all":[["Aborn Elementary",27,298,254,5307],["Breed Middle School",100,1013,1052,15186],["Brickett Elementary",30,308,266,3898],["Callahan Elementary",39,403,296,4795],["City Arts & Sciences Academy (CASA)",33,168,288,1598],["Cobbet Elementary",59,501,428,4999],["Connery Elementary",52,351,351,4855],["Drewicz Elementary",52,693,371,5335],["Early Childhood",7,24,0,0],["Fallon Elementary",17,132,28,609],["Ford Elementary",42,572,301,7018],["Frederick Douglass Collegiate Academy",18,127,140,982],["Harold Durgin Success Academy",36,222,38,199],["Harrington Elementary",60,442,337,3245],["Hood Elementary",49,540,388,5151],["Ingalls Elementary",59,613,433,7349],["Lincoln - Thomson Elementary",18,196,167,3584],["Lynn Classical High School",136,650,664,3098],["Lynn English High School",131,729,859,3657],["Lynn SD (district level)",28,341,0,0],["Lynn Vocational Technical Institute",127,796,1187,9951],["Lynn Woods Elementary",14,185,138,3049],["No school listed",4,5,0,0],["Pickering Middle School",63,504,534,17095],["Sewell Anderson Elementary",26,358,213,4813],["Shoemaker Elementary",43,307,168,2694],["Sisson Elementary",37,502,304,5592],["TEAMS Academy at Virginia Barton Center",4,7,0,0],["Thurgood Marshall Middle School",112,945,1083,15402],["Tracy Elementary",37,417,312,4143],["Washington Elementary",39,355,287,4113]],"ixl":[["Aborn Elementary",22,187,254,5004],["Breed Middle School",68,662,1052,13470],["Brickett Elementary",23,126,264,3325],["Callahan Elementary",28,200,296,4291],["City Arts & Sciences Academy (CASA)",9,53,254,1231],["Cobbet Elementary",35,206,405,3909],["Connery Elementary",28,182,250,3756],["Drewicz Elementary",32,318,369,4331],["Fallon Elementary",10,90,28,597],["Ford Elementary",28,374,289,6135],["Frederick Douglass Collegiate Academy",9,55,138,934],["Harold Durgin Success Academy",10,82,30,155],["Harrington Elementary",22,116,146,2014],["Hood Elementary",35,279,379,4157],["Ingalls Elementary",42,393,410,5911],["Lincoln - Thomson Elementary",14,122,167,3297],["Lynn Classical High School",36,264,471,1750],["Lynn English High School",35,311,574,2161],["Lynn SD (district level)",16,122,0,0],["Lynn Vocational Technical Institute",36,374,1157,8959],["Lynn Woods Elementary",12,116,138,2968],["Pickering Middle School",46,276,534,16706],["Sewell Anderson Elementary",19,199,209,4219],["Shoemaker Elementary",25,140,164,2436],["Sisson Elementary",25,245,302,5060],["Thurgood Marshall Middle School",77,570,1057,14134],["Tracy Elementary",25,112,282,3099],["Washington Elementary",28,142,247,3219]],"bm":[["Aborn Elementary",26,68,0,0],["Breed Middle School",95,259,0,0],["Brickett Elementary",29,152,0,0],["Callahan Elementary",37,94,0,0],["City Arts & Sciences Academy (CASA)",33,85,0,0],["Cobbet Elementary",16,87,0,0],["Connery Elementary",46,103,0,0],["Drewicz Elementary",50,265,0,0],["Early Childhood",6,22,0,0],["Fallon Elementary",16,36,0,0],["Ford Elementary",38,87,0,0],["Frederick Douglass Collegiate Academy",18,49,0,0],["Harold Durgin Success Academy",26,113,0,0],["Harrington Elementary",56,202,0,0],["Hood Elementary",46,138,0,0],["Ingalls Elementary",43,147,0,0],["Lincoln - Thomson Elementary",18,48,0,0],["Lynn Classical High School",131,328,0,0],["Lynn English High School",124,202,0,0],["Lynn SD (district level)",19,141,0,0],["Lynn Vocational Technical Institute",124,370,0,0],["Lynn Woods Elementary",14,63,0,0],["Pickering Middle School",59,173,0,0],["Sewell Anderson Elementary",26,123,0,0],["Shoemaker Elementary",41,135,0,0],["Sisson Elementary",37,160,0,0],["TEAMS Academy at Virginia Barton Center",4,6,0,0],["Thurgood Marshall Middle School",106,281,0,0],["Tracy Elementary",22,156,0,0],["Washington Elementary",20,70,0,0]],"ell":[["Aborn Elementary",17,43,67,303],["Breed Middle School",35,92,333,1716],["Brickett Elementary",16,30,131,573],["Callahan Elementary",22,109,89,504],["City Arts & Sciences Academy (CASA)",10,30,87,367],["Cobbet Elementary",40,208,302,1090],["Connery Elementary",28,66,242,1099],["Drewicz Elementary",34,110,188,1004],["Early Childhood",1,2,0,0],["Fallon Elementary",3,6,8,12],["Ford Elementary",26,111,218,883],["Frederick Douglass Collegiate Academy",2,23,10,48],["Harold Durgin Success Academy",13,27,15,44],["Harrington Elementary",30,124,274,1231],["Hood Elementary",24,123,189,994],["Ingalls Elementary",25,73,314,1438],["Lincoln - Thomson Elementary",5,26,70,287],["Lynn Classical High School",28,58,361,1348],["Lynn English High School",54,216,480,1496],["Lynn SD (district level)",13,78,0,0],["Lynn Vocational Technical Institute",31,52,267,992],["Lynn Woods Elementary",4,6,24,81],["No school listed",4,5,0,0],["Pickering Middle School",21,55,120,389],["Sewell Anderson Elementary",13,36,97,594],["Shoemaker Elementary",12,32,63,258],["Sisson Elementary",18,97,138,532],["TEAMS Academy at Virginia Barton Center",1,1,0,0],["Thurgood Marshall Middle School",28,94,374,1268],["Tracy Elementary",25,149,188,1044],["Washington Elementary",23,143,184,894]]}},"weeks":[{"label":"Sep 1","range":"Sep 1–6","counts":{"ixl":632,"bm":199,"ell":434}},{"label":"Sep 7","range":"Sep 7–13","counts":{"ixl":3134,"bm":355,"ell":550}},{"label":"Sep 14","range":"Sep 14–20","counts":{"ixl":43904,"bm":368,"ell":512}},{"label":"Sep 21","range":"Sep 21–27","counts":{"ixl":34710,"bm":462,"ell":491}},{"label":"Sep 28","range":"Sep 28–Oct 4","counts":{"ixl":32611,"bm":457,"ell":690}},{"label":"Oct 5","range":"Oct 5–11","counts":{"ixl":33120,"bm":593,"ell":13486}},{"label":"Oct 12","range":"Oct 12–18","counts":{"ixl":27206,"bm":425,"ell":7498}},{"label":"Oct 19","range":"Oct 19–25","counts":{"ixl":28855,"bm":2478,"ell":736}},{"label":"Oct 26","range":"Oct 26–31","counts":{"ixl":31487,"bm":494,"ell":691}}],"notes":{"rows":268473,"through":"October 31, 2026","ellStudentFirst":"October 1","multiSchool":105,"quickRepeatPct":4.5}};
+const state = { period: "all", plat: "all", sort: 5, dir: -1, trend: "same" };
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const num = n => n.toLocaleString("en-US");
+const pct = (a, b) => b ? 100 * a / b : 0;
+const pct0 = v => (v > 0 && v < 1 ? "<1" : Math.round(v)) + "%";
+const compact = n => n < 1000 ? String(n) : n < 10000 ? (n / 1000).toFixed(1).replace(/\.0$/, "") + "K" : Math.round(n / 1000) + "K";
+const platName = id => D.plats.find(p => p.id === id).name;
+const period = () => D.periods.find(p => p.id === state.period);
+const months = D.periods.filter(p => p.id !== "all");
+const popName = p => (p.plat === "bm" ? "Branching Minds" : platName(p.plat)) + " " + p.aud.toLowerCase();
+
+function renderSeg() {
+  $("periodSeg").innerHTML = D.periods.map(p =>
+    `<button data-period="${p.id}" aria-pressed="${p.id === state.period}">${esc(p.label)}</button>`).join("");
+  const opts = [{ id: "all", name: "All platforms" }, ...D.plats];
+  $("schoolSeg").innerHTML = opts.map(p =>
+    `<button data-plat="${p.id}" aria-pressed="${p.id === state.plat}">${esc(p.name)}</button>`).join("");
+  const scales = [{ id: "same", label: "Same scale" }, { id: "own", label: "Separate scales" }];
+  $("trendSeg").innerHTML = scales.map(s =>
+    `<button data-trend="${s.id}" aria-pressed="${s.id === state.trend}">${s.label}</button>`).join("");
+}
+
+function renderLede() {
+  const rows = D.pops.map(p => {
+    const [u, l] = D.stats[p.id][state.period];
+    return { p, v: pct(u, p.roster), l };
+  }).filter(r => r.l > 0).sort((a, b) => b.v - a.v);
+  const hi = rows[0], lo = rows[rows.length - 1];
+  const quiet = D.pops.length - rows.length;
+  let t = rows.length > 1
+
+ $("platSub").innerHTML = state.period === "all"
+     ? "Percentage of <b>Classlink rostered accounts</b> with at least one launch in Classlink across all dates."
+     : `Percentage of rostered accounts with at least one launch in ${period().range}.`;
+ }
+
+function renderPlats() {
+  $("plats").innerHTML = D.plats.map(pl => {
+    const [u] = D.platStats[pl.id][state.period];
+    const rows = ["Staff", "Students"].map(aud => {
+      const p = D.pops.find(x => x.plat === pl.id && x.aud === aud);
+      if (!p) return `<div class="aud none">No student accounts rostered</div>`;
+      const [au] = D.stats[p.id][state.period];
+      const v = pct(au, p.roster);
+      return `<div class="aud">
+        <div class="aud-top"><span class="aud-name">${aud}</span><span class="aud-pct">${pct0(v)}</span></div>
+        <div class="meter" role="img" aria-label="${pct0(v)} of ${aud.toLowerCase()} accounts logged in"><i style="width:${v.toFixed(2)}%"></i></div>
+        <div class="aud-det"><span>${num(au)} of ${num(p.roster)} accounts</span></div>
+      </div>`;
+    }).join("");
+    return `<article class="plat" style="--c:var(--${pl.id})">
+      <h3 class="plat-name"><span class="swatch"></span>${esc(pl.name)}</h3>
+      <div><div class="big">${pct0(pct(u, pl.roster))}</div><div class="lab">of ${num(pl.roster)} accounts logged in</div></div>
+      ${rows}
+    </article>`;
+  }).join("");
+}
+
+function bars(p, metric) {
+  const vals = months.map(m => D.stats[p.id][m.id]);
+  const max = metric === "pct" ? 100 : Math.max(1, ...vals.map(v => v[1]));
+  return `<div class="cols" style="--n:${months.length}">` + months.map((m, i) => {
+    const [u, l] = vals[i];
+    const v = metric === "pct" ? pct(u, p.roster) : l;
+    const h = Math.round(56 * v / max);
+    const label = metric === "pct" ? pct0(v) : compact(l);
+    const tip = `${popName(p)}, ${m.range}: ${num(u)} of ${num(p.roster)} accounts (${pct0(pct(u, p.roster))}), ${num(l)} launches`;
+    return `<button class="col${m.partial ? " partial" : ""}" data-period="${m.id}" aria-pressed="${m.id === state.period}" data-tip="${esc(tip)}" aria-label="${esc(tip)}">
+      <span class="plot">${metric === "pct" ? `<span class="track"></span>` : ""}<span class="val">${label}</span><span class="fill" style="height:${v > 0 ? Math.max(h, 2) : 0}px"></span><span class="base"></span></span>
+      <span class="mon">${esc(m.label)}</span></button>`;
+  }).join("") + "</div>";
+}
+
+function renderMonths() {
+  const head = `<div class="m-row m-h"><span>Group</span><span>Percentage of accounts logged in</span><span>App launches (own scale per row)</span></div>`;
+  $("months").innerHTML = head + D.pops.map(p => `<div class="m-row" style="--c:var(--${p.plat})">
+    <div class="m-pop"><div class="plat-name"><span class="swatch"></span>${esc(platName(p.plat))}</div><small>${p.aud}</small></div>
+    <div><span class="m-sublab">% of accounts logged in</span>${bars(p, "pct")}</div>
+    <div><span class="m-sublab">App launches, own scale</span>${bars(p, "launch")}</div>
+  </div>`).join("");
+}
+
+const TR = { ml: 46, mr: 26, mt: 22 };
+let trendPanels = [];
+
+function niceScale(v, parts) {
+  const raw = Math.max(v, 1) / parts;
+  const pow = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 2.5, 5, 10].find(m => m * pow >= raw) * pow;
+  return { step, max: Math.ceil(v / step) * step };
+}
+
+function panelSvg(index, series, W, H, mb, parts, named, showX) {
+  const n = D.weeks.length;
+  const { step, max } = niceScale(Math.max(...series.flatMap(s => s.vals)), parts);
+  const x = i => TR.ml + i * (W - TR.ml - TR.mr) / (n - 1);
+  const y = v => TR.mt + (H - TR.mt - mb) * (1 - v / max);
+  trendPanels[index] = { x, y, series };
+  let out = "";
+  for (let t = 0; t <= max; t += step) {
+    out += `<line x1="${TR.ml}" x2="${W - TR.mr}" y1="${y(t)}" y2="${y(t)}" stroke="var(${t ? "--line-2" : "--line"})"/>`;
+    out += `<text x="${TR.ml - 8}" y="${y(t) + 4}" text-anchor="end">${compact(t)}</text>`;
+  }
+  if (showX) {
+    const every = Math.ceil(62 / ((W - TR.ml - TR.mr) / (n - 1)));
+    D.weeks.forEach((w, i) => {
+      if (i % every === 0) out += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${esc(w.label)}</text>`;
+    });
+  }
+  series.forEach(s => {
+    const d = s.vals.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("");
+    out += `<path d="${d}" fill="none" stroke="var(--${s.id})" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
+  });
+  series.forEach(s => {
+    const pk = s.vals.indexOf(Math.max(...s.vals));
+    const px = x(pk), anchor = px > W - 60 ? "end" : px < TR.ml + 40 ? "start" : "middle";
+    const text = (named ? s.name + " " : "") + compact(s.vals[pk]);
+    out += `<circle cx="${px}" cy="${y(s.vals[pk])}" r="4" fill="var(--${s.id})" stroke="var(--panel)" stroke-width="2"/>`;
+    out += `<text class="pk" x="${px}" y="${y(s.vals[pk]) - 9}" text-anchor="${anchor}">${esc(text)}</text>`;
+  });
+  out += `<line class="xh" y1="${TR.mt}" y2="${H - mb}" stroke="var(--ink-3)" visibility="hidden"/>`;
+  series.forEach(s => {
+    out += `<circle class="hv" data-s="${s.id}" r="4" fill="var(--${s.id})" stroke="var(--panel)" stroke-width="2" visibility="hidden"/>`;
+  });
+  const label = series.map(s => `${s.name} peaks at ${num(Math.max(...s.vals))} launches`).join(", ");
+  return `<svg class="trend-plot" data-p="${index}" width="100%" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Weekly app launches. ${esc(label)}. Exact numbers are in the table below.">${out}</svg>`;
+}
+
+function renderTrend() {
+  const box = $("trendPlot");
+  const W = Math.max(box.clientWidth, 280);
+  box.dataset.w = W;
+  trendPanels = [];
+  const series = D.plats.map(p => ({ id: p.id, name: p.name, vals: D.weeks.map(w => w.counts[p.id]) }));
+  if (state.trend === "same") {
+    const legend = series.map(s => `<span style="--c:var(--${s.id})"><i></i>${esc(s.name)}</span>`).join("");
+    box.innerHTML = `<div class="tr-legend" style="margin-bottom:8px">${legend}</div>` +
+      panelSvg(0, series, W, W < 560 ? 250 : 320, 26, 5, true, true);
+  } else {
+    box.innerHTML = series.map((s, i) => {
+      const last = i === series.length - 1;
+      return `<div class="tr-panel"><div class="tr-title" style="--c:var(--${s.id})"><span class="swatch"></span>${esc(s.name)}</div>` +
+        panelSvg(i, [s], W, last ? 146 : 128, last ? 26 : 8, 3, false, last) + `</div>`;
+    }).join("");
+  }
+}
+
+function renderWeekTable() {
+  $("weekHead").innerHTML = "<th>Week</th>" + D.plats.map(p => `<th>${esc(p.name)}</th>`).join("") + "<th>All platforms</th>";
+  $("weekRows").innerHTML = D.weeks.map(w => {
+    const vals = D.plats.map(p => w.counts[p.id]);
+    return `<tr><td>${esc(w.range)}</td>${vals.map(v => `<td>${num(v)}</td>`).join("")}<td>${num(vals.reduce((a, b) => a + b, 0))}</td></tr>`;
+  }).join("");
+}
+
+function clearTrendHover() {
+  document.querySelectorAll(".trend-plot .xh, .trend-plot .hv").forEach(el => el.setAttribute("visibility", "hidden"));
+}
+
+function trendHover(svg, e) {
+  const panel = trendPanels[+svg.dataset.p];
+  const rect = svg.getBoundingClientRect();
+  const n = D.weeks.length;
+  const W = +$("trendPlot").dataset.w;
+  const px = (e.clientX - rect.left) * (W / rect.width);
+  const i = Math.max(0, Math.min(n - 1, Math.round((px - TR.ml) / (W - TR.ml - TR.mr) * (n - 1))));
+  document.querySelectorAll(".trend-plot").forEach(el => {
+    const pn = trendPanels[+el.dataset.p];
+    const line = el.querySelector(".xh");
+    line.setAttribute("x1", pn.x(i)); line.setAttribute("x2", pn.x(i)); line.setAttribute("visibility", "visible");
+    pn.series.forEach(s => {
+      const dot = el.querySelector(`.hv[data-s="${s.id}"]`);
+      dot.setAttribute("cx", pn.x(i)); dot.setAttribute("cy", pn.y(s.vals[i])); dot.setAttribute("visibility", "visible");
+    });
+  });
+  const w = D.weeks[i];
+  placeTip(w.range + "\n" + D.plats.map(p => `${p.name}: ${num(w.counts[p.id])}`).join("\n"), e.clientX, e.clientY);
+}
+
+function renderSchools() {
+  const raw = D.schools[state.period][state.plat].map(r => [...r, r[2] + r[4]]);
+  const k = state.sort, dir = state.dir;
+  raw.sort((a, b) => k === 0 ? dir * String(a[0]).localeCompare(b[0]) : dir * (a[k] - b[k]) || a[0].localeCompare(b[0]));
+  const max = Math.max(1, ...raw.map(r => r[5]));
+  const noStud = state.plat === "bm";
+  const c = state.plat === "all" ? "--all" : "--" + state.plat;
+  const cell = (v) => noStud ? `<td class="na">—</td>` : `<td>${num(v)}</td>`;
+  const rows = raw.map(r => `<tr>
+    <td>${esc(r[0])}</td><td>${num(r[1])}</td>${cell(r[3])}<td>${num(r[2])}</td>${cell(r[4])}
+    <td class="spark" data-tip="${esc(r[0])}: ${num(r[5])} launches" style="--c:var(${c})"><span style="display:flex;align-items:center;gap:8px"><span style="min-width:52px">${num(r[5])}</span><span style="flex:1"><i style="width:${(100 * r[5] / max).toFixed(1)}%"></i></span></span></td>
+  </tr>`).join("");
+  $("schoolRows").innerHTML = rows || `<tr><td colspan="6" class="na">No launches for this platform in this period.</td></tr>`;
+  document.querySelectorAll("th[data-k]").forEach(th => {
+    if (+th.dataset.k === k) th.setAttribute("aria-sort", dir < 0 ? "descending" : "ascending");
+    else th.removeAttribute("aria-sort");
+  });
+  const name = state.plat === "all" ? "all platforms" : platName(state.plat);
+  $("schoolSub").textContent = `${raw.length} locations with launches on ${name}, ${period().range}.`;
+}
+
+function renderNotes() {
+  const n = D.notes;
+  $("notes").innerHTML = [
+    `<p><b>Logged in</b> means an account launched the app at least once in the selected period. Each account counts once per platform, however many times it launched.</p>`,
+    `<p><b>App launches</b> are counts from ${num(n.rows)} ClassLink App Launch Log. Sign-ins that skip ClassLink aren't included.</p>`,
+    `<p><b>Staff</b> combines the Teacher and Tenant Admin roles. IXL combines the IXL and IXL - Admin apps. Ellevation combines Ellevation Staff and Ellevation Benchmark Students.</p>`,
+    `<p><b>Dates:</b> this dashboard runs through ${esc(n.through)}.</p>`,
+    `<p><b>Schools:</b> ${num(n.multiSchool)} accounts launched under two locations and count at each one, so account counts by school add up to slightly more than the platform totals. Launches add up exactly.</p>`
+  ].join("");
+}
+
+function render() { renderSeg(); renderLede(); renderPlats(); renderMonths(); renderSchools(); renderNotes(); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-period],[data-plat],[data-sort],[data-trend]");
+  if (!t) return;
+  if (t.dataset.period) state.period = t.dataset.period;
+  else if (t.dataset.plat) state.plat = t.dataset.plat;
+  else if (t.dataset.trend) { state.trend = t.dataset.trend; renderTrend(); }
+  else {
+    const k = +t.dataset.sort;
+    if (state.sort === k) state.dir = -state.dir;
+    else { state.sort = k; state.dir = k === 0 ? 1 : -1; }
+  }
+  $("tip").hidden = true;
+  render();
+});
+
+const tip = $("tip");
+function showTip(el, x, y) { placeTip(el.dataset.tip, x, y); }
+function placeTip(text, x, y) {
+  tip.textContent = text;
+  tip.hidden = false;
+  const r = tip.getBoundingClientRect();
+  tip.style.left = Math.max(8, Math.min(innerWidth - r.width - 8, x + 12)) + "px";
+  tip.style.top = Math.max(8, Math.min(innerHeight - r.height - 8, y - r.height - 10)) + "px";
+}
+document.addEventListener("mousemove", e => {
+  const svg = e.target.closest(".trend-plot");
+  if (svg) { trendHover(svg, e); return; }
+  clearTrendHover();
+  const el = e.target.closest("[data-tip]");
+  if (el) showTip(el, e.clientX, e.clientY); else tip.hidden = true;
+});
+document.addEventListener("focusin", e => {
+  const el = e.target.closest("[data-tip]");
+  if (el) { const r = el.getBoundingClientRect(); showTip(el, r.left, r.top); }
+});
+document.addEventListener("focusout", () => { tip.hidden = true; });
+window.addEventListener("scroll", () => { tip.hidden = true; clearTrendHover(); }, { passive: true });
+
+render();
+renderTrend();
+renderWeekTable();
+new ResizeObserver(() => {
+  if ($("trendPlot").clientWidth !== +$("trendPlot").dataset.w) renderTrend();
+}).observe($("trendPlot"));
+</script>
+</body>
+</html>
