@@ -303,7 +303,7 @@ function bars(p, metric) {
 }
 
 function renderMonths() {
-  const head = `<div class="m-row m-h"><span>Group</span><span>Percentage of accounts logged in</span><span>App launches (own scale per row)</span></div>`;
+  const head = `<div class="m-row m-h"><span>Group</span><span>Percentage of accounts logged in</span><span>App launches (scale varies per app and users)</span></div>`;
   $("months").innerHTML = head + D.pops.map(p => `<div class="m-row" style="--c:var(--${p.plat})">
     <div class="m-pop"><div class="plat-name"><span class="swatch"></span>${esc(platName(p.plat))}</div><small>${p.aud}</small></div>
     <div><span class="m-sublab">% of accounts logged in</span>${bars(p, "pct")}</div>
